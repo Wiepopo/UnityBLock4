@@ -1,0 +1,297 @@
+fileFormatVersion: 2
+guid: 68735912e0c6b3a4e90d6ca14cde26b3
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Box_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: ba958d363b4a3e54ca42f35491437854, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Box_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 9309f7df9826a2c43a9cdb2e6d02465b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BroomStick_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: 6f2ad1086390ffe4b8633f05a25f01da, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BroomStick_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 5e70278c52e32d240b47da845eb3ca35, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bucket water_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: fdc760d17d9313249b08557e536f2236, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bucket water_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 0fc637016da41cb4986e84dda4afa6fa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bucket_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: c0ae9d3065b4ccb45b4b5a14635f6a1e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bucket_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 0c6239bb81ee346459a5d31f089e1f0c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChalkBoardBlack_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: 31ff2a526c9c0d94780f7c4e059b35d6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChalkBoardBlack_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: e7675197bd0329442b2279b5163acc01, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChalkBoardMEtal_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: 22bb83912e2372747a3897ab9f5b9677, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChalkBoardMEtal_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: f07e6f087a7e9a44a8f54654f281e434, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChalkBoardrim_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: 91789228a41126546bd5b2d09482a27a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChalkBoardrim_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 1d9535a6844bae348beb180759c0b251, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fence Gate_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: 5cb73758413fef042ac5264a4bf9235c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fence Gate_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: f62d0e1bd0d779a4ca58f66527698c1d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fence rods_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: 5c72ef2a47468334fb33434bb654fdb7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fence rods_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: eab1024bda189f042939ab01a5fc7407, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: First area Floor1_Material.039_BaseMap
+    second: {fileID: 2800000, guid: 8187d43178ae3d94399e51bfa266f2ce, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: First area Floor1_Material.039_Normal
+    second: {fileID: 2800000, guid: dce8d5756eeff2845836909973d51371, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: First area roof_Material.002_BaseMap
+    second: {fileID: 2800000, guid: 40643cfbf8894714f97ee12d397c46b7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: First area roof_Material.002_Normal
+    second: {fileID: 2800000, guid: 2ddfa2eaa9f5e134b83639dfcbf1839e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: First area wall1_Material.041_BaseMap
+    second: {fileID: 2800000, guid: 47cc44c7cf3f0f240bcdfc522f034546, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: First area wall1_Material.041_Normal
+    second: {fileID: 2800000, guid: 4de0d685ca019684782a26fdc09e7ffb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Glass4_Material.004_BaseMap
+    second: {fileID: 2800000, guid: 549440f4956ae3043b161532ce1ecb10, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Glass4_Material.004_Normal
+    second: {fileID: 2800000, guid: 9eab6c600234b594481293c73ca9e822, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Outside wall_Material.007_BaseMap
+    second: {fileID: 2800000, guid: ca6d7e021755b03408d5c7823b20a75b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Outside wall_Material.007_Normal
+    second: {fileID: 2800000, guid: 041b927476d2b6046b2cbb8577dfcf9c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Outside wall_Material.009_BaseMap
+    second: {fileID: 2800000, guid: d57d49ca52ce84d4dbbc5e5237fbe58a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Outside wall_Material.009_Normal
+    second: {fileID: 2800000, guid: 39369f701d27b8247b8c0e02ed8bda28, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Roof2_Material_BaseMap
+    second: {fileID: 2800000, guid: f5df90837827eb448ad3a4a0f0889ab0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Roof2_Material_Normal
+    second: {fileID: 2800000, guid: 41b2cffc7844132409be4f49f88cc6f4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Screws2323232332321_Material.020_BaseMap
+    second: {fileID: 2800000, guid: d6dc97112560bd2478c94ef9f53f58fa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Screws2323232332321_Material.020_Normal
+    second: {fileID: 2800000, guid: 3411fe1aa6cb7b242946f6d351d1d218, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bOOTHsT2223213123122ICK_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: 37c50546c545a324bb8288aad4605ecf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bOOTHsT2223213123122ICK_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 858ffa87f711d6e4c83b7ea8c81c2715, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: tICKETbOOTH232323fbx_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: 7659d7c19f7fc844dbd0bf94229c55a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: tICKETbOOTH232323fbx_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 77ab9ea790c8d7648b109a2fd5faed7f, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
