@@ -12,7 +12,7 @@ public class PlayerPickUpDrop : MonoBehaviour
      private ObjectGrabbable objectGrabbable;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(0))
         {
             if (objectGrabbable == null){
             //Not carrying an object, try to grab 
@@ -25,12 +25,16 @@ public class PlayerPickUpDrop : MonoBehaviour
                 }
             }
             } 
-            else
+              
+    }
+     if (Input.GetMouseButtonUp(0)) // When left mouse button is released
+        {
+            if (objectGrabbable != null)
             {
-                //carrying
+                // Drop the object when button is released
                 objectGrabbable.Drop();
                 objectGrabbable = null;
-            }      
+            }
         }
     }
 } 
