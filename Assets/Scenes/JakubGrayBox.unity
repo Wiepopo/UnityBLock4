@@ -21181,10 +21181,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1219820230}
+    - target: {fileID: 1646857960910647381, guid: 701cb0d50a786014c8adc59db0af80a5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4843ffe5fdf66844b8b0cd683df432f3, type: 2}
     - target: {fileID: 2071456868407066974, guid: 701cb0d50a786014c8adc59db0af80a5, type: 3}
       propertyPath: m_Name
       value: Fence_Outside_Right
       objectReference: {fileID: 0}
+    - target: {fileID: 2369931608427435380, guid: 701cb0d50a786014c8adc59db0af80a5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4843ffe5fdf66844b8b0cd683df432f3, type: 2}
     - target: {fileID: 2400676635930416452, guid: 701cb0d50a786014c8adc59db0af80a5, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -21205,6 +21213,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1013340830}
+    - target: {fileID: 4274536507967089282, guid: 701cb0d50a786014c8adc59db0af80a5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4843ffe5fdf66844b8b0cd683df432f3, type: 2}
     - target: {fileID: 6065878167547057979, guid: 701cb0d50a786014c8adc59db0af80a5, type: 3}
       propertyPath: m_Mesh
       value: 
