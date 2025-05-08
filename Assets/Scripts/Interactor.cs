@@ -34,7 +34,6 @@ public class Interacting : MonoBehaviour
                     interactObj.Interact();
                 }
             }
-            Debug.Log("Interacted");
         }
         
     }
