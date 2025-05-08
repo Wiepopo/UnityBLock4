@@ -20,6 +20,7 @@ public class Interactor : MonoBehaviour
     public void Interact()
     {
         onInteraction.Invoke();
+        Debug.Log("Interacted");
     }
     public void DisableOutline()
     {

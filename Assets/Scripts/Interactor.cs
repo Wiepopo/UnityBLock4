@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 interface IInteractable
 {
@@ -33,6 +34,7 @@ public class Interacting : MonoBehaviour
                     interactObj.Interact();
                 }
             }
+            Debug.Log("Interacted");
         }
         
     }
