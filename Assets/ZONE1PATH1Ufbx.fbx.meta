@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: ZONE1PATH1fbx_Material.001_BaseMap
-    second: {fileID: 2800000, guid: 27ca6890359be034e9ed529401fc4515, type: 3}
+    second: {fileID: 2800000, guid: 9e242dc397a75634ba0a0021d8279305, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: ZONE1PATH1fbx_Material.001_Normal
-    second: {fileID: 2800000, guid: 147950c2092e45147b118a9fa3c80cc2, type: 3}
+    second: {fileID: 2800000, guid: 6654a7d2774e5d743877b140453bb504, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
