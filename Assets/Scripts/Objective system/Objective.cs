@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Objective : MonoBehaviour
 {
-
+    
 
     //Public Variables //
     public AudioSource objFX;
