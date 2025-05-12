@@ -10,4 +10,4 @@ public class ItemSO : ScriptableObject
     public Sprite item_sprite;
 }
 
-public enum itemType {Keys};
+public enum itemType {Keys, Capsule};

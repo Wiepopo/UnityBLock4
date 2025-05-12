@@ -21,11 +21,13 @@ public class PlayerInventory : MonoBehaviour
     [Space(20)]
     [Header("Item gameobjects")]
     [SerializeField] GameObject keys_item;
+    [SerializeField] GameObject capsule_item;
 
 
     [Space(20)]
     [Header("Item Prefabs")]
     [SerializeField] GameObject keys_prefab;
+    [SerializeField] GameObject capsule_prefab;
 
     [Space(20)]
     [Header("UI")]
@@ -43,9 +45,11 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         itemSetActive.Add(itemType.Keys, keys_item);
+        itemSetActive.Add(itemType.Capsule, capsule_item);
 
 
-        itemInstantiate.Add(itemType.Keys, keys_item);
+        itemInstantiate.Add(itemType.Keys, keys_prefab);
+        itemInstantiate.Add(itemType.Capsule, capsule_prefab);
 
         NewItemSelected();
     }
@@ -56,9 +60,10 @@ public class PlayerInventory : MonoBehaviour
         
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
-
+        
         if(Physics.Raycast(ray, out hitInfo, playerReach) && Input.GetKey(pickItemKey))
         {
+            Debug.Log("sdad");
             IPickable item = hitInfo.collider.GetComponent<IPickable>();
             if (item != null)
             {
@@ -129,17 +134,17 @@ public class PlayerInventory : MonoBehaviour
             selectedItem = 0;
             NewItemSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 1)
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && inventoryList.Count > 1)
         {
             selectedItem = 1;
             NewItemSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 2)
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && inventoryList.Count > 2)
         {
             selectedItem = 2;
             NewItemSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 3)
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && inventoryList.Count > 3)
         {
             selectedItem = 3;
             NewItemSelected();
@@ -149,6 +154,7 @@ public class PlayerInventory : MonoBehaviour
     private void NewItemSelected()
     {
         keys_item.SetActive(false);
+        capsule_item.SetActive(false);
 
         GameObject selectedItemGameobject = itemSetActive[inventoryList[selectedItem]];
         selectedItemGameobject.SetActive(true);

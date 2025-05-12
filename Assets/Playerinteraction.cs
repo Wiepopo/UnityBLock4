@@ -59,12 +59,15 @@ public class Playerinteract : MonoBehaviour
     }
     void DisableCurrentInteractable() 
     {
+        if ( HUDController.instance != null)
+        {
         HUDController.instance.DisableInteractionText();
         if (currentInteractable)
         {
             currentInteractable.DisableOutline();
             currentInteractable = null;
 
+        }
         }
     }
 }
