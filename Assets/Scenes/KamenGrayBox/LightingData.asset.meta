@@ -1,6 +1,17 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: ad9ed046f75c2a94fa5e925f09762616
 NativeFormatImporter:
+=======
+<<<<<<<< Updated upstream:Assets/Scenes/ThygoTestonk.meta
+guid: 58c04fea4cbda044aac01a5d498259ff
+folderAsset: yes
+DefaultImporter:
+========
+guid: 22fecde48fa71804ab48423ac33706de
+NativeFormatImporter:
+>>>>>>>> Stashed changes:Assets/Scenes/KamenGrayBox/LightingData.asset.meta
+>>>>>>> Stashed changes
   externalObjects: {}
   mainObjectFileID: 112000000
   userData: 
