@@ -30,6 +30,9 @@ public class PlayerInventory : MonoBehaviour
     [Space(20)]
     [Header("UI")]
     [SerializeField] Image[] inventorySlotImage = new Image[4];
+    //new
+    [SerializeField] private Image[] inventoryItemImage = new Image[4];
+    //---
     [SerializeField] Image[] inventoryBGImage = new Image[4];
     [SerializeField] Sprite emptySlotSprite;
     [SerializeField] Camera cam;
@@ -132,12 +135,34 @@ public class PlayerInventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < inventoryBGImage.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
+            // always update background color — even for slot 1
             inventoryBGImage[i].color = (i == selectedItem)
-                ? new Color32(145, 254, 126, 255)
-                : new Color32(219, 219, 219, 255);
+                ? new Color32(145, 254, 126, 255) // green
+                : new Color32(219, 219, 219, 255); // gray
+
+            // skip dynamic item logic only for slot 1 (camera)
+            if (i == 1)
+                continue;
+
+            // show item image only if there's an item
+            if (inventoryList[i].HasValue)
+            {
+                var itemSprite = itemSetActive[inventoryList[i].Value]
+                    .GetComponent<Item>().itemScriptableObject.item_sprite;
+
+                inventorySlotImage[i].sprite = itemSprite;
+                inventoryItemImage[i].enabled = true;
+                inventoryItemImage[i].sprite = itemSprite;
+            }
+            else
+            {
+                inventorySlotImage[i].sprite = emptySlotSprite;
+                inventoryItemImage[i].enabled = false;
+            }
         }
+
 
         // Inventory slot selection
         if (Input.GetKeyDown(KeyCode.Alpha1))
