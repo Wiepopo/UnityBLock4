@@ -9,6 +9,7 @@ TagManager:
   - Selectable
   - Target
   - SnapZone
+  - Evidence
   layers:
   - Default
   - TransparentFX
