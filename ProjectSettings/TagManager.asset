@@ -8,6 +8,8 @@ TagManager:
   - Interactable
   - Selectable
   - Target
+  - SnapZone
+  - Evidence
   layers:
   - Default
   - TransparentFX
