@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
     [Header("General")]
-    public List<itemType> inventoryList;
+    public itemType?[] inventoryList = new itemType?[4];
     public int selectedItem;
     public float playerReach;
 
@@ -23,7 +22,6 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] GameObject keys_item;
     [SerializeField] GameObject capsule_item;
 
-
     [Space(20)]
     [Header("Item Prefabs")]
     [SerializeField] GameObject keys_prefab;
@@ -32,21 +30,26 @@ public class PlayerInventory : MonoBehaviour
     [Space(20)]
     [Header("UI")]
     [SerializeField] Image[] inventorySlotImage = new Image[4];
+    //new
+    [SerializeField] private Image[] inventoryItemImage = new Image[4];
+    //---
     [SerializeField] Image[] inventoryBGImage = new Image[4];
     [SerializeField] Sprite emptySlotSprite;
     [SerializeField] Camera cam;
 
     [SerializeField] GameObject pickUpItem_gameobject;
 
+    [Header("PhotoCamera")]
+    [SerializeField] GameObject cameraController;
+    [SerializeField] GameObject cameraCanvas;
 
-    private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>() { };
-    private Dictionary<itemType, GameObject> itemInstantiate = new Dictionary<itemType, GameObject>() { };
+    private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>();
+    private Dictionary<itemType, GameObject> itemInstantiate = new Dictionary<itemType, GameObject>();
 
     void Start()
     {
         itemSetActive.Add(itemType.Keys, keys_item);
         itemSetActive.Add(itemType.Capsule, capsule_item);
-
 
         itemInstantiate.Add(itemType.Keys, keys_prefab);
         itemInstantiate.Add(itemType.Capsule, capsule_prefab);
@@ -56,24 +59,36 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
-        //Items pickup
-        
+        // Items pickup
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
-        
-        if(Physics.Raycast(ray, out hitInfo, playerReach) && Input.GetKey(pickItemKey))
+
+        if (Physics.Raycast(ray, out hitInfo, playerReach) && Input.GetKey(pickItemKey))
         {
-            Debug.Log("sdad");
             IPickable item = hitInfo.collider.GetComponent<IPickable>();
             if (item != null)
             {
-                pickUpItem_gameobject.SetActive(true); 
-                if (Input.GetKey(pickItemKey))
+                pickUpItem_gameobject.SetActive(true);
+
+                itemType newItem = hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.item_type;
+                bool placed = false;
+                int[] allowedSlots = { 0, 2, 3 };
+
+                foreach (int i in allowedSlots)
                 {
-                    inventoryList.Add(hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.item_type);
-                    item.PickItem();
+                    if (inventoryList[i] == null)
+                    {
+                        inventoryList[i] = newItem;
+                        placed = true;
+                        item.PickItem();
+                        break;
+                    }
                 }
-                
+
+                if (!placed)
+                {
+                    Debug.Log("Inventory full or slot 1 blocked.");
+                }
             }
             else
             {
@@ -81,73 +96,102 @@ public class PlayerInventory : MonoBehaviour
             }
         }
         else
-            {
-                pickUpItem_gameobject.SetActive(false);
-            }
-
-        //Items throw
-
-        if(Input.GetKeyDown(throwItemKey) && inventoryList.Count > 1)
         {
-            Instantiate(itemInstantiate[inventoryList[selectedItem]], position: throwItem_gameobject.transform.position, new Quaternion());
-            inventoryList.RemoveAt(selectedItem);
+            pickUpItem_gameobject.SetActive(false);
+        }
 
-            if(selectedItem != 0)
+        // Items throw
+        if (Input.GetKeyDown(throwItemKey) && selectedItem != 1 && inventoryList[selectedItem].HasValue)
+        {
+            Instantiate(itemInstantiate[inventoryList[selectedItem].Value], position: throwItem_gameobject.transform.position, rotation: Quaternion.identity);
+            inventoryList[selectedItem] = null;
+
+            // Automatically select next available item
+            for (int i = selectedItem - 1; i >= 0; i--)
             {
-                selectedItem -= 1;
+                if (inventoryList[i].HasValue && i != 1)
+                {
+                    selectedItem = i;
+                    break;
+                }
             }
             NewItemSelected();
         }
-        //UI
 
-        for (int i = 0; i < 3; i++)
+        // UI update
+        for (int i = 0; i < 4; i++)
         {
-            if (i < inventoryList.Count)
+
+            if (i == 1)
+                continue; // skip second slot completely
+            if (inventoryList[i].HasValue)
             {
-                inventorySlotImage[i].sprite = itemSetActive[inventoryList[i]].GetComponent<Item>().itemScriptableObject.item_sprite;
+                inventorySlotImage[i].sprite = itemSetActive[inventoryList[i].Value].GetComponent<Item>().itemScriptableObject.item_sprite;
             }
-            else 
+            else
             {
+
                 inventorySlotImage[i].sprite = emptySlotSprite;
             }
         }
 
-        int a = 0;
-        foreach(Image image in inventoryBGImage)
+        for (int i = 0; i < 4; i++)
         {
-            if(a == selectedItem)
+            // always update background color — even for slot 1
+            inventoryBGImage[i].color = (i == selectedItem)
+                ? new Color32(145, 254, 126, 255) // green
+                : new Color32(219, 219, 219, 255); // gray
+
+            // skip dynamic item logic only for slot 1 (camera)
+            if (i == 1)
+                continue;
+
+            // show item image only if there's an item
+            if (inventoryList[i].HasValue)
             {
-                image.color = new Color32(145, 254, 126, 255);
+                var itemSprite = itemSetActive[inventoryList[i].Value]
+                    .GetComponent<Item>().itemScriptableObject.item_sprite;
+
+                inventorySlotImage[i].sprite = itemSprite;
+                inventoryItemImage[i].enabled = true;
+                inventoryItemImage[i].sprite = itemSprite;
             }
             else
             {
-                image.color = new Color32(219, 219, 219, 255);
+                inventorySlotImage[i].sprite = emptySlotSprite;
+                inventoryItemImage[i].enabled = false;
             }
-            a++;
         }
 
 
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0)
+        // Inventory slot selection
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedItem = 0;
             NewItemSelected();
+            cameraCanvas.SetActive(false);
+            cameraController.SetActive(false);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && inventoryList.Count > 1)
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             selectedItem = 1;
             NewItemSelected();
+            cameraCanvas.SetActive(true);
+            cameraController.SetActive(true);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && inventoryList.Count > 2)
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             selectedItem = 2;
             NewItemSelected();
+            cameraCanvas.SetActive(false);
+            cameraController.SetActive(false);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4) && inventoryList.Count > 3)
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             selectedItem = 3;
             NewItemSelected();
+            cameraCanvas.SetActive(false);
+            cameraController.SetActive(false);
         }
     }
 
@@ -156,12 +200,17 @@ public class PlayerInventory : MonoBehaviour
         keys_item.SetActive(false);
         capsule_item.SetActive(false);
 
-        GameObject selectedItemGameobject = itemSetActive[inventoryList[selectedItem]];
+        if (selectedItem < 0 || selectedItem >= inventoryList.Length || !inventoryList[selectedItem].HasValue)
+        {
+            return;
+        }
+
+        GameObject selectedItemGameobject = itemSetActive[inventoryList[selectedItem].Value];
         selectedItemGameobject.SetActive(true);
-    } 
+    }
 }
 
 public interface IPickable
 {
-    void PickItem(); 
+    void PickItem();
 }
