@@ -46090,7 +46090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bedf8f906f23a5543a3ef208b31f3122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theText: {fileID: 0}
+  theText: {fileID: 165293418}
 --- !u!4 &2018348365 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7481789455337829225, guid: f5779f7afd0bc04438196e411aba38ae, type: 3}
@@ -53065,7 +53065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9006467480690623001, guid: b71646e7d8caa8b4f8efd9b26013604a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.03
+      value: -23.29
       objectReference: {fileID: 0}
     - target: {fileID: 9006467480690623001, guid: b71646e7d8caa8b4f8efd9b26013604a, type: 3}
       propertyPath: m_LocalRotation.w
