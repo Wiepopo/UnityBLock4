@@ -14,14 +14,18 @@ using UnityEngine.UI;
     using System.Net;
 #endif
 
+
+
 public class FirstPersonController : MonoBehaviour
 {
+    
     private Rigidbody rb;
 
     #region Camera Movement Variables
 
     public Camera playerCamera;
 
+    
     public float fov = 60f;
     public bool invertCamera = false;
     public bool cameraCanMove = true;
