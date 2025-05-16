@@ -14,6 +14,10 @@ public class PhotoSaveToGallery : MonoBehaviour
 
     private List<Texture2D> photoGallery = new List<Texture2D>();
 
+    void Start()
+    {
+        PhotoGalleryPanel.SetActive(false);
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
