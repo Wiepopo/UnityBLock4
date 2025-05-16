@@ -2749,7 +2749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placedVersion: {fileID: 550459203}
-  snapSound: {fileID: 0}
+  snapSound: {fileID: 8300000, guid: ead6fb09337096d4d81f055aed302ed5, type: 3}
 --- !u!43 &76001556
 Mesh:
   m_ObjectHideFlags: 0
