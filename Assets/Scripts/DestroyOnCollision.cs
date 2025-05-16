@@ -12,6 +12,7 @@ public class DestroyOnCollision : MonoBehaviour
             // You could access more data from the Feedable component here
             Debug.Log("Fed the animal!");
             Destroy(gameObject); // destroy the food item
+            
         }
     }
 

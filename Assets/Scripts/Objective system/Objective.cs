@@ -24,8 +24,8 @@ public class Objective : MonoBehaviour
     private IEnumerator missionObj()
     {
         objFX.Play();
-        theText.GetComponent<Text>().text = "Get to the other side of the zoo";
-        yield return null;
+        theText.GetComponent<Text>().text = "Inspect the zoo and take photo's of the animals";
+        yield return null;  
        
     }
 
