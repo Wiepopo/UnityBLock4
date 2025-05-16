@@ -4747,6 +4747,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.01
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7a96e749ad9cb9a4782b3c3a8b811334, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: def81e2eacd7b4154b20aff2862d0510, type: 2}
     - target: {fileID: 919132149155446097, guid: 7a96e749ad9cb9a4782b3c3a8b811334, type: 3}
       propertyPath: m_Name
       value: MEtalTestHigh222 1 (1)
@@ -6139,6 +6143,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7a96e749ad9cb9a4782b3c3a8b811334, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: def81e2eacd7b4154b20aff2862d0510, type: 2}
     - target: {fileID: 919132149155446097, guid: 7a96e749ad9cb9a4782b3c3a8b811334, type: 3}
       propertyPath: m_Name
       value: MEtalTestHigh222 1
@@ -13745,13 +13753,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676465404}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.098944575, y: -0.9762021, z: 0.15565753, w: -0.11406244}
+  m_LocalRotation: {x: 0.052985877, y: -0.55682033, z: 0.828295, w: 0.03272804}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 19.055, y: -191.713, z: 9.602}
+  m_LocalEulerAnglesHint: {x: 67.803, y: 7.809, z: 180.726}
 --- !u!114 &676465407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17408,6 +17416,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b9f7339d1d11f1749becd1092d94bdc6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7f2484759f45c43558d69fb79ef935e0, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b9f7339d1d11f1749becd1092d94bdc6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 125ed2263c2464e61871174adf8faded, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b9f7339d1d11f1749becd1092d94bdc6, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 14ecbd4e45f974083b95b6e3e355f1de, type: 2}
     - target: {fileID: 919132149155446097, guid: b9f7339d1d11f1749becd1092d94bdc6, type: 3}
       propertyPath: m_Name
       value: MEtalRoofPoleFixfbx
