@@ -26,7 +26,7 @@ public class PhotoSave : MonoBehaviour
             viewPlanes.transform.position = -planes[i].normal * planes[i].distance; //Setting the planes position according to their number
             viewPlanes.transform.rotation = Quaternion.FromToRotation(Vector3.up, planes[i].normal); //Setting the rotation according to their number
             //Quaternion.FromToRotation makes it so the planes can only rotate in one Quaternion which means only on one axis
-            obj = this.gameObject;
+            obj = gameObject;
             objCollider = GetComponent<Collider>();
 
         }
