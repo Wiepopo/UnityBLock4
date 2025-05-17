@@ -715,8 +715,8 @@
     "m_ObjectId": "053929a5f1df4584bf80dd0fff0cd79d",
     "m_Title": "Uv Animation",
     "m_Position": {
-        "x": -957.0,
-        "y": -543.5
+        "x": -957.0000610351563,
+        "y": -543.9999389648438
     }
 }
 
@@ -796,8 +796,8 @@
     "m_ObjectId": "0b13377edc604fc19e58b7939077d1d5",
     "m_Title": "UV Offset",
     "m_Position": {
-        "x": -1885.99951171875,
-        "y": -1109.5
+        "x": -1886.0001220703125,
+        "y": -1110.0
     }
 }
 
@@ -807,8 +807,8 @@
     "m_ObjectId": "0dc74a5038a0440ca947e4d32df3762b",
     "m_Title": "Vertex Animation",
     "m_Position": {
-        "x": -930.99951171875,
-        "y": -1269.5
+        "x": -931.0000610351563,
+        "y": -1270.0
     }
 }
 
@@ -946,10 +946,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 872.0001831054688,
-            "y": -248.00003051757813,
+            "x": 808.0,
+            "y": -307.0,
             "width": 138.0,
-            "height": 33.999969482421878
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -1520,10 +1520,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 155.00001525878907,
-            "y": -406.9999694824219,
-            "width": 182.99998474121095,
-            "height": 251.0
+            "x": 156.99993896484376,
+            "y": -420.9998779296875,
+            "width": 208.00003051757813,
+            "height": 434.99993896484377
         }
     },
     "m_Slots": [
@@ -1556,7 +1556,7 @@
         "tex2d"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": false,
+    "m_PreviewExpanded": true,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -2077,7 +2077,7 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1814.0,
+            "x": -1811.0001220703125,
             "y": -1033.0,
             "width": 206.0,
             "height": 130.99993896484376
@@ -2668,7 +2668,7 @@
     "m_Title": "Color",
     "m_Position": {
         "x": -76.0,
-        "y": -601.5
+        "y": -601.9999389648438
     }
 }
 
@@ -4096,7 +4096,7 @@
         "m_Id": "9f764cd60fc546a493ad6810742bb19d"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 1,
+    "m_SurfaceType": 0,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
