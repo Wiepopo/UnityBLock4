@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -39,6 +40,10 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] GameObject pickUpItem_gameobject;
 
+
+    [Header("Clipboard")]
+    [SerializeField] GameObject clipboard;
+
     [Header("PhotoCamera")]
     [SerializeField] GameObject cameraController;
     [SerializeField] GameObject cameraCanvas;
@@ -49,45 +54,68 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         itemSetActive.Add(itemType.Keys, keys_item);
-        itemSetActive.Add(itemType.Capsule, capsule_item);
+    itemSetActive.Add(itemType.Capsule, capsule_item);
 
-        itemInstantiate.Add(itemType.Keys, keys_prefab);
-        itemInstantiate.Add(itemType.Capsule, capsule_prefab);
+    itemInstantiate.Add(itemType.Keys, keys_prefab);
+    itemInstantiate.Add(itemType.Capsule, capsule_prefab);
 
+    // Make sure slot 0 is selected on start
+    selectedItem = 0;
+
+    // Show the clipboard if we're starting on slot 0
+    clipboard.SetActive(true);
+    cameraCanvas.SetActive(false);
+    cameraController.SetActive(false);
+
+    // Only show the held item if there is one
+    
         NewItemSelected();
+    
     }
 
     void Update()
     {
+        
         // Items pickup
+        // --- Cast a ray to detect a pickable item ---
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
 
-        if (Physics.Raycast(ray, out hitInfo, playerReach) && Input.GetKey(pickItemKey))
+        if (Physics.Raycast(ray, out hitInfo, playerReach))
         {
             IPickable item = hitInfo.collider.GetComponent<IPickable>();
             if (item != null)
             {
+                // Show the pickup prompt
                 pickUpItem_gameobject.SetActive(true);
 
-                itemType newItem = hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.item_type;
-                bool placed = false;
-                int[] allowedSlots = { 0, 2, 3 };
-
-                foreach (int i in allowedSlots)
+                // Handle the pickup only when E is pressed
+                if (Input.GetKeyDown(pickItemKey))
                 {
-                    if (inventoryList[i] == null)
+                    itemType newItem = hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.item_type;
+                    bool placed = false;
+                    int[] allowedSlots = { 2, 3 };
+
+                    foreach (int i in allowedSlots)
                     {
-                        inventoryList[i] = newItem;
-                        placed = true;
-                        item.PickItem();
-                        break;
-                    }
-                }
+                        if (inventoryList[i] == null)
+                        {
+                            inventoryList[i] = newItem;
+                            placed = true;
+                            item.PickItem();
 
-                if (!placed)
-                {
-                    Debug.Log("Inventory full or slot 1 blocked.");
+                            if (i == selectedItem)
+                            {
+                                NewItemSelected();
+                            }
+                            break;
+                        }
+                    }
+
+                    if (!placed)
+                    {
+                        Debug.Log("Inventory full or slot 1 blocked.");
+                    }
                 }
             }
             else
@@ -100,21 +128,23 @@ public class PlayerInventory : MonoBehaviour
             pickUpItem_gameobject.SetActive(false);
         }
 
+
         // Items throw
         if (Input.GetKeyDown(throwItemKey) && selectedItem != 1 && inventoryList[selectedItem].HasValue)
         {
             Instantiate(itemInstantiate[inventoryList[selectedItem].Value], position: throwItem_gameobject.transform.position, rotation: Quaternion.identity);
             inventoryList[selectedItem] = null;
 
-            // Automatically select next available item
-            for (int i = selectedItem - 1; i >= 0; i--)
-            {
-                if (inventoryList[i].HasValue && i != 1)
-                {
-                    selectedItem = i;
-                    break;
-                }
-            }
+            //shifts to another slot
+            // for (int i = selectedItem - 1; i >= 0; i--)
+            // {
+            //     if (inventoryList[i].HasValue && i != 1 || i != 0)
+            //     {
+            //         selectedItem = i;
+            //         break;
+            //     }
+            // }
+
             NewItemSelected();
         }
 
@@ -124,6 +154,9 @@ public class PlayerInventory : MonoBehaviour
 
             if (i == 1)
                 continue; // skip second slot completely
+
+            if (i == 0)
+                continue;
             if (inventoryList[i].HasValue)
             {
                 inventorySlotImage[i].sprite = itemSetActive[inventoryList[i].Value].GetComponent<Item>().itemScriptableObject.item_sprite;
@@ -144,6 +177,9 @@ public class PlayerInventory : MonoBehaviour
 
             // skip dynamic item logic only for slot 1 (camera)
             if (i == 1)
+                continue;
+
+            if (i == 0)
                 continue;
 
             // show item image only if there's an item
@@ -171,6 +207,7 @@ public class PlayerInventory : MonoBehaviour
             NewItemSelected();
             cameraCanvas.SetActive(false);
             cameraController.SetActive(false);
+            clipboard.SetActive(true);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -178,6 +215,7 @@ public class PlayerInventory : MonoBehaviour
             NewItemSelected();
             cameraCanvas.SetActive(true);
             cameraController.SetActive(true);
+            clipboard.SetActive(false);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -185,6 +223,7 @@ public class PlayerInventory : MonoBehaviour
             NewItemSelected();
             cameraCanvas.SetActive(false);
             cameraController.SetActive(false);
+            clipboard.SetActive(false);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
@@ -192,6 +231,7 @@ public class PlayerInventory : MonoBehaviour
             NewItemSelected();
             cameraCanvas.SetActive(false);
             cameraController.SetActive(false);
+            clipboard.SetActive(false);
         }
     }
 
