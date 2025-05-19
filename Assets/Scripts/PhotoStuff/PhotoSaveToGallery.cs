@@ -5,12 +5,10 @@ using System.Collections.Generic;
 
 public class PhotoSaveToGallery : MonoBehaviour
 {
-    public Camera photoCamera; // Assign the camera used for capturing
-    public RawImage photoDisplayPrefab; // Prefab with a RawImage component to display photos
-    public Transform galleryParent; // Parent transform to hold photo displays
-    public GameObject PhotoGalleryPanel; //panel on which the different photos will be put
-    public GameObject PhotoDisplayPrefab; // this is the ui prefab on which the screenshots will be projected
-    public Transform GallaryContent; //content of the photo 
+    public Camera photoCamera;
+    public GameObject PhotoGalleryPanel; // Full panel
+    public GameObject PhotoDisplayPrefab; // The prefab with a RawImage
+    public Transform GallaryContent; // Content area of scroll view
 
     private List<Texture2D> photoGallery = new List<Texture2D>();
 
@@ -18,39 +16,30 @@ public class PhotoSaveToGallery : MonoBehaviour
     {
         PhotoGalleryPanel.SetActive(false);
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
-    {
-        PhotoGalleryPanel.SetActive(!PhotoGalleryPanel.activeSelf);
-    }
-    }
-    public void CapturePhoto()
-    {
-        StartCoroutine(CapturePhotoCoroutine());
+        {
+            PhotoGalleryPanel.SetActive(!PhotoGalleryPanel.activeSelf);
+        }
     }
 
-    private IEnumerator CapturePhotoCoroutine()
+    public void SavePhoto(Texture2D photo)
     {
-        yield return new WaitForEndOfFrame();
+        if (photo == null) return;
 
-        // Set up RenderTexture
-        RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
-        photoCamera.targetTexture = rt;
-        Texture2D screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-        photoCamera.Render();
-        RenderTexture.active = rt;
-        screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
-        screenShot.Apply();
-        photoCamera.targetTexture = null;
-        RenderTexture.active = null;
-        Destroy(rt);
+        photoGallery.Add(photo);
 
-        // Add the screenshot to the gallery
-        photoGallery.Add(screenShot);
-
-        // Display the photo in the gallery UI
-        RawImage newPhoto = Instantiate(photoDisplayPrefab, galleryParent);
-        newPhoto.texture = screenShot;
+        GameObject newPhotoGO = Instantiate(PhotoDisplayPrefab, GallaryContent);
+        RawImage rawImage = newPhotoGO.GetComponent<RawImage>();
+        if (rawImage != null)
+        {
+            rawImage.texture = photo;
+        }
+        else
+        {
+            Debug.LogWarning("PhotoDisplayPrefab is missing a RawImage component.");
+        }
     }
 }
