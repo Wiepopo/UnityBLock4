@@ -24,6 +24,10 @@ public class PhotoCapture : MonoBehaviour
     [Header("Photosave")]
     [SerializeField] PhotoSaveToGallery photoSaveToGallery;
 
+    [Header("Evidence")]
+    [SerializeField] private PhotoDetector photoDetector;
+
+
 
     private Texture2D screenCapture;
     private bool viewingPhoto;
@@ -50,27 +54,32 @@ public class PhotoCapture : MonoBehaviour
 
     IEnumerator CapturePhoto()
     {
-
-        //Camera UI false 
         cameraUI.SetActive(false);
         viewingPhoto = true;
 
         yield return new WaitForEndOfFrame();
 
         Rect regionToRead = new Rect(0, 0, Screen.width, Screen.height);
-
         screenCapture.ReadPixels(regionToRead, 0, 0, false);
         screenCapture.Apply();
 
-        // Clone the photo so each gallery item gets its own texture
-        Texture2D photoCopy = new Texture2D(screenCapture.width, screenCapture.height, screenCapture.format, false);
-        photoCopy.SetPixels(screenCapture.GetPixels());
-        photoCopy.Apply();
+        // Only save the photo if we detected evidence
+        if (photoDetector.TryDetectEvidence())
+        {
+            Texture2D photoCopy = new Texture2D(screenCapture.width, screenCapture.height, screenCapture.format, false);
+            photoCopy.SetPixels(screenCapture.GetPixels());
+            photoCopy.Apply();
 
-        photoSaveToGallery.SavePhoto(photoCopy);
+            photoSaveToGallery.SavePhoto(photoCopy);
+        }
+        else
+        {
+            Debug.Log("No evidence in photo — not saving.");
+        }
 
         ShowPhoto();
     }
+
 
     void ShowPhoto()
     {

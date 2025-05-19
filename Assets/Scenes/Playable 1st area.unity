@@ -37065,6 +37065,7 @@ MonoBehaviour:
   fadingAnimation: {fileID: 937123675}
   cameraAudio: {fileID: 474472864}
   photoSaveToGallery: {fileID: 1303370811}
+  photoDetector: {fileID: 505613287}
 --- !u!4 &1522602447
 Transform:
   m_ObjectHideFlags: 0
