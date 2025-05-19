@@ -21,6 +21,9 @@ public class PhotoCapture : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioSource cameraAudio;
 
+    [Header("Photosave")]
+    [SerializeField] PhotoSaveToGallery photoSaveToGallery;
+
 
     private Texture2D screenCapture;
     private bool viewingPhoto;
@@ -32,32 +35,40 @@ public class PhotoCapture : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            if(!viewingPhoto)
+            if (!viewingPhoto)
             {
-            StartCoroutine(CapturePhoto());
+                StartCoroutine(CapturePhoto());
             }
             else
             {
                 RemovePhoto();
             }
-        }   
+        }
     }
 
     IEnumerator CapturePhoto()
     {
-        
+
         //Camera UI false 
         cameraUI.SetActive(false);
         viewingPhoto = true;
 
         yield return new WaitForEndOfFrame();
 
-        Rect regionToRead = new Rect (0, 0, Screen.width, Screen.height);
+        Rect regionToRead = new Rect(0, 0, Screen.width, Screen.height);
 
         screenCapture.ReadPixels(regionToRead, 0, 0, false);
         screenCapture.Apply();
+
+        // Clone the photo so each gallery item gets its own texture
+        Texture2D photoCopy = new Texture2D(screenCapture.width, screenCapture.height, screenCapture.format, false);
+        photoCopy.SetPixels(screenCapture.GetPixels());
+        photoCopy.Apply();
+
+        photoSaveToGallery.SavePhoto(photoCopy);
+
         ShowPhoto();
     }
 
