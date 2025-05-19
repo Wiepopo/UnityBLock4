@@ -10,7 +10,11 @@ public class ZookeeperSubtitle : MonoBehaviour
 
     private Coroutine subtitleRoutine;
     private bool onCooldown = false;
-    
+
+    public bool IsOnCooldown()
+    {
+        return onCooldown;
+    }
 
     public void Speak(string line, AudioClip voiceClip, float customDuration = -1f)
     {

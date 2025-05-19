@@ -36497,6 +36497,8 @@ MonoBehaviour:
   flashTime: 0.2
   fadingAnimation: {fileID: 937123675}
   cameraAudio: {fileID: 474472864}
+  photoSaveToGallery: {fileID: 0}
+  photoDetector: {fileID: 0}
 --- !u!4 &1522602447
 Transform:
   m_ObjectHideFlags: 0
@@ -44494,7 +44496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &1812002957
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44536,6 +44538,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2102498778}
   followDistance: 3
+  closeWanderRadius: 2
+  farWanderRadius: 5
+  playerStillThreshold: 2
+  wanderInterval: 4
 --- !u!195 &1812002959
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -44679,9 +44685,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subtitleSystem: {fileID: 1812002964}
   randomLines:
-  - Did you know cats sleep 16 hours a day?
+  - Did you know that cats sleep 16 hours a day?
+  - Did you dogs?
   randomClips:
   - {fileID: 8300000, guid: 78afe051dd4bc01429ddbf952213b564, type: 3}
+  - {fileID: 8300000, guid: 90efb5b6040ea304fa92948321d7c44e, type: 3}
   minDelay: 10
   maxDelay: 25
 --- !u!4 &1825785228 stripped

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ZookeeperRandomTalk : MonoBehaviour
@@ -10,22 +11,47 @@ public class ZookeeperRandomTalk : MonoBehaviour
     [SerializeField] private float minDelay = 10f;
     [SerializeField] private float maxDelay = 25f;
 
-    private bool isTalking = false;
+    private Queue<(string, AudioClip)> lineQueue;
 
     void Start()
     {
+        InitializeQueue();
         StartCoroutine(RandomTalkRoutine());
+    }
+
+    void InitializeQueue()
+    {
+        List<(string, AudioClip)> combined = new List<(string, AudioClip)>();
+        for (int i = 0; i < randomLines.Length; i++)
+        {
+            AudioClip clip = i < randomClips.Length ? randomClips[i] : null;
+            combined.Add((randomLines[i], clip));
+        }
+
+        Shuffle(combined);
+        lineQueue = new Queue<(string, AudioClip)>(combined);
     }
 
     IEnumerator RandomTalkRoutine()
     {
-        while (true)
+        while (lineQueue.Count > 0)
         {
             float waitTime = Random.Range(minDelay, maxDelay);
             yield return new WaitForSeconds(waitTime);
 
-            int index = Random.Range(0, randomLines.Length);
-            subtitleSystem.Speak(randomLines[index], randomClips.Length > index ? randomClips[index] : null);
+            if (!subtitleSystem) yield break;
+
+            var (line, clip) = lineQueue.Dequeue();
+            subtitleSystem.Speak(line, clip);
+        }
+    }
+
+    void Shuffle<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int rand = Random.Range(i, list.Count);
+            (list[i], list[rand]) = (list[rand], list[i]);
         }
     }
 }
