@@ -11,7 +11,7 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         // Load your actual game scene
-        SceneManager.LoadScene("KamenGrayBox");
+        SceneManager.LoadScene("Zone1Playable");
     }
 
     public void OpenOptions()
