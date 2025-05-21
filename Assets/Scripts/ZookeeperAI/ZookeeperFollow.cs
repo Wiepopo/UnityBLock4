@@ -20,9 +20,13 @@ public class ZookeeperFollow : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = 5.5f; // Increase this to make the zookeeper walk faster
         wanderTimer = wanderInterval;
         lastPlayerPosition = player.position;
         playerStillTime = 0f;
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        agent.speed = Mathf.Lerp(2f, 6f, distanceToPlayer / 10f); // Increase speed based on distance
+
     }
 
     void Update()
