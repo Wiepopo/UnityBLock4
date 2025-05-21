@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public string startgame;
-    public string options;
+  
     public void StartGame()
     {
         // Load your actual game scene
@@ -17,7 +16,12 @@ public class MenuManager : MonoBehaviour
 
     public void OpenOptions()
     {
-        Debug.Log(options);
+        SceneManager.LoadScene("OptionsMenu");
+    }
+
+    public void GoBackMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
