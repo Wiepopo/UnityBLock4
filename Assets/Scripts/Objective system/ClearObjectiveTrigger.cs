@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ClearObjectiveTrigger : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class ClearObjectiveTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            theText.GetComponent<Text>().text = "";
+            theText.GetComponent<Text>().text = "Done with zone 1";
         }
     }
 }
