@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,13 +6,44 @@ public class DestroyOnCollisiontest : MonoBehaviour
 {
     public GameObject theText;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.TryGetComponent<Feedable>(out var feedable))
-        {
-            Debug.Log("Fed the animal!");
-            Destroy(gameObject); // destroy the food item
 
+    [SerializeField] GameObject emptyBowl1;
+    [SerializeField] GameObject fullBowl1;
+    [SerializeField] GameObject emptyBowl2;
+    [SerializeField] GameObject fullBowl2;
+    [SerializeField] GameObject emptyBowl3;
+    [SerializeField] GameObject fullBowl3;
+    private void OnTriggerEnter(Collider other)
+    {
+         if (other.TryGetComponent<Feedable>(out var feedable))
+        {
+            GameObject hitBowl = other.gameObject;
+
+            if (hitBowl == emptyBowl1)
+            {
+                emptyBowl1.SetActive(false);
+                fullBowl1.SetActive(true);
+            }
+            else if (hitBowl == emptyBowl2)
+            {
+                emptyBowl2.SetActive(false);
+                fullBowl2.SetActive(true);
+            }
+            else if (hitBowl == emptyBowl3)
+            {
+                emptyBowl3.SetActive(false);
+                fullBowl3.SetActive(true);
+            }
+            else
+            {
+                // Not a recognized bowl
+                return;
+            }
+
+            Debug.Log("Fed the animal!");
+            Destroy(gameObject); // Destroy the food bag
+
+            // GameManager logic
             if (GameManager.Instance == null)
             {
                 Debug.LogError("GameManager.Instance is NULL. Add GameManager to the scene.");
@@ -31,4 +63,5 @@ public class DestroyOnCollisiontest : MonoBehaviour
             }
         }
     }
+
 }
