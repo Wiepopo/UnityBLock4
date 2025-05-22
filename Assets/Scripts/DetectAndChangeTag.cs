@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DetectAndChangeTag : MonoBehaviour
 {
@@ -7,7 +9,7 @@ public class DetectAndChangeTag : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0)) // Replace with your photo key
+        if (Mouse.current.leftButton.wasPressedThisFrame) // Replace with your photo key
         {
             TryDetectEvidence();
         }
@@ -21,9 +23,8 @@ public class DetectAndChangeTag : MonoBehaviour
             if (hit.collider.CompareTag("Evidence"))
             {
                 Debug.Log("Evidence found: " + hit.collider.name);
-                hit.collider.tag = "NoLongerEvidence";
-                evidenceAmount -= 1f;
-                Debug.Log("Amount of evidence left to collect: " + evidenceAmount);
+                StartCoroutine(ChangeTagAfterDelay(hit.collider.gameObject, 0.1f));
+                evidenceAmount -= 1;
                 return true;
             }
             else
@@ -34,5 +35,13 @@ public class DetectAndChangeTag : MonoBehaviour
 
         return false;
     }
+
+    private IEnumerator ChangeTagAfterDelay(GameObject obj, float delay)
+{
+    yield return new WaitForSeconds(delay);
+    obj.tag = "NoLongerEvidence";
+}
+
+    
 
 }

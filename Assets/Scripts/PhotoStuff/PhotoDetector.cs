@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PhotoDetector : MonoBehaviour
 {
     [SerializeField] private Camera photoCamera;
+    [SerializeField] private float evidenceAmount;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0)) // Replace with your photo key
+        if (Mouse.current.leftButton.wasPressedThisFrame) // Replace with your photo key
         {
             TryDetectEvidence();
         }
@@ -20,6 +22,7 @@ public class PhotoDetector : MonoBehaviour
             if (hit.collider.CompareTag("Evidence"))
             {
                 Debug.Log("Evidence found: " + hit.collider.name);
+                
                 return true;
             }
             else

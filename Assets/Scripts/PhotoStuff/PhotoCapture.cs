@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using UnityEngine.InputSystem;
 public class PhotoCapture : MonoBehaviour
 {
     [Header("Photo Taker")]
@@ -39,7 +40,7 @@ public class PhotoCapture : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             if (!viewingPhoto)
             {
