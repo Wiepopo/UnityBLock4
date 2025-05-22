@@ -298,7 +298,7 @@ MonoBehaviour:
   wanderRadius: 10
   wanderInterval: 2.54
   maxWanderAngle: 40
-  walkspeed: 10
+  walkspeed: 2
   obstacleDetectionDistance: 15
   obstacleLayer:
     serializedVersion: 2
@@ -315,6 +315,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4ff61add341154388dd90512811f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wanderTime: 10
+  runTime: 0
+  idleTime: 5
+  switchToNextStateTimer: 3
 --- !u!114 &27218005
 MonoBehaviour:
   m_ObjectHideFlags: 0
