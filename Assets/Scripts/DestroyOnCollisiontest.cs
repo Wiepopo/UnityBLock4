@@ -60,7 +60,7 @@ public class DestroyOnCollisiontest : MonoBehaviour
                 if (GameManager.Instance.Interactions == GameManager.Instance.MaxInteractions)
                 {
                     Debug.Log("Objective Completed");
-                    theText.GetComponent<Text>().text = "Inspect the zoo, <color=green>Feed</color> and take photo's of the animals";
+                    theText.GetComponent<Text>().text = " <color=green>Feed the animals</color>";
                 }
             }
         }

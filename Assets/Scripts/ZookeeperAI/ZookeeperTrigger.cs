@@ -1,7 +1,12 @@
+using UnityEditor.Rendering;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ZookeeperTrigger : MonoBehaviour
+
 {
+    public GameObject theText;
     public ZookeeperSubtitle subtitleSystem;
     [TextArea]
     public string line;
@@ -18,6 +23,7 @@ public class ZookeeperTrigger : MonoBehaviour
         {
             subtitleSystem.Speak(line, voiceClip, subtitleDuration);
             alreadyTriggered = true;
+            theText.GetComponent<Text>().text = "Feed the animals";
         }
     }
 }
