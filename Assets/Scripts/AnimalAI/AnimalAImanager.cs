@@ -45,9 +45,7 @@ public class AnimalAImanager : MonoBehaviour
                 currentTime = wanderTime;
             }
         
-            animalAIIdle.enabled = !switchmodeactive;
-            animalAIWander.enabled = switchmodeactive;
-        
-       
+        animalAIIdle.enabled = !switchmodeactive;
+        animalAIWander.enabled = switchmodeactive;
     }
 }

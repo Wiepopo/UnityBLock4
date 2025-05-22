@@ -48222,6 +48222,7 @@ MonoBehaviour:
   animalSleeping: {fileID: 0}
   animalTalking: {fileID: 0}
   animalWalking: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!54 &2059298331
 Rigidbody:
   m_ObjectHideFlags: 0
