@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
 
 public class PhotoSaveToGallery : MonoBehaviour
 {
+    [Header("References")]
     public Camera photoCamera;
-    public GameObject PhotoGalleryPanel; // Full panel
-    public GameObject PhotoDisplayPrefab; // The prefab with a RawImage
-    public Transform GallaryContent; // Content area of scroll view
+    public GameObject PhotoGalleryPanel;       // Full gallery panel
+    public GameObject PhotoDisplayPrefab;      // Prefab with ScreenshotCardUI and RawImage
+    public Transform GallaryContent;           // ScrollView's content container
+    public FullscreenPhotoViewer fullscreenViewer; // Assign this in Inspector!
 
     private List<Texture2D> photoGallery = new List<Texture2D>();
 
@@ -21,7 +22,12 @@ public class PhotoSaveToGallery : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            PhotoGalleryPanel.SetActive(!PhotoGalleryPanel.activeSelf);
+            bool isOpen = !PhotoGalleryPanel.activeSelf;
+            PhotoGalleryPanel.SetActive(isOpen);
+
+            // Toggle mouse cursor visibility
+            Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = isOpen;
         }
     }
 
@@ -32,14 +38,17 @@ public class PhotoSaveToGallery : MonoBehaviour
         photoGallery.Add(photo);
 
         GameObject newPhotoGO = Instantiate(PhotoDisplayPrefab, GallaryContent);
-        RawImage rawImage = newPhotoGO.GetComponent<RawImage>();
-        if (rawImage != null)
+
+        ScreenshotCardUI cardUI = newPhotoGO.GetComponent<ScreenshotCardUI>();
+
+        if (cardUI != null)
         {
-            rawImage.texture = photo;
+            cardUI.SetPhoto(photo);
+            cardUI.fullscreenViewer = fullscreenViewer; // ✅ Assign viewer here
         }
         else
         {
-            Debug.LogWarning("PhotoDisplayPrefab is missing a RawImage component.");
+            Debug.LogWarning("ScreenshotCardUI script not found on prefab.");
         }
     }
 }
