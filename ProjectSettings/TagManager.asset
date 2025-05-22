@@ -10,6 +10,7 @@ TagManager:
   - Target
   - SnapZone
   - Evidence
+  - Zookeeper
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Player
   - Feedable
   - Obstacle
-  - 
+  - Zookeeper
   - 
   - 
   - 

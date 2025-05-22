@@ -8,7 +8,7 @@ public class ZookeeperFollow : MonoBehaviour
 
     public float closeWanderRadius = 2f;
     public float farWanderRadius = 5f;
-    public float playerStillThreshold = 2f; // seconds of no movement to allow far wander
+    public float playerStillThreshold = 2f;
 
     public float wanderInterval = 4f;
 
@@ -17,20 +17,31 @@ public class ZookeeperFollow : MonoBehaviour
     private Vector3 lastPlayerPosition;
     private float playerStillTime;
 
+    private bool followEnabled = false;
+
+    private float destinationUpdateThreshold = 1.5f; // Don't re-path unless player moved
+
+    // Optional: Reference to Animator (assign in Inspector if used)
+    public Animator animator;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = 5.5f; // Increase this to make the zookeeper walk faster
         wanderTimer = wanderInterval;
         lastPlayerPosition = player.position;
         playerStillTime = 0f;
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        agent.speed = Mathf.Lerp(2f, 6f, distanceToPlayer / 10f); // Increase speed based on distance
 
+        // Optional smoother settings
+        agent.acceleration = 10f;
+        agent.angularSpeed = 180f;
+        agent.stoppingDistance = 1.2f;
+        agent.autoBraking = true;
     }
 
     void Update()
     {
+        if (!followEnabled) return;
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // Track player movement
@@ -44,10 +55,15 @@ public class ZookeeperFollow : MonoBehaviour
             playerStillTime += Time.deltaTime;
         }
 
-        // If too far, follow
+        // Smooth follow logic
         if (distanceToPlayer > followDistance)
         {
-            agent.SetDestination(player.position);
+            float distanceToCurrentTarget = Vector3.Distance(agent.destination, player.position);
+
+            if (distanceToCurrentTarget > destinationUpdateThreshold)
+            {
+                agent.SetDestination(player.position);
+            }
         }
         else
         {
@@ -59,9 +75,27 @@ public class ZookeeperFollow : MonoBehaviour
                 {
                     float radius = (playerStillTime > playerStillThreshold) ? farWanderRadius : closeWanderRadius;
                     WanderNearPlayer(radius);
-                    wanderTimer = Random.Range(wanderInterval - 1f, wanderInterval + 1.5f); // adds variety
+                    wanderTimer = Random.Range(wanderInterval - 1f, wanderInterval + 1.5f);
                 }
             }
+        }
+
+        // Optional: Smooth manual rotation if agent.updateRotation is false
+        if (agent.hasPath && agent.desiredVelocity.sqrMagnitude > 0.1f)
+        {
+            Vector3 direction = agent.steeringTarget - transform.position;
+            direction.y = 0f;
+            if (direction != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3f);
+            }
+        }
+
+        // Optional: Hook to animation
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", agent.velocity.magnitude);
         }
     }
 
@@ -75,5 +109,11 @@ public class ZookeeperFollow : MonoBehaviour
         {
             agent.SetDestination(hit.position);
         }
+    }
+
+    public void EnableFollow()
+    {
+        Debug.Log("Zookeeper follow ENABLED");
+        followEnabled = true;
     }
 }

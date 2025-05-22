@@ -26,7 +26,7 @@ public class AnimalAImanager : MonoBehaviour
         {
             switchmode = !switchmode;
         }
-        Debug.Log(switchmode);
+       // Debug.Log(switchmode);
         
             animalAIIdle.enabled = !switchmode;
             animalAIWander.enabled = switchmode;
