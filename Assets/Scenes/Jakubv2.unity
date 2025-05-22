@@ -31035,6 +31035,33 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1260964994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8353114709834019034, guid: 791520e8b21b30140836e117a2760a79, type: 3}
+  m_PrefabInstance: {fileID: 9072593378799187671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1260964998
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260964994}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6549178805441001786, guid: c2206e871a429d74ca82fd6bd83dcaf5, type: 3}
 --- !u!1 &1268995047
 GameObject:
   m_ObjectHideFlags: 0
@@ -40571,6 +40598,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 756049811098633014, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1194182279195757933, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
       propertyPath: m_AllowMSAA
       value: 0
@@ -40578,6 +40609,10 @@ PrefabInstance:
     - target: {fileID: 1194182279195757933, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
       propertyPath: m_RenderingPath
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194182279302950379, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1194182280054482933, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40622,6 +40657,14 @@ PrefabInstance:
     - target: {fileID: 1194182280054482937, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
       propertyPath: m_Name
       value: Player Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5549622428052597954, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757346568033645672, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -53685,10 +53728,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zone 1 small wall
       objectReference: {fileID: 0}
+    - target: {fileID: 7560635450261541135, guid: 791520e8b21b30140836e117a2760a79, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 43e2048c24c0e6146b8b0213e3096c22, type: 2}
+    - target: {fileID: 8694174062404921952, guid: 791520e8b21b30140836e117a2760a79, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8353114709834019034, guid: 791520e8b21b30140836e117a2760a79, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1260964998}
   m_SourcePrefab: {fileID: 100100000, guid: 791520e8b21b30140836e117a2760a79, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
