@@ -2,20 +2,20 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class AnimalAIWander : MonoBehaviour
+public class AnimalAIRunning : MonoBehaviour
 {
     [Header("Wandering Settings")]
     [SerializeField] float wanderRadius = 10f;           // Radius within which the agent will wander
     [SerializeField] float wanderInterval;          // Time interval between wander movements
     [SerializeField] float maxWanderAngle;         // Maximum angle deviation from forward direction
-    [SerializeField] float walkspeed;   //Speed of traversal
+    [SerializeField] float runSpeed;   //Speed of traversal
     [Header("Obstacle Detection Settings")]
     [SerializeField] float obstacleDetectionDistance = 2f;   // Distance to detect obstacles
     [SerializeField] LayerMask obstacleLayer;  // Layer mask for obstacles make sure obstacles are in the obstacle layer and the obstacle layer is set in the insp[SerializeField]
 
     private NavMeshAgent agent;
     private float timer;
-    
+
 
     void Awake()
     {
@@ -25,12 +25,12 @@ public class AnimalAIWander : MonoBehaviour
 
     void Start()
     {
-        agent.speed = walkspeed;
+        agent.speed = runSpeed;
     }
 
     void Update()
     {
-        
+
         timer += Time.deltaTime;
 
         if (timer >= wanderInterval)
@@ -40,7 +40,7 @@ public class AnimalAIWander : MonoBehaviour
             {
                 agent.SetDestination(newPos);
             }
-            
+
             timer = 0;
         }
     }
