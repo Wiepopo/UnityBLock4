@@ -33346,7 +33346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5957219766833055260, guid: 865f12e8d1f405341b9e1efc511bc635, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 291869.97
+      value: 291727.56
       objectReference: {fileID: 0}
     - target: {fileID: 6033823547920920575, guid: 865f12e8d1f405341b9e1efc511bc635, type: 3}
       propertyPath: m_Spacing.x
@@ -53437,6 +53437,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7282070779637041511, guid: 24c3644ef739a864793e6747d4ec6c4a, type: 3}
+--- !u!1 &1868591743 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2050620793817214342, guid: e5641e5bf0ef3df4eab9b3dd7d9dbb2f, type: 3}
+  m_PrefabInstance: {fileID: 801549928881524376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1868591747
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868591743}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6549178805441001786, guid: 38f66310414501d429cb68933934589a, type: 3}
 --- !u!1 &1870763151 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55844a6030a40ea48844b49680312ce4, type: 3}
@@ -62523,10 +62550,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallPathWall
       objectReference: {fileID: 0}
+    - target: {fileID: 4467513450708439308, guid: e5641e5bf0ef3df4eab9b3dd7d9dbb2f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2050620793817214342, guid: e5641e5bf0ef3df4eab9b3dd7d9dbb2f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1868591747}
   m_SourcePrefab: {fileID: 100100000, guid: e5641e5bf0ef3df4eab9b3dd7d9dbb2f, type: 3}
 --- !u!1 &919132148581417841 stripped
 GameObject:
