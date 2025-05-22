@@ -9,13 +9,13 @@ public class AnimalAImanager : MonoBehaviour
 
     //Statements
     bool switchmodeactive = false;
+    float stateCount = 0;
 
     //Different timers for switching between states\
     [SerializeField] float wanderTime;
     [SerializeField] float runTime;
     [SerializeField] float idleTime;
-    [SerializeField] float switchToNextStateTimer;
-    private float currentTime;
+    private float switchToNextStateTimer;
 
     void Awake()
     {
@@ -27,25 +27,59 @@ public class AnimalAImanager : MonoBehaviour
 
     void Start()
     {
-        animalAIWander.enabled = false;
-        animalAIRunning.enabled = false;
-        currentTime = switchToNextStateTimer;
+        
+        
     }
 
     void Update()
     {
-        if (currentTime > 0f)
-        {
-            currentTime -= Time.deltaTime;
-        }
+        switchToNextStateTimer -= Time.deltaTime;
+        //Debug.Log(switchToNextStateTimer);
 
-        if (currentTime <= 0f)
-            {
-                switchmodeactive = !switchmodeactive;
-                currentTime = wanderTime;
-            }
-        
-        animalAIIdle.enabled = !switchmodeactive;
-        animalAIWander.enabled = switchmodeactive;
+        if (switchToNextStateTimer <= 0f)
+        {
+            StateSwitcher();
+            Debug.Log("should've switched states now");
+        }    
     }
+
+    void StateSwitcher()
+    {
+        if (stateCount == 0)
+        {
+            AllAISetToFalse();
+            animalAIIdle.enabled = true;
+            switchToNextStateTimer = idleTime;
+        }
+        else if (stateCount == 1)
+        {
+            AllAISetToFalse();
+            animalAIWander.enabled = true;
+            switchToNextStateTimer = wanderTime;
+        }
+        else if (stateCount == 2)
+        {
+            AllAISetToFalse();
+            animalAIRunning.enabled = true;
+            switchToNextStateTimer = runTime;
+        }
+        else if (stateCount == 3)
+        {
+            AllAISetToFalse();
+            animalAIWander.enabled = true;
+            switchToNextStateTimer = wanderTime;
+            stateCount = -1f;
+        }
+        stateCount += 1;
+        Debug.Log(stateCount);
+    }
+    void AllAISetToFalse()
+    {
+        animalAIIdle.enabled = false;
+        animalAIWander.enabled = false;
+        animalAIRunning.enabled = false;
+    }
+
+
+    
 }

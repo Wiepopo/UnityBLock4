@@ -2359,7 +2359,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.7291681, y: 1.1291741, z: 0.6481671}
   m_Center: {x: -0.01779616, y: 0.6414215, z: -0.07199776}
@@ -33471,7 +33471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1126543768
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -60278,7 +60278,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.3096222, y: 0.17187257, z: 0.047295325}
   m_Center: {x: -0.03779908, y: 0.2643145, z: -0.19670357}

@@ -23,7 +23,7 @@ public class DetectAndChangeTag : MonoBehaviour
                 Debug.Log("Evidence found: " + hit.collider.name);
                 hit.collider.tag = "NoLongerEvidence";
                 evidenceAmount -= 1f;
-                Debug.Log(evidenceAmount);
+                Debug.Log("Amount of evidence left to collect: " + evidenceAmount);
                 return true;
             }
             else

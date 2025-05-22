@@ -25,12 +25,12 @@ public class AnimalAIRunning : MonoBehaviour
 
     void Start()
     {
-        agent.speed = runSpeed;
+        
     }
 
     void Update()
     {
-
+        agent.speed = runSpeed;
         timer += Time.deltaTime;
 
         if (timer >= wanderInterval)

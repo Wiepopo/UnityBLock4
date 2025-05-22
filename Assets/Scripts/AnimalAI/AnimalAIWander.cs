@@ -25,12 +25,12 @@ public class AnimalAIWander : MonoBehaviour
 
     void Start()
     {
-        agent.speed = walkspeed;
+        
     }
 
     void Update()
     {
-        
+        agent.speed = walkspeed;
         timer += Time.deltaTime;
 
         if (timer >= wanderInterval)
