@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class FullscreenPhotoViewer : MonoBehaviour
 {
@@ -8,37 +9,73 @@ public class FullscreenPhotoViewer : MonoBehaviour
     public RawImage fullscreenPhoto;
     public TextMeshProUGUI captionText;
 
-    public void ShowPhoto(Texture2D texture, string caption = "")
-{
-    Debug.Log("ShowPhoto called. Checking refs...");
+    private List<Texture2D> allPhotos = new List<Texture2D>();
+    private int currentIndex = 0;
 
-    if (fullscreenPhoto == null)
-        Debug.LogError("fullscreenPhoto is NULL!");
-    if (captionText == null)
-        Debug.LogWarning("captionText is NULL! Skipping caption assignment.");
-    if (panel == null)
-        Debug.LogError("panel is NULL!");
+    // ✅ Public property for PauseMenuManager to check if open
+    public bool IsOpen => panel != null && panel.activeSelf;
 
-    fullscreenPhoto.texture = texture;
+    public void ShowPhoto(Texture2D texture, string caption = "", List<Texture2D> gallery = null)
+    {
+        fullscreenPhoto.texture = texture;
+        if (captionText != null) captionText.text = caption;
+        panel.SetActive(true);
 
-    // ✅ Only set text if captionText exists
-    if (captionText != null)
-        captionText.text = caption;
+        // ⏸ Pause game while fullscreen is open
+        Time.timeScale = 0f;
 
-    panel.SetActive(true);
-}
-
+        if (gallery != null)
+        {
+            allPhotos = gallery;
+            currentIndex = allPhotos.IndexOf(texture);
+        }
+    }
 
     public void ClosePhoto()
     {
         panel.SetActive(false);
+        Time.timeScale = 1f;
+        // Inform PauseMenuManager to block ESC this frame
+        PauseMenuManager pauseMenu = Object.FindFirstObjectByType<PauseMenuManager>();
+
+        if (pauseMenu != null)
+            pauseMenu.BlockESCForOneFrame();
     }
 
     void Update()
     {
-        if (panel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        if (!panel.activeSelf) return;
+
+        // Close with ESC
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             ClosePhoto();
         }
+
+        // Left/Right arrows to flip images
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            ShowNext();
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            ShowPrevious();
+        }
+    }
+
+    void ShowNext()
+    {
+        if (allPhotos == null || allPhotos.Count == 0) return;
+
+        currentIndex = (currentIndex + 1) % allPhotos.Count;
+        fullscreenPhoto.texture = allPhotos[currentIndex];
+    }
+
+    void ShowPrevious()
+    {
+        if (allPhotos == null || allPhotos.Count == 0) return;
+
+        currentIndex = (currentIndex - 1 + allPhotos.Count) % allPhotos.Count;
+        fullscreenPhoto.texture = allPhotos[currentIndex];
     }
 }

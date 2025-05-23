@@ -10,6 +10,7 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject photoFrame;
     [SerializeField] private GameObject cameraUI;
+    [SerializeField] private GameObject inventoryCanvas;
 
     [Header("Flash Effect")]
     [SerializeField] private GameObject cameraFlash;
@@ -56,6 +57,7 @@ public class PhotoCapture : MonoBehaviour
     IEnumerator CapturePhoto()
 {
     cameraUI.SetActive(false);
+        inventoryCanvas.SetActive(false);
     viewingPhoto = true;
 
     yield return new WaitForEndOfFrame();
@@ -107,5 +109,6 @@ public class PhotoCapture : MonoBehaviour
         photoFrame.SetActive(false);
         //CameraUI true 
         cameraUI.SetActive(true);
+        inventoryCanvas.SetActive(true);
     }
 }

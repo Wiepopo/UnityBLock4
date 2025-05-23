@@ -6,12 +6,12 @@ public class PhotoSaveToGallery : MonoBehaviour
 {
     [Header("References")]
     public Camera photoCamera;
-    public GameObject PhotoGalleryPanel;       // Full gallery panel
-    public GameObject PhotoDisplayPrefab;      // Prefab with ScreenshotCardUI and RawImage
-    public Transform GallaryContent;           // ScrollView's content container
+    public GameObject PhotoGalleryPanel;           // Full gallery panel
+    public GameObject PhotoDisplayPrefab;          // Prefab with ScreenshotCardUI and RawImage
+    public Transform GallaryContent;               // ScrollView's content container
     public FullscreenPhotoViewer fullscreenViewer; // Assign this in Inspector!
 
-    private List<Texture2D> photoGallery = new List<Texture2D>();
+    private static List<Texture2D> photoGallery = new List<Texture2D>();
 
     void Start()
     {
@@ -28,6 +28,8 @@ public class PhotoSaveToGallery : MonoBehaviour
             // Toggle mouse cursor visibility
             Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = isOpen;
+            if (!isOpen)
+                Time.timeScale = 1f;
         }
     }
 
@@ -44,11 +46,20 @@ public class PhotoSaveToGallery : MonoBehaviour
         if (cardUI != null)
         {
             cardUI.SetPhoto(photo);
-            cardUI.fullscreenViewer = fullscreenViewer; // ✅ Assign viewer here
+            cardUI.fullscreenViewer = fullscreenViewer; // ✅ Assign viewer
+
+            // Optional: assign the photo gallery list if needed
+            cardUI.photoGallery = photoGallery;
         }
         else
         {
             Debug.LogWarning("ScreenshotCardUI script not found on prefab.");
         }
+    }
+
+    // Public getter for other scripts (like ScreenshotCardUI)
+    public static List<Texture2D> GetGallery()
+    {
+        return photoGallery;
     }
 }

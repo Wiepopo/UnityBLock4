@@ -2,12 +2,25 @@ using UnityEngine;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    public GameObject optionsPanel; // assign your UI panel here
+    public GameObject optionsPanel;               // Assign your menu panel
+    public FullscreenPhotoViewer fullscreenViewer; // Assign in Inspector
 
     private bool isPaused = false;
+    private bool escBlockedThisFrame = false;
 
     void Update()
     {
+        // Prevent ESC from doing anything this frame if blocked
+        if (escBlockedThisFrame)
+        {
+            escBlockedThisFrame = false;
+            return;
+        }
+
+        // If fullscreen viewer is open, do nothing
+        if (fullscreenViewer != null && fullscreenViewer.IsOpen)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!isPaused)
@@ -33,5 +46,11 @@ public class PauseMenuManager : MonoBehaviour
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    // Call this from FullscreenPhotoViewer when ESC is used to close fullscreen
+    public void BlockESCForOneFrame()
+    {
+        escBlockedThisFrame = true;
     }
 }

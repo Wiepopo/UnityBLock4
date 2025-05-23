@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
+
 public class ScreenshotCardUI : MonoBehaviour
 {
     public RawImage photoImage;
@@ -14,17 +16,15 @@ public class ScreenshotCardUI : MonoBehaviour
         photoImage.texture = texture;
     }
 
-   public void OnClick()
-{
-    Debug.Log("Card clicked");
-    if (fullscreenViewer != null && currentTexture != null)
+    public List<Texture2D> photoGallery; // Assigned from PhotoSaveToGallery
+
+    public void OnClick()
     {
-        fullscreenViewer.ShowPhoto(currentTexture);
+        if (fullscreenViewer != null && currentTexture != null)
+        {
+            fullscreenViewer.ShowPhoto(currentTexture, "", photoGallery);
+        }
     }
-    else
-    {
-        Debug.LogWarning("Missing fullscreenViewer or texture.");
-    }
-}
+
 
 }
