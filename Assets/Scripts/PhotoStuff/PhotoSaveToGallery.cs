@@ -10,8 +10,13 @@ public class PhotoSaveToGallery : MonoBehaviour
     public GameObject PhotoDisplayPrefab;          // Prefab with ScreenshotCardUI and RawImage
     public Transform GallaryContent;               // ScrollView's content container
     public FullscreenPhotoViewer fullscreenViewer; // Assign this in Inspector!
+     [SerializeField] private GameObject takePhotoScript; 
 
     private static List<Texture2D> photoGallery = new List<Texture2D>();
+    
+
+    // To block pause menu ESC for one frame
+    public static bool BlockPauseESCThisFrame = false;
 
     void Start()
     {
@@ -25,13 +30,41 @@ public class PhotoSaveToGallery : MonoBehaviour
             bool isOpen = !PhotoGalleryPanel.activeSelf;
             PhotoGalleryPanel.SetActive(isOpen);
 
-            // Toggle mouse cursor visibility
             Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = isOpen;
-            if (!isOpen)
-                Time.timeScale = 1f;
+
+            // Block pause menu ESC for this frame
+            if (isOpen) BlockPauseESCThisFrame = true;
+
+            
+            if (takePhotoScript != null)
+                takePhotoScript.SetActive(!isOpen);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (PhotoGalleryPanel.activeSelf)
+            {
+                PhotoGalleryPanel.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                BlockPauseESCThisFrame = true; // Block ESC opening pause menu
+
+                
+                if (takePhotoScript != null)
+                    takePhotoScript.SetActive(true);
+
+            }
         }
     }
+    public void CloseGallery()
+    {
+        PhotoGalleryPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        PhotoSaveToGallery.BlockPauseESCThisFrame = true;
+    }
+
 
     public void SavePhoto(Texture2D photo)
     {
@@ -46,9 +79,7 @@ public class PhotoSaveToGallery : MonoBehaviour
         if (cardUI != null)
         {
             cardUI.SetPhoto(photo);
-            cardUI.fullscreenViewer = fullscreenViewer; // ✅ Assign viewer
-
-            // Optional: assign the photo gallery list if needed
+            cardUI.fullscreenViewer = fullscreenViewer;
             cardUI.photoGallery = photoGallery;
         }
         else
@@ -57,7 +88,6 @@ public class PhotoSaveToGallery : MonoBehaviour
         }
     }
 
-    // Public getter for other scripts (like ScreenshotCardUI)
     public static List<Texture2D> GetGallery()
     {
         return photoGallery;
