@@ -1,4 +1,8 @@
+#if UNITY_EDITOR
+using UnityEditor;
 using UnityEditor.Rendering;
+#endif
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
