@@ -5966,6 +5966,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5335788}
     - target: {fileID: 1785540215447509204, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: takePhotoCanvas
+      value: 
+      objectReference: {fileID: 1193594631}
+    - target: {fileID: 1785540215447509204, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
       propertyPath: takePhotoScript
       value: 
       objectReference: {fileID: 1100088309}

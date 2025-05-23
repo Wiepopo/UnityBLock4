@@ -10,10 +10,11 @@ public class PhotoSaveToGallery : MonoBehaviour
     public GameObject PhotoDisplayPrefab;          // Prefab with ScreenshotCardUI and RawImage
     public Transform GallaryContent;               // ScrollView's content container
     public FullscreenPhotoViewer fullscreenViewer; // Assign this in Inspector!
-     [SerializeField] private GameObject takePhotoScript; 
+    [SerializeField] private GameObject takePhotoScript;
+    [SerializeField] private GameObject takePhotoCanvas;
 
     private static List<Texture2D> photoGallery = new List<Texture2D>();
-    
+
 
     // To block pause menu ESC for one frame
     public static bool BlockPauseESCThisFrame = false;
@@ -36,9 +37,11 @@ public class PhotoSaveToGallery : MonoBehaviour
             // Block pause menu ESC for this frame
             if (isOpen) BlockPauseESCThisFrame = true;
 
-            
+
             if (takePhotoScript != null)
                 takePhotoScript.SetActive(!isOpen);
+            if (takePhotoCanvas != null)
+                takePhotoCanvas.SetActive(!isOpen);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -50,9 +53,11 @@ public class PhotoSaveToGallery : MonoBehaviour
                 Cursor.visible = false;
                 BlockPauseESCThisFrame = true; // Block ESC opening pause menu
 
-                
+
                 if (takePhotoScript != null)
                     takePhotoScript.SetActive(true);
+                if (takePhotoCanvas != null)
+                    takePhotoCanvas.SetActive(true);
 
             }
         }
