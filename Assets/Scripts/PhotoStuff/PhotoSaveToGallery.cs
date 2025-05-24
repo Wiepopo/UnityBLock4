@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
+using Unity.VisualScripting.FullSerializer.Internal;
 
 public class PhotoSaveToGallery : MonoBehaviour
 {
@@ -9,15 +11,16 @@ public class PhotoSaveToGallery : MonoBehaviour
     public GameObject PhotoGalleryPanel;           // Full gallery panel
     public GameObject PhotoDisplayPrefab;          // Prefab with ScreenshotCardUI and RawImage
     public Transform GallaryContent;               // ScrollView's content container
-    public FullscreenPhotoViewer fullscreenViewer; // Assign this in Inspector!
+    public FullscreenPhotoViewer fullscreenViewer;
     [SerializeField] private GameObject takePhotoScript;
     [SerializeField] private GameObject takePhotoCanvas;
-
     private static List<Texture2D> photoGallery = new List<Texture2D>();
 
 
     // To block pause menu ESC for one frame
     public static bool BlockPauseESCThisFrame = false;
+    //For blocking movement when the gallery is opened
+    bool galleryOpen = false;
 
     void Start()
     {
