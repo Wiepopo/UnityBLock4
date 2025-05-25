@@ -12,6 +12,7 @@ TagManager:
   - Evidence
   - Zookeeper
   - NoLongerEvidence
+  - FinalGalleryTrigger
   layers:
   - Default
   - TransparentFX

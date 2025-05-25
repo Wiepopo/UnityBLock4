@@ -16,16 +16,27 @@ public class PhotoSaveToGallery : MonoBehaviour
     [SerializeField] private GameObject takePhotoCanvas;
     private static List<Texture2D> photoGallery = new List<Texture2D>();
 
+    
+
 
     // To block pause menu ESC for one frame
     public static bool BlockPauseESCThisFrame = false;
     //For blocking movement when the gallery is opened
     bool galleryOpen = false;
 
-    void Start()
+   void Start()
+{
+    PhotoGalleryPanel.SetActive(false);
+
+    // Clear any previously instantiated photo prefabs
+    foreach (Transform child in GallaryContent)
     {
-        PhotoGalleryPanel.SetActive(false);
+        Destroy(child.gameObject);
     }
+
+    // Optional: re-add saved photos if needed here
+}
+
 
     void Update()
     {
