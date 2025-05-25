@@ -16,8 +16,10 @@ public class ObjectiveTestThygo : MonoBehaviour
         private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-        StartCoroutine(missionObj());
-        Debug.Log("it triggers");
+        {
+            StartCoroutine(missionObj());
+            Debug.Log("it triggers");
+        }
 
     }
 
