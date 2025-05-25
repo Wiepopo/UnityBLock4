@@ -2913,7 +2913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &121168333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6574,6 +6574,10 @@ PrefabInstance:
       propertyPath: 'inventorySlotImage.Array.data[3]'
       value: 
       objectReference: {fileID: 60019099}
+    - target: {fileID: 3653940175502011375, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: cameraManager
+      value: 
+      objectReference: {fileID: 1817249566}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24557,7 +24561,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1194182280054482931, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
   m_PrefabInstance: {fileID: 256084016}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1817249566}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d90ba6530d9bfda47abb4610956b2f44, type: 3}
@@ -25431,7 +25435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photoCamera: {fileID: 860581996}
-  evidenceAmount: 0
+  evidenceAmount: 12
 --- !u!4 &848655360
 Transform:
   m_ObjectHideFlags: 0
@@ -56593,6 +56597,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817066360}
   m_CullTransparentMesh: 1
+--- !u!1 &1817249566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1194182280054482937, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+  m_PrefabInstance: {fileID: 256084016}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1833494422
 GameObject:
   m_ObjectHideFlags: 0

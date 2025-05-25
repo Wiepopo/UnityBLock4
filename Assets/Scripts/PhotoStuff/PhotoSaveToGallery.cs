@@ -24,18 +24,20 @@ public class PhotoSaveToGallery : MonoBehaviour
     //For blocking movement when the gallery is opened
     bool galleryOpen = false;
 
-   void Start()
+ void Start()
 {
     PhotoGalleryPanel.SetActive(false);
 
-    // Clear any previously instantiated photo prefabs
+    // Clear old gallery data
+    photoGallery.Clear();
+
+    // Clean up previously spawned screenshot cards in the scene
     foreach (Transform child in GallaryContent)
     {
         Destroy(child.gameObject);
     }
-
-    // Optional: re-add saved photos if needed here
 }
+
 
 
     void Update()
