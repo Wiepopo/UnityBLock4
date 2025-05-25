@@ -33,7 +33,7 @@ public class FirstPersonController : MonoBehaviour
     public bool cameraCanMove = true;
     public float mouseSensitivity = 2f;
     public float maxLookAngle = 50f;
-    bool galleryIsOpen = false;
+    
 
     // Crosshair
     public bool lockCursor = true;
@@ -138,6 +138,10 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+    [SerializeField] GameObject PhotoGalleryPanel;
+    [SerializeField] GameObject optionsCanvas;
+    bool menuIsOpen = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -158,7 +162,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Start()
     {
-        if(lockCursor)
+        if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
@@ -210,17 +214,17 @@ public class FirstPersonController : MonoBehaviour
     private void Update()
     {
         #region Camera
-        if (Keyboard.current.kKey.wasPressedThisFrame)
+        if (PhotoGalleryPanel.activeInHierarchy || optionsCanvas.activeInHierarchy == true)
         {
-            galleryIsOpen = !galleryIsOpen;
+            menuIsOpen = true;
         }
-
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        else
         {
-            galleryIsOpen = !galleryIsOpen;
+            menuIsOpen = false;
         }
+        
         // Control camera movement
-        if (galleryIsOpen == false)
+        if (menuIsOpen == false)
         {
             if (cameraCanMove == true)
             {
@@ -341,13 +345,14 @@ public class FirstPersonController : MonoBehaviour
         #endregion
 
         #region Jump
-
-        // Gets input and calls jump method
-        if(enableJump && Input.GetKeyDown(jumpKey) && isGrounded)
+        if (menuIsOpen == false)
         {
-            Jump();
+            // Gets input and calls jump method
+            if (enableJump && Input.GetKeyDown(jumpKey) && isGrounded)
+            {
+                Jump();
+            }
         }
-
         #endregion
 
         #region Crouch
@@ -384,7 +389,7 @@ public class FirstPersonController : MonoBehaviour
     void FixedUpdate()
     {
         #region Movement
-        if (galleryIsOpen == false)
+        if (menuIsOpen == false)
         {
             if (playerCanMove)
             {
@@ -564,6 +569,9 @@ public class FirstPersonController : MonoBehaviour
 
     public override void OnInspectorGUI()
     {
+        serializedObject.Update();
+        DrawDefaultInspector(); //This line ensures all [SerializeField] fields are shown
+        serializedObject.ApplyModifiedProperties();
         SerFPC.Update();
 
         EditorGUILayout.Space();
