@@ -214,6 +214,11 @@ public class FirstPersonController : MonoBehaviour
         {
             galleryIsOpen = !galleryIsOpen;
         }
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            galleryIsOpen = !galleryIsOpen;
+        }
         // Control camera movement
         if (galleryIsOpen == false)
         {
