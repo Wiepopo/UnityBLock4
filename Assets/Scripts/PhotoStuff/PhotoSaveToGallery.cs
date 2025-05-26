@@ -14,6 +14,7 @@ public class PhotoSaveToGallery : MonoBehaviour
     public FullscreenPhotoViewer fullscreenViewer;
     [SerializeField] private GameObject takePhotoScript;
     [SerializeField] private GameObject takePhotoCanvas;
+    bool cameraIsActive = false;
     private static List<Texture2D> photoGallery = new List<Texture2D>();
 
     
@@ -55,9 +56,10 @@ public class PhotoSaveToGallery : MonoBehaviour
 
 
             if (takePhotoScript != null)
+            {
                 takePhotoScript.SetActive(!isOpen);
-            if (takePhotoCanvas != null)
-                takePhotoCanvas.SetActive(!isOpen);
+            }
+
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -72,11 +74,22 @@ public class PhotoSaveToGallery : MonoBehaviour
 
                 if (takePhotoScript != null)
                     takePhotoScript.SetActive(true);
-                if (takePhotoCanvas != null)
-                    takePhotoCanvas.SetActive(true);
+               
 
             }
         }
+
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+            cameraIsActive = true;
+        else if (Keyboard.current.digit1Key.wasPressedThisFrame || Keyboard.current.digit3Key.wasPressedThisFrame || Keyboard.current.digit4Key.wasPressedThisFrame)
+            cameraIsActive = false;
+
+        if (PhotoGalleryPanel.activeInHierarchy == true)
+            takePhotoCanvas.SetActive(false);
+        else if (PhotoGalleryPanel.activeInHierarchy == true && cameraIsActive == false)
+            takePhotoCanvas.SetActive(false);
+        else
+            takePhotoCanvas.SetActive(cameraIsActive);
     }
     public void CloseGallery()
     {

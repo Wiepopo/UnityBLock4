@@ -46,6 +46,7 @@ public class PhotoCapture : MonoBehaviour
             if (!viewingPhoto)
             {
                 StartCoroutine(CapturePhoto());
+                Invoke("RemovePhoto", 3f);
             }
             else
             {

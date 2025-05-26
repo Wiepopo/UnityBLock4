@@ -140,6 +140,7 @@ public class FirstPersonController : MonoBehaviour
 
     [SerializeField] GameObject PhotoGalleryPanel;
     [SerializeField] GameObject optionsCanvas;
+    [SerializeField] GameObject submitEvidence;
     bool menuIsOpen = false;
 
     private void Awake()
@@ -214,7 +215,7 @@ public class FirstPersonController : MonoBehaviour
     private void Update()
     {
         #region Camera
-        if (PhotoGalleryPanel.activeInHierarchy || optionsCanvas.activeInHierarchy == true)
+        if (PhotoGalleryPanel.activeInHierarchy || optionsCanvas.activeInHierarchy || submitEvidence.activeInHierarchy == true)
         {
             menuIsOpen = true;
         }
