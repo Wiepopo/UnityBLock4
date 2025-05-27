@@ -33,19 +33,31 @@ public class PhotoCapture : MonoBehaviour
 
     private Texture2D screenCapture;
     private bool viewingPhoto;
-    bool cameraIsActive = false;
+    private bool cameraIsActive;
 
     private void Start()
     {
         screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        cameraIsActive = false;
     }
 
-    private void Update()
+    void FixedUpdate()
     {
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
             cameraIsActive = true;
-        else if (Keyboard.current.digit1Key.wasPressedThisFrame || Keyboard.current.digit3Key.wasPressedThisFrame || Keyboard.current.digit4Key.wasPressedThisFrame)
+            Debug.Log("camera has activated");
+        }
+        if (Keyboard.current.digit1Key.wasPressedThisFrame || Keyboard.current.digit3Key.wasPressedThisFrame || Keyboard.current.digit4Key.wasPressedThisFrame)
+        {
             cameraIsActive = false;
+            Debug.Log("camera is deactivated");
+        }
+    }
+    void Update()
+    {
+        
+
         if (cameraIsActive == true)
         {
             if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -60,12 +72,13 @@ public class PhotoCapture : MonoBehaviour
                 }
             }
         }
+        
     }
 
     IEnumerator CapturePhoto()
 {
     cameraUI.SetActive(false);
-        inventoryCanvas.SetActive(false);
+    inventoryCanvas.SetActive(false);
     viewingPhoto = true;
 
     yield return new WaitForEndOfFrame();

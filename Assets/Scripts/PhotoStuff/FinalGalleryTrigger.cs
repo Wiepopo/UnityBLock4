@@ -46,6 +46,11 @@ public class FinalGalleryRayTrigger : MonoBehaviour
         
     }
 
+    void LateUpdate()
+    {
+        BlockPauseESCThisFrame = false;
+    }
+
     bool TryInteract()
     {
         Ray ray = new Ray(transform.position, transform.forward);
