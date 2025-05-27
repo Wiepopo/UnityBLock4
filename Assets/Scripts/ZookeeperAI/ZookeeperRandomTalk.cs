@@ -5,27 +5,41 @@ using UnityEngine;
 public class ZookeeperRandomTalk : MonoBehaviour
 {
     [SerializeField] private ZookeeperSubtitle subtitleSystem;
-    [SerializeField] private string[] randomLines;
-    [SerializeField] private AudioClip[] randomClips;
 
+    [System.Serializable]
+    public class FactSet
+    {
+        public string[] lines;
+        public AudioClip[] clips;
+    }
+
+    [SerializeField] private FactSet[] factSets; // You can set 3 of these in the Inspector
     [SerializeField] private float minDelay = 10f;
     [SerializeField] private float maxDelay = 25f;
 
     private Queue<(string, AudioClip)> lineQueue;
+    private Coroutine talkRoutine;
 
-    void Start()
+    public void TriggerTalk(int factSetIndex)
     {
-        InitializeQueue();
-        StartCoroutine(RandomTalkRoutine());
+        if (factSetIndex < 0 || factSetIndex >= factSets.Length) return;
+
+        if (talkRoutine != null)
+        {
+            StopCoroutine(talkRoutine);
+        }
+
+        InitializeQueue(factSets[factSetIndex]);
+        talkRoutine = StartCoroutine(RandomTalkRoutine());
     }
 
-    void InitializeQueue()
+    void InitializeQueue(FactSet set)
     {
         List<(string, AudioClip)> combined = new List<(string, AudioClip)>();
-        for (int i = 0; i < randomLines.Length; i++)
+        for (int i = 0; i < set.lines.Length; i++)
         {
-            AudioClip clip = i < randomClips.Length ? randomClips[i] : null;
-            combined.Add((randomLines[i], clip));
+            AudioClip clip = i < set.clips.Length ? set.clips[i] : null;
+            combined.Add((set.lines[i], clip));
         }
 
         Shuffle(combined);

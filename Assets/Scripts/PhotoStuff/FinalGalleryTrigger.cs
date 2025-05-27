@@ -15,7 +15,7 @@ public class FinalGalleryRayTrigger : MonoBehaviour
     [SerializeField] private GameObject optionsMenu;
 
     // To block pause menu ESC for one frame
-    public static bool BlockPauseESCThisFrame = false;
+
 
 
     void Update()
@@ -23,13 +23,14 @@ public class FinalGalleryRayTrigger : MonoBehaviour
         if (Input.GetKeyDown(interactionKey))
         {
             bool isOpen = !finalGalleryPanel.activeSelf;
-            if (isOpen) BlockPauseESCThisFrame = true;
+            if (isOpen) PhotoSaveToGallery.BlockPauseESCThisFrame = true;
+
             if (TryInteract())
             {
                 OpenFinalGallery();
             }
 
-            if (BlockPauseESCThisFrame == true)
+            if (PhotoSaveToGallery.BlockPauseESCThisFrame == true)
                 optionsMenu.SetActive(false);
         }
 
@@ -38,7 +39,7 @@ public class FinalGalleryRayTrigger : MonoBehaviour
             finalGalleryPanel.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            BlockPauseESCThisFrame = true;
+            PhotoSaveToGallery.BlockPauseESCThisFrame = true;
 
             if (takePhotoScript != null) takePhotoScript.SetActive(true);
             if (takePhotoCanvas != null) takePhotoCanvas.SetActive(true);
@@ -48,7 +49,7 @@ public class FinalGalleryRayTrigger : MonoBehaviour
 
     void LateUpdate()
     {
-        BlockPauseESCThisFrame = false;
+        PhotoSaveToGallery.BlockPauseESCThisFrame = false;
     }
 
     bool TryInteract()
@@ -84,7 +85,8 @@ public class FinalGalleryRayTrigger : MonoBehaviour
         if (takePhotoScript != null) takePhotoScript.SetActive(true);
         if (takePhotoCanvas != null) takePhotoCanvas.SetActive(true);
 
-        FinalGalleryRayTrigger.BlockPauseESCThisFrame = true;
+        PhotoSaveToGallery.BlockPauseESCThisFrame = true;
+
     }
 
     public void SubmitAndEndGame()
