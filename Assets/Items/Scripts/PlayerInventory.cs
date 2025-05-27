@@ -47,7 +47,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] GameObject cameraController;
     [SerializeField] GameObject cameraCanvas;
 
-    private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>();
+    public Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>();
     private Dictionary<itemType, GameObject> itemInstantiate = new Dictionary<itemType, GameObject>();
 
     void Start()

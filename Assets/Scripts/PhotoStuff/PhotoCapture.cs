@@ -33,51 +33,31 @@ public class PhotoCapture : MonoBehaviour
 
     private Texture2D screenCapture;
     private bool viewingPhoto;
-    private bool cameraIsActive;
 
     private void Start()
     {
         screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-        cameraIsActive = false;
     }
 
-    void FixedUpdate()
+    private void Update()
     {
-        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            cameraIsActive = true;
-            Debug.Log("camera has activated");
-        }
-        if (Keyboard.current.digit1Key.wasPressedThisFrame || Keyboard.current.digit3Key.wasPressedThisFrame || Keyboard.current.digit4Key.wasPressedThisFrame)
-        {
-            cameraIsActive = false;
-            Debug.Log("camera is deactivated");
-        }
-    }
-    void Update()
-    {
-
-        if (!cameraIsActive)
-            return;
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            if (!viewingPhoto)
             {
-                if (!viewingPhoto)
-                {
-                    StartCoroutine(CapturePhoto());
-                    Invoke("RemovePhoto", 4f);
-                }
-                else
-                {
-                    RemovePhoto();
-                }
+                StartCoroutine(CapturePhoto());
             }
-        
+            else
+            {
+                RemovePhoto();
+            }
+        }
     }
 
     IEnumerator CapturePhoto()
 {
     cameraUI.SetActive(false);
-    inventoryCanvas.SetActive(false);
+        inventoryCanvas.SetActive(false);
     viewingPhoto = true;
 
     yield return new WaitForEndOfFrame();
