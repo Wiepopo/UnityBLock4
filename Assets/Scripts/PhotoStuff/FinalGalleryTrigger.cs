@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ public class FinalGalleryRayTrigger : MonoBehaviour
     [SerializeField] private GameObject finalGalleryPrefab;
     [SerializeField] private GameObject takePhotoScript;
     [SerializeField] private GameObject takePhotoCanvas;
+    [SerializeField] private GameObject optionsMenu;
 
     // To block pause menu ESC for one frame
     public static bool BlockPauseESCThisFrame = false;
@@ -26,6 +28,9 @@ public class FinalGalleryRayTrigger : MonoBehaviour
             {
                 OpenFinalGallery();
             }
+
+            if (BlockPauseESCThisFrame == true)
+                optionsMenu.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && finalGalleryPanel.activeSelf)
@@ -36,6 +41,7 @@ public class FinalGalleryRayTrigger : MonoBehaviour
             BlockPauseESCThisFrame = true;
 
             if (takePhotoScript != null) takePhotoScript.SetActive(true);
+            if (takePhotoCanvas != null) takePhotoCanvas.SetActive(true);
         }
         
     }

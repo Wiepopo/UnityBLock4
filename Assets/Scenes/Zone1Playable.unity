@@ -5793,6 +5793,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 681679531}
     - target: {fileID: 1785540215447509204, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: finalGalleryPanel
+      value: 
+      objectReference: {fileID: 678618830}
+    - target: {fileID: 1785540215447509204, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
       propertyPath: PhotoDisplayPrefab
       value: 
       objectReference: {fileID: 2778660815886949660, guid: ff49289b0bae6a34382e5be2193d8b8f, type: 3}
@@ -46275,6 +46279,7 @@ MonoBehaviour:
   finalGalleryPrefab: {fileID: 2778660815886949660, guid: ff49289b0bae6a34382e5be2193d8b8f, type: 3}
   takePhotoScript: {fileID: 1526243172}
   takePhotoCanvas: {fileID: 1193594631}
+  optionsMenu: {fileID: 0}
 --- !u!114 &1774446877 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1785540215447509204, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}

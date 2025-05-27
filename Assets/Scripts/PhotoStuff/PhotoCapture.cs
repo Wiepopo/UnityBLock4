@@ -33,6 +33,7 @@ public class PhotoCapture : MonoBehaviour
 
     private Texture2D screenCapture;
     private bool viewingPhoto;
+    bool cameraIsActive = false;
 
     private void Start()
     {
@@ -41,16 +42,22 @@ public class PhotoCapture : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+            cameraIsActive = true;
+        else if (Keyboard.current.digit1Key.wasPressedThisFrame || Keyboard.current.digit3Key.wasPressedThisFrame || Keyboard.current.digit4Key.wasPressedThisFrame)
+            cameraIsActive = false;
+        if (cameraIsActive == true)
         {
-            if (!viewingPhoto)
+            if (Mouse.current.leftButton.wasPressedThisFrame)
             {
-                StartCoroutine(CapturePhoto());
-                Invoke("RemovePhoto", 3f);
-            }
-            else
-            {
-                RemovePhoto();
+                if (!viewingPhoto)
+                {
+                    StartCoroutine(CapturePhoto());
+                }
+                else
+                {
+                    RemovePhoto();
+                }
             }
         }
     }
