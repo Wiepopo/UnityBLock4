@@ -56,22 +56,21 @@ public class PhotoCapture : MonoBehaviour
     }
     void Update()
     {
-        
 
-        if (cameraIsActive == true)
-        {
+        if (!cameraIsActive)
+            return;
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
                 if (!viewingPhoto)
                 {
                     StartCoroutine(CapturePhoto());
+                    Invoke("RemovePhoto", 4f);
                 }
                 else
                 {
                     RemovePhoto();
                 }
             }
-        }
         
     }
 

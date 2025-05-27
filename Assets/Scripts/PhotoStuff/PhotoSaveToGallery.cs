@@ -15,7 +15,7 @@ public class PhotoSaveToGallery : MonoBehaviour
     [SerializeField] private GameObject takePhotoScript;
     [SerializeField] private GameObject takePhotoCanvas;
     [SerializeField] private GameObject finalGalleryPanel;
-    bool cameraIsActive = false;
+    public bool cameraIsActive = false;
     private static List<Texture2D> photoGallery = new List<Texture2D>();
 
     
@@ -26,20 +26,19 @@ public class PhotoSaveToGallery : MonoBehaviour
     //For blocking movement when the gallery is opened
     bool galleryOpen = false;
 
- void Start()
-{
-    PhotoGalleryPanel.SetActive(false);
-
-    // Clear old gallery data
-    photoGallery.Clear();
-
-    // Clean up previously spawned screenshot cards in the scene
-    foreach (Transform child in GallaryContent)
+    void Start()
     {
-        Destroy(child.gameObject);
-    }
-}
+        PhotoGalleryPanel.SetActive(false);
 
+        // Clear old gallery data
+        photoGallery.Clear();
+
+        // Clean up previously spawned screenshot cards in the scene
+        foreach (Transform child in GallaryContent)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 
 
     void Update()
@@ -74,23 +73,28 @@ public class PhotoSaveToGallery : MonoBehaviour
 
 
                 if (takePhotoScript != null)
-                    takePhotoScript.SetActive(true);
-               
+                    takePhotoScript.SetActive(cameraIsActive);
+
 
             }
         }
-
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
             cameraIsActive = true;
         else if (Keyboard.current.digit1Key.wasPressedThisFrame || Keyboard.current.digit3Key.wasPressedThisFrame || Keyboard.current.digit4Key.wasPressedThisFrame)
             cameraIsActive = false;
 
-        if (PhotoGalleryPanel.activeInHierarchy == true || finalGalleryPanel.activeInHierarchy)
+        if (PhotoGalleryPanel.activeInHierarchy == true || finalGalleryPanel.activeInHierarchy == true)
             takePhotoCanvas.SetActive(false);
         else if (PhotoGalleryPanel.activeInHierarchy == true || finalGalleryPanel.activeInHierarchy == true && cameraIsActive == false)
             takePhotoCanvas.SetActive(false);
-        else
+        else if (PhotoGalleryPanel.activeInHierarchy == false && finalGalleryPanel.activeInHierarchy == false)
+            takePhotoScript.SetActive(cameraIsActive);
             takePhotoCanvas.SetActive(cameraIsActive);
+
+        if (cameraIsActive)
+            Debug.Log("Active");
+        else
+            Debug.Log("inactive");
     }
     public void CloseGallery()
     {
@@ -98,6 +102,11 @@ public class PhotoSaveToGallery : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         PhotoSaveToGallery.BlockPauseESCThisFrame = true;
+
+        if (!Keyboard.current.digit2Key.isPressed)
+            cameraIsActive = false;
+        takePhotoScript.SetActive(cameraIsActive);
+        
     }
 
 
