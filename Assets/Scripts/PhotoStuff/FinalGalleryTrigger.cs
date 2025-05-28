@@ -1,8 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Collections;
+using TMPro;
 
-public class FinalGalleryRayTrigger : MonoBehaviour
+public class FinalGalleryTrigger : MonoBehaviour
 {
     [SerializeField] private float interactionDistance = 3f;
     [SerializeField] private KeyCode interactionKey = KeyCode.E;
@@ -14,9 +18,9 @@ public class FinalGalleryRayTrigger : MonoBehaviour
     [SerializeField] private GameObject takePhotoCanvas;
     [SerializeField] private GameObject optionsMenu;
 
-    // To block pause menu ESC for one frame
-
-
+    [SerializeField] private TMP_Text warningText;
+    [SerializeField] private TMP_Text evidenceCountText; // <-- Assign this in the inspector
+    [SerializeField] private int maxEvidence = 8;
 
     void Update()
     {
@@ -30,21 +34,14 @@ public class FinalGalleryRayTrigger : MonoBehaviour
                 OpenFinalGallery();
             }
 
-            if (PhotoSaveToGallery.BlockPauseESCThisFrame == true)
+            if (PhotoSaveToGallery.BlockPauseESCThisFrame)
                 optionsMenu.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && finalGalleryPanel.activeSelf)
         {
-            finalGalleryPanel.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            PhotoSaveToGallery.BlockPauseESCThisFrame = true;
-
-            if (takePhotoScript != null) takePhotoScript.SetActive(true);
-            if (takePhotoCanvas != null) takePhotoCanvas.SetActive(true);
+            CloseFinalGallery();
         }
-        
     }
 
     void LateUpdate()
@@ -57,12 +54,10 @@ public class FinalGalleryRayTrigger : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
-            if (hit.collider.CompareTag("FinalGalleryTrigger"))
-                return true;
+            return hit.collider.CompareTag("FinalGalleryTrigger");
         }
         return false;
     }
-
 
     void OpenFinalGallery()
     {
@@ -74,8 +69,10 @@ public class FinalGalleryRayTrigger : MonoBehaviour
         if (takePhotoCanvas != null) takePhotoCanvas.SetActive(false);
 
         PopulateFinalGallery();
+        UpdateEvidenceCounter();
         PhotoSaveToGallery.BlockPauseESCThisFrame = true;
     }
+
     public void CloseFinalGallery()
     {
         finalGalleryPanel.SetActive(false);
@@ -86,14 +83,23 @@ public class FinalGalleryRayTrigger : MonoBehaviour
         if (takePhotoCanvas != null) takePhotoCanvas.SetActive(true);
 
         PhotoSaveToGallery.BlockPauseESCThisFrame = true;
-
     }
 
     public void SubmitAndEndGame()
     {
-        Debug.Log("Evidence submitted. Ending game...");
+        int evidenceCount = PhotoSaveToGallery.GetGallery().Count;
+        if (evidenceCount < maxEvidence)
+        {
+            if (warningText != null)
+            {
+                warningText.text = "You need to collect more evidences to submit.";
+                warningText.gameObject.SetActive(true);
+                StartCoroutine(HideWarningAfterSeconds(2f));
+            }
+            return;
+        }
 
-        // Close UI
+        Debug.Log("Evidence submitted. Ending game...");
         finalGalleryPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -101,15 +107,30 @@ public class FinalGalleryRayTrigger : MonoBehaviour
         if (takePhotoScript != null) takePhotoScript.SetActive(true);
         if (takePhotoCanvas != null) takePhotoCanvas.SetActive(true);
 
-        // Optional: fade out or show message here
-
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false; // stop in editor
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
-    Application.Quit(); // quit in build
+        Application.Quit();
 #endif
     }
 
+    private IEnumerator HideWarningAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        if (warningText != null)
+        {
+            warningText.gameObject.SetActive(false);
+        }
+    }
+
+    void UpdateEvidenceCounter()
+    {
+        int evidenceCount = PhotoSaveToGallery.GetGallery().Count;
+        if (evidenceCountText != null)
+        {
+            evidenceCountText.text = $"Evidence Collected ({evidenceCount}/{maxEvidence})";
+        }
+    }
 
     void PopulateFinalGallery()
     {
@@ -123,7 +144,6 @@ public class FinalGalleryRayTrigger : MonoBehaviour
             if (card != null)
             {
                 card.SetPhoto(tex);
-                // Optional: assign viewer
             }
         }
     }

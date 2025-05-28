@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
@@ -15,11 +16,15 @@ public class PhotoSaveToGallery : MonoBehaviour
     [SerializeField] private GameObject takePhotoCanvas;
     [SerializeField] private GameObject finalGalleryPanel;
 
+    [Header("Evidence UI")]
+    [SerializeField] private TMP_Text evidenceCounterText;
+    public int maxEvidence = 8;
+    private int collectedEvidence = 0;
+
     public bool cameraIsActive = false;
     private static List<Texture2D> photoGallery = new List<Texture2D>();
 
     public int currentPhotoZone = 1;
-
     public static bool BlockPauseESCThisFrame = false;
 
     void Start()
@@ -31,6 +36,8 @@ public class PhotoSaveToGallery : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
+        UpdateEvidenceUI(); // initialize UI
     }
 
     void Update()
@@ -44,9 +51,7 @@ public class PhotoSaveToGallery : MonoBehaviour
             Cursor.visible = isOpen;
 
             if (isOpen) BlockPauseESCThisFrame = true;
-
-            if (takePhotoScript != null)
-                takePhotoScript.SetActive(!isOpen);
+            if (takePhotoScript != null) takePhotoScript.SetActive(!isOpen);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -90,36 +95,23 @@ public class PhotoSaveToGallery : MonoBehaviour
 
     public void SavePhoto(Texture2D photo, GameObject photographedObject)
     {
-        if (photo == null)
+        if (photo == null || photographedObject == null || !photographedObject.CompareTag("Evidence"))
         {
-            Debug.LogWarning("No photo texture provided.");
+            Debug.LogWarning("Invalid photo or object");
             return;
         }
 
-        if (photographedObject == null)
+        if (GameManager.Instance != null && !GameManager.Instance.CanSavePhotoInZone(currentPhotoZone))
         {
-            Debug.LogWarning("No object was photographed.");
+            Debug.Log($"Cannot save photo in Zone {currentPhotoZone}: limit reached.");
             return;
         }
 
-        if (!photographedObject.CompareTag("Evidence"))
-        {
-            Debug.Log("Photo not saved — object is not tagged as 'Evidence'.");
-            return;
-        }
-
-        if (GameManager.Instance != null)
-        {
-            if (!GameManager.Instance.CanSavePhotoInZone(currentPhotoZone))
-            {
-                Debug.Log($"Cannot save photo in Zone {currentPhotoZone}: limit reached.");
-                return;
-            }
-
-            GameManager.Instance.SavePhotoInZone(currentPhotoZone);
-        }
+        GameManager.Instance?.SavePhotoInZone(currentPhotoZone);
 
         photoGallery.Add(photo);
+        collectedEvidence++;
+        UpdateEvidenceUI();
 
         GameObject newPhotoGO = Instantiate(PhotoDisplayPrefab, GallaryContent);
         ScreenshotCardUI cardUI = newPhotoGO.GetComponent<ScreenshotCardUI>();
@@ -130,12 +122,14 @@ public class PhotoSaveToGallery : MonoBehaviour
             cardUI.fullscreenViewer = fullscreenViewer;
             cardUI.photoGallery = photoGallery;
         }
-        else
-        {
-            Debug.LogWarning("ScreenshotCardUI script not found on prefab.");
-        }
 
         Debug.Log($"Photo saved successfully in Zone {currentPhotoZone}.");
+    }
+
+    void UpdateEvidenceUI()
+    {
+        if (evidenceCounterText != null)
+            evidenceCounterText.text = $"Evidence Collected ({collectedEvidence}/{maxEvidence})";
     }
 
     public static List<Texture2D> GetGallery()
