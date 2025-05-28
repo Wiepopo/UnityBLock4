@@ -8,7 +8,7 @@ public class DetectAndChangeTag : MonoBehaviour
     [SerializeField] private GameObject cameraManager;
     [SerializeField] private float evidenceAmount; // The amount of evidence needed
     [SerializeField] private PhotoSaveToGallery photoSaveToGallery; // Reference to your photo save script
-   
+
 
     void Update()
     {
@@ -28,12 +28,19 @@ public class DetectAndChangeTag : MonoBehaviour
                 if (hit.collider.CompareTag("Evidence"))
                 {
                     Debug.Log("Evidence found: " + hit.collider.name);
-                  
 
+                    // Hide the exclamation icon
+                    EvidenceIconSpawner icon = hit.collider.GetComponent<EvidenceIconSpawner>();
+                    if (icon != null)
+                        icon.HideIcon();
+
+                    // Optionally disable tag
                     StartCoroutine(ChangeTagAfterDelay(hit.collider.gameObject, 0.1f));
-                    evidenceAmount = Mathf.Max(0, evidenceAmount - 1);
+
+                    evidenceAmount -= 1;
                     return true;
                 }
+
                 else
                 {
                     Debug.Log("Hit something, but it's not evidence.");
