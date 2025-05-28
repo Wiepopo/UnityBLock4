@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class ZoneUpdate1 : MonoBehaviour
+public class ZoneUpdate : MonoBehaviour
 {
     [Tooltip("Set this to the zone number for this trigger")]
-    public int zoneNumber = 1;
+    public int zoneNumber = 3;
 
     [Tooltip("Reference to your PhotoSaveToGallery script")]
     public PhotoSaveToGallery photoSaveScript;

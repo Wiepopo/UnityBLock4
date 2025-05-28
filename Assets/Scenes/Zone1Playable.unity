@@ -3317,7 +3317,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147907493}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afe610b7afd5e994ba895795f7f0f7c3, type: 3}
   m_Name: 
@@ -6618,6 +6618,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1526243172}
     - target: {fileID: 1785540215447509204, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: currentPhotoZone
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785540215447509204, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
       propertyPath: fullscreenViewer
       value: 
       objectReference: {fileID: 1735235055}
@@ -6709,6 +6713,10 @@ PrefabInstance:
       propertyPath: cameraManager
       value: 
       objectReference: {fileID: 1526243172}
+    - target: {fileID: 3653940175502011375, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: photoSaveToGallery
+      value: 
+      objectReference: {fileID: 1774446877}
     - target: {fileID: 6757346568033645672, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -11286,6 +11294,20 @@ MonoBehaviour:
   theobjective: {fileID: 829131188}
   Objectivetrigger: {fileID: 421887303}
   theText: {fileID: 968744795}
+--- !u!114 &421887317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421887303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c48840d44cf8ba247bcce8ef3b9fa264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneNumber: 1
+  photoSaveScript: {fileID: 1774446877}
 --- !u!1001 &424748928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16856,6 +16878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placedVersion: {fileID: 2037335325}
   snapSound: {fileID: 8300000, guid: ead6fb09337096d4d81f055aed302ed5, type: 3}
+  theText: {fileID: 0}
 --- !u!54 &662504723
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22698,7 +22721,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photoCamera: {fileID: 860581996}
-  evidenceAmount: 0
+  cameraManager: {fileID: 0}
+  photoSaveToGallery: {fileID: 0}
 --- !u!4 &848655360
 Transform:
   m_ObjectHideFlags: 0
@@ -24036,7 +24060,7 @@ Transform:
   m_GameObject: {fileID: 872006141}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.44, y: 1.19, z: 27.69}
+  m_LocalPosition: {x: -11.6, y: 1.19, z: 8.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38166,6 +38190,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7905781646455368129, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.19999981
@@ -38216,6 +38244,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 421887310}
+    - targetCorrespondingSourceObject: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 421887317}
   m_SourcePrefab: {fileID: 100100000, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
 --- !u!1001 &1347793189
 PrefabInstance:
@@ -42751,7 +42782,6 @@ MonoBehaviour:
   fadingAnimation: {fileID: 1688158656}
   cameraAudio: {fileID: 1791545460}
   photoSaveToGallery: {fileID: 1774446877}
-  photoDetector: {fileID: 848655359}
 --- !u!4 &1526243174
 Transform:
   m_ObjectHideFlags: 0
@@ -43196,6 +43226,10 @@ PrefabInstance:
     - target: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       propertyPath: m_Name
       value: Objectivetrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 7905781646455368129, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -43892,7 +43926,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568276030}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afe610b7afd5e994ba895795f7f0f7c3, type: 3}
   m_Name: 
@@ -50649,6 +50683,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Interactions: 2
   MaxInteractions: 3
+  MaxPhotosAllowed: 8
+  PhotosTakenZone1: 0
+  PhotosTakenZone2: 0
+  PhotosTakenZone3: 0
+  MaxPhotosZone1: 3
+  MaxPhotosZone2: 3
+  MaxPhotosZone3: 2
 --- !u!65 &1834639287
 BoxCollider:
   m_ObjectHideFlags: 0

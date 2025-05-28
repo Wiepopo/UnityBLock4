@@ -7,6 +7,7 @@ public class PhotoDetector : MonoBehaviour
     [SerializeField] private GameObject cameraManager;
     [SerializeField] private PhotoSaveToGallery photoSaveToGallery;
 
+   
     public bool TryDetectEvidence(Texture2D photoTexture)
     {
         Ray ray = photoCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -17,7 +18,19 @@ public class PhotoDetector : MonoBehaviour
             {
                 Debug.Log("Evidence found: " + hit.collider.name);
 
+                // ✅ Save the photo to the gallery
+                if (photoSaveToGallery != null)
+                {
+                    photoSaveToGallery.SavePhoto(photoTexture, hit.collider.gameObject);
+                }
+                else
+                {
+                    Debug.LogWarning("photoSaveToGallery reference is not assigned!");
+                }
+
+                // ✅ Update tag to prevent duplicate saving
                 StartCoroutine(ChangeTagAfterDelay(hit.collider.gameObject, 0.1f));
+
                 return true;
             }
             else

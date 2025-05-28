@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ZoneUpdate : MonoBehaviour
+public class ZoneUpdate2 : MonoBehaviour
 {
     [Tooltip("Set this to the zone number for this trigger")]
     public int zoneNumber = 2;
