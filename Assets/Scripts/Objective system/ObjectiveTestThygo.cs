@@ -28,8 +28,9 @@ public class ObjectiveTestThygo : MonoBehaviour
         objFX.Play();
         theText.SetActive(true);
         theText.GetComponent<Text>().text = missionObjectiveText;
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
+        yield break;
     }
 
 

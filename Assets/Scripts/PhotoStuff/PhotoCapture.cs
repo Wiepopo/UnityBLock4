@@ -96,7 +96,19 @@ public class PhotoCapture : MonoBehaviour
         photoFrame.SetActive(true);
         StartCoroutine(CameraFlashEffect());
         fadingAnimation.Play("PhotoFade");
+
+        //automatically closes the photo
+        StartCoroutine(AutoHidePhoto());
     }
+    IEnumerator AutoHidePhoto()
+{
+    yield return new WaitForSeconds(2f); // Delay for 2 seconds
+    if (viewingPhoto)
+    {
+        RemovePhoto();
+    }
+}
+
 
     IEnumerator CameraFlashEffect()
     {
