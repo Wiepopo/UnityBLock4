@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class SnapToPoint : MonoBehaviour
 {
@@ -6,6 +9,7 @@ public class SnapToPoint : MonoBehaviour
     [SerializeField] private AudioClip snapSound;           // sound when snapped
 
     private bool hasSnapped = false;                        // checks if its already snapped
+    public GameObject theText;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,15 +17,17 @@ public class SnapToPoint : MonoBehaviour
 
         if (other.CompareTag("SnapZone"))
         {
-            hasSnapped = true;                              
+            hasSnapped = true;
+            
 
             if (placedVersion != null)
                 placedVersion.SetActive(true);
-
             // plays sounds on snap
             if (snapSound != null)
                 AudioSource.PlayClipAtPoint(snapSound, transform.position);
-
+            if (theText !=null)
+                theText.GetComponent<Text>().text = " <color=green>Find a way across the water</color>";
+           
             Destroy(gameObject);                            // removes the picked plank
         }
     }

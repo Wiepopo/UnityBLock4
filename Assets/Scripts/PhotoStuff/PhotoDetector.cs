@@ -1,28 +1,23 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PhotoDetector : MonoBehaviour
 {
     [SerializeField] private Camera photoCamera;
-    [SerializeField] private float evidenceAmount;
+    [SerializeField] private GameObject cameraManager;
+    [SerializeField] private PhotoSaveToGallery photoSaveToGallery;
 
-    void Update()
-    {
-        if (Mouse.current.leftButton.wasPressedThisFrame) // Replace with your photo key
-        {
-            TryDetectEvidence();
-        }
-    }
-
-    public bool TryDetectEvidence()
+    public bool TryDetectEvidence(Texture2D photoTexture)
     {
         Ray ray = photoCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f))
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f) && cameraManager.activeSelf)
         {
             if (hit.collider.CompareTag("Evidence"))
             {
                 Debug.Log("Evidence found: " + hit.collider.name);
-                
+
+                StartCoroutine(ChangeTagAfterDelay(hit.collider.gameObject, 0.1f));
                 return true;
             }
             else
@@ -34,4 +29,9 @@ public class PhotoDetector : MonoBehaviour
         return false;
     }
 
+    private IEnumerator ChangeTagAfterDelay(GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        obj.tag = "NoLongerEvidence";
+    }
 }

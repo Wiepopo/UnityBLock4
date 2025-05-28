@@ -2,44 +2,36 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using Unity.VisualScripting.FullSerializer.Internal;
 
 public class PhotoSaveToGallery : MonoBehaviour
 {
     [Header("References")]
-    public Camera photoCamera;
-    public GameObject PhotoGalleryPanel;           // Full gallery panel
-    public GameObject PhotoDisplayPrefab;          // Prefab with ScreenshotCardUI and RawImage
-    public Transform GallaryContent;               // ScrollView's content container
+    public GameObject PhotoGalleryPanel;
+    public GameObject PhotoDisplayPrefab;
+    public Transform GallaryContent;
     public FullscreenPhotoViewer fullscreenViewer;
+
     [SerializeField] private GameObject takePhotoScript;
     [SerializeField] private GameObject takePhotoCanvas;
     [SerializeField] private GameObject finalGalleryPanel;
+
     public bool cameraIsActive = false;
     private static List<Texture2D> photoGallery = new List<Texture2D>();
 
-    
+    public int currentPhotoZone = 1;
 
-
-    // To block pause menu ESC for one frame
     public static bool BlockPauseESCThisFrame = false;
-    //For blocking movement when the gallery is opened
-    bool galleryOpen = false;
 
     void Start()
     {
         PhotoGalleryPanel.SetActive(false);
-
-        // Clear old gallery data
         photoGallery.Clear();
 
-        // Clean up previously spawned screenshot cards in the scene
         foreach (Transform child in GallaryContent)
         {
             Destroy(child.gameObject);
         }
     }
-
 
     void Update()
     {
@@ -51,73 +43,85 @@ public class PhotoSaveToGallery : MonoBehaviour
             Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = isOpen;
 
-            // Block pause menu ESC for this frame
             if (isOpen) BlockPauseESCThisFrame = true;
 
-
             if (takePhotoScript != null)
-            {
                 takePhotoScript.SetActive(!isOpen);
-            }
-
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (PhotoGalleryPanel.activeSelf)
             {
-                PhotoGalleryPanel.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                BlockPauseESCThisFrame = true; // Block ESC opening pause menu
-
-
-                if (takePhotoScript != null)
-                    takePhotoScript.SetActive(cameraIsActive);
-
-
+                CloseGallery();
             }
         }
+
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
             cameraIsActive = true;
         else if (Keyboard.current.digit1Key.wasPressedThisFrame || Keyboard.current.digit3Key.wasPressedThisFrame || Keyboard.current.digit4Key.wasPressedThisFrame)
             cameraIsActive = false;
 
-        if (PhotoGalleryPanel.activeInHierarchy == true || finalGalleryPanel.activeInHierarchy == true)
+        if (PhotoGalleryPanel.activeInHierarchy || finalGalleryPanel.activeInHierarchy)
+        {
             takePhotoCanvas.SetActive(false);
-        else if (PhotoGalleryPanel.activeInHierarchy == true || finalGalleryPanel.activeInHierarchy == true && cameraIsActive == false)
-            takePhotoCanvas.SetActive(false);
-        else if (PhotoGalleryPanel.activeInHierarchy == false && finalGalleryPanel.activeInHierarchy == false)
+        }
+        else
+        {
             takePhotoScript.SetActive(cameraIsActive);
             takePhotoCanvas.SetActive(cameraIsActive);
+        }
 
-        if (cameraIsActive)
-            Debug.Log("Active");
-        else
-            Debug.Log("inactive");
+        Debug.Log(cameraIsActive ? "Active" : "Inactive");
     }
+
     public void CloseGallery()
     {
         PhotoGalleryPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        PhotoSaveToGallery.BlockPauseESCThisFrame = true;
+        BlockPauseESCThisFrame = true;
 
         if (!Keyboard.current.digit2Key.isPressed)
             cameraIsActive = false;
+
         takePhotoScript.SetActive(cameraIsActive);
-        
     }
 
-
-    public void SavePhoto(Texture2D photo)
+    public void SavePhoto(Texture2D photo, GameObject photographedObject)
     {
-        if (photo == null) return;
+        if (photo == null)
+        {
+            Debug.LogWarning("No photo texture provided.");
+            return;
+        }
+
+        if (photographedObject == null)
+        {
+            Debug.LogWarning("No object was photographed.");
+            return;
+        }
+
+        if (!photographedObject.CompareTag("Evidence"))
+        {
+            Debug.Log("Photo not saved — object is not tagged as 'Evidence'.");
+            return;
+        }
+
+        if (GameManager.Instance != null)
+        {
+            if (!GameManager.Instance.CanSavePhotoInZone(currentPhotoZone))
+            {
+                Debug.Log($"Cannot save photo in Zone {currentPhotoZone}: limit reached.");
+                return;
+            }
+
+            GameManager.Instance.SavePhotoInZone(currentPhotoZone);
+        }
 
         photoGallery.Add(photo);
 
         GameObject newPhotoGO = Instantiate(PhotoDisplayPrefab, GallaryContent);
-
         ScreenshotCardUI cardUI = newPhotoGO.GetComponent<ScreenshotCardUI>();
 
         if (cardUI != null)
@@ -130,6 +134,8 @@ public class PhotoSaveToGallery : MonoBehaviour
         {
             Debug.LogWarning("ScreenshotCardUI script not found on prefab.");
         }
+
+        Debug.Log($"Photo saved successfully in Zone {currentPhotoZone}.");
     }
 
     public static List<Texture2D> GetGallery()
