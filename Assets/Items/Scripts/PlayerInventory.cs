@@ -74,7 +74,7 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
-        
+
         // Items pickup
         // --- Cast a ray to detect a pickable item ---
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -232,7 +232,9 @@ public class PlayerInventory : MonoBehaviour
             cameraController.SetActive(false);
             clipboard.SetActive(false);
         }
+        
     }
+    
 
     private void NewItemSelected()
     {
