@@ -4,24 +4,20 @@ using UnityEngine.AI;
 public class ZookeeperFollow : MonoBehaviour
 {
     public Transform player;
-    public float followDistance = 5f;
 
-    public float closeWanderRadius = 2f;
-    public float farWanderRadius = 5f;
-    public float playerStillThreshold = 2f;
+    public float followDistance = 5f;
+    public float minWanderDistance = 2.5f;
+    public float maxWanderDistance = 4f;
 
     public float wanderInterval = 4f;
+    public float playerStillThreshold = 2f;
 
     private NavMeshAgent agent;
     private float wanderTimer;
     private Vector3 lastPlayerPosition;
     private float playerStillTime;
-
     private bool followEnabled = false;
 
-    private float destinationUpdateThreshold = 1.5f; // Don't re-path unless player moved
-
-    // Optional: Reference to Animator (assign in Inspector if used)
     public Animator animator;
 
     void Start()
@@ -31,10 +27,7 @@ public class ZookeeperFollow : MonoBehaviour
         lastPlayerPosition = player.position;
         playerStillTime = 0f;
 
-        // Optional smoother settings
-        agent.acceleration = 10f;
-        agent.angularSpeed = 180f;
-        agent.stoppingDistance = 1.2f;
+        agent.stoppingDistance = minWanderDistance;
         agent.autoBraking = true;
     }
 
@@ -44,7 +37,7 @@ public class ZookeeperFollow : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // Track player movement
+        // Track if the player is moving
         if (Vector3.Distance(player.position, lastPlayerPosition) > 0.05f)
         {
             playerStillTime = 0f;
@@ -55,65 +48,74 @@ public class ZookeeperFollow : MonoBehaviour
             playerStillTime += Time.deltaTime;
         }
 
-        // Smooth follow logic
+        // If too far, follow directly
         if (distanceToPlayer > followDistance)
         {
-            float distanceToCurrentTarget = Vector3.Distance(agent.destination, player.position);
-
-            if (distanceToCurrentTarget > destinationUpdateThreshold)
+            if (Vector3.Distance(agent.destination, player.position) > 1.0f)
             {
                 agent.SetDestination(player.position);
             }
         }
         else
         {
+            // Wander nearby when close to player
             wanderTimer -= Time.deltaTime;
 
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.1f)
             {
                 if (wanderTimer <= 0f)
                 {
-                    float radius = (playerStillTime > playerStillThreshold) ? farWanderRadius : closeWanderRadius;
-                    WanderNearPlayer(radius);
+                    WanderNearPlayer();
                     wanderTimer = Random.Range(wanderInterval - 1f, wanderInterval + 1.5f);
                 }
             }
         }
 
-        // Optional: Smooth manual rotation if agent.updateRotation is false
+        // Optional smooth look
         if (agent.hasPath && agent.desiredVelocity.sqrMagnitude > 0.1f)
         {
-            Vector3 direction = agent.steeringTarget - transform.position;
-            direction.y = 0f;
-            if (direction != Vector3.zero)
+            Vector3 dir = agent.steeringTarget - transform.position;
+            dir.y = 0f;
+            if (dir.sqrMagnitude > 0.01f)
             {
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3f);
+                Quaternion rot = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 3f);
             }
         }
 
-        // Optional: Hook to animation
+        // Optional animation
         if (animator != null)
         {
             animator.SetFloat("Speed", agent.velocity.magnitude);
         }
     }
 
-    void WanderNearPlayer(float radius)
+    void WanderNearPlayer()
     {
-        Vector3 randomOffset = Random.insideUnitSphere * radius;
-        randomOffset.y = 0f;
-        Vector3 target = player.position + randomOffset;
+        const int maxAttempts = 10;
 
-        if (NavMesh.SamplePosition(target, out NavMeshHit hit, radius, NavMesh.AllAreas))
+        for (int i = 0; i < maxAttempts; i++)
         {
-            agent.SetDestination(hit.position);
+            Vector3 offset = Random.insideUnitSphere * maxWanderDistance;
+            offset.y = 0f;
+
+            Vector3 target = player.position + offset;
+            float dist = Vector3.Distance(target, player.position);
+
+            if (dist >= minWanderDistance && dist <= maxWanderDistance &&
+                NavMesh.SamplePosition(target, out NavMeshHit hit, maxWanderDistance, NavMesh.AllAreas))
+            {
+                agent.SetDestination(hit.position);
+                return;
+            }
         }
+
+        // fallback
+        agent.ResetPath();
     }
 
     public void EnableFollow()
     {
-        Debug.Log("Zookeeper follow ENABLED");
         followEnabled = true;
     }
 }
