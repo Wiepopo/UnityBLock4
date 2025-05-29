@@ -8,13 +8,20 @@ public class AnimalAImanager : MonoBehaviour
     private AnimalAIRunning animalAIRunning;
 
     //Statements
-    bool switchmodeactive = false;
-    float stateCount = 0;
+    private enum AIState { Idle, Wander, Run }
+    private AIState currentState;
 
     //Different timers for switching between states\
+    [Header("State durations")]
     [SerializeField] float wanderTime;
     [SerializeField] float runTime;
     [SerializeField] float idleTime;
+
+    //Weight a certain state has to determine what state is the AI more likely to be in in percentatges 0.1 = 10%
+    [Header("State weights (0-1)")]
+    [Range(0f, 1f)]public float idleWeight = 0.4f;
+    [Range(0f, 1f)]public float wanderWeight = 0.4f;
+    [Range(0f, 1f)]public float runWeight = 0.2f;
     private float switchToNextStateTimer;
 
     void Awake()
@@ -22,13 +29,13 @@ public class AnimalAImanager : MonoBehaviour
         animalAIWander = GetComponent<AnimalAIWander>();
         animalAIIdle = GetComponent<AnimalAIIdle>();
         animalAIRunning = GetComponent<AnimalAIRunning>();
-        
+
     }
 
     void Start()
     {
-        
-        
+        SwitchState(); // statr with a random state
+
     }
 
     void Update()
@@ -38,42 +45,54 @@ public class AnimalAImanager : MonoBehaviour
 
         if (switchToNextStateTimer <= 0f)
         {
-            StateSwitcher();
-            Debug.Log("should've switched states now");
-        }    
+            SwitchState();
+        }
     }
 
-    void StateSwitcher()
+    void SwitchState()
     {
-        if (stateCount == 0)
-        {
-            AllAISetToFalse();
-            animalAIIdle.enabled = true;
-            switchToNextStateTimer = idleTime;
-        }
-        else if (stateCount == 1)
-        {
-            AllAISetToFalse();
-            animalAIWander.enabled = true;
-            switchToNextStateTimer = wanderTime;
-        }
-        else if (stateCount == 2)
-        {
-            AllAISetToFalse();
-            animalAIRunning.enabled = true;
-            switchToNextStateTimer = runTime;
-        }
-        else if (stateCount == 3)
-        {
-            AllAISetToFalse();
-            animalAIWander.enabled = true;
-            switchToNextStateTimer = wanderTime;
-            stateCount = -1f;
-        }
-        stateCount += 1;
-        Debug.Log(stateCount);
+        currentState = GetWeightedRandomState();
+        ApplyState(currentState);
     }
-    void AllAISetToFalse()
+
+    void ApplyState(AIState state)
+    {
+        AllAISetToFalse();
+
+
+        switch (state)
+        {
+            case AIState.Idle:
+                animalAIIdle.enabled = true;
+                switchToNextStateTimer = idleTime;
+                break;
+
+            case AIState.Wander:
+                animalAIWander.enabled = true;
+                switchToNextStateTimer = wanderTime;
+                break;
+
+            case AIState.Run:
+                animalAIRunning.enabled = true;
+                switchToNextStateTimer = runTime;
+                break;
+        }
+    }
+
+    AIState GetWeightedRandomState()
+    {
+        float totalWeight = idleWeight + wanderWeight + runWeight;
+        float rand = Random.Range(0f, totalWeight);
+
+        if (rand < idleWeight)
+            return AIState.Idle;
+        else if (rand < idleWeight + wanderWeight)
+            return AIState.Wander;
+        else
+            return AIState.Run;
+    }
+
+void AllAISetToFalse()
     {
         animalAIIdle.enabled = false;
         animalAIWander.enabled = false;
