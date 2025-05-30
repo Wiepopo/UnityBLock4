@@ -5,22 +5,25 @@ using UnityEngine.AI;
 public class AnimalAIWander : MonoBehaviour
 {
     [Header("Wandering Settings")]
-    [SerializeField] float wanderRadius = 10f;           // Radius within which the agent will wander
-    [SerializeField] float wanderInterval;          // Time interval between wander movements
-    [SerializeField] float maxWanderAngle;         // Maximum angle deviation from forward direction
-    [SerializeField] float walkspeed;   //Speed of traversal
+    private float wanderRadius;           // Radius within which the agent will wander
+    private float wanderInterval;          // Time interval between wander movements
+    [SerializeField] float maxWanderAngle = 35f;         // Maximum angle deviation from forward direction
+    [SerializeField] float walkspeed = 2;   //Speed of traversal
     [Header("Obstacle Detection Settings")]
-    [SerializeField] float obstacleDetectionDistance = 2f;   // Distance to detect obstacles
+    private float obstacleDetectionDistance;   // Distance to detect obstacles
     [SerializeField] LayerMask obstacleLayer;  // Layer mask for obstacles make sure obstacles are in the obstacle layer and the obstacle layer is set in the insp[SerializeField]
 
     private NavMeshAgent agent;
     private float timer;
-    
+
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         timer = wanderInterval;
+        wanderInterval = 0.5f * walkspeed;
+        wanderRadius = walkspeed * 2 + 2; //setting the distance the ai tries to walk in line with the speed to choose a new point before reaching the point to keep walking
+        obstacleDetectionDistance = wanderRadius + 1f; // the obstacle detection range is slightly further than the walk distance to try keep it from running into walls
     }
 
     void Start()

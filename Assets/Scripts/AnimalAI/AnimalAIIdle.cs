@@ -4,10 +4,10 @@ using UnityEngine.UIElements;
 
 public class AnimalAIIdle : MonoBehaviour
 {
-    [SerializeField] float rotationSpeed; // speed at wich the agent rotates this is for testing purposes
+    [SerializeField] float rotationSpeed = .1f; // speed at wich the agent rotates this is for testing purposes
     private NavMeshAgent agent;
 
-    [SerializeField] float stationaryThreshold; //The amount of time between no movement and the start of the idleAnimation
+    [SerializeField] float stationaryThreshold = 0.2f; //The amount of time between no movement and the start of the idleAnimation
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();

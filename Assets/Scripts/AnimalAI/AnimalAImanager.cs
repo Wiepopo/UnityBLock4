@@ -13,9 +13,9 @@ public class AnimalAImanager : MonoBehaviour
 
     //Different timers for switching between states\
     [Header("State durations")]
-    [SerializeField] float wanderTime;
-    [SerializeField] float runTime;
-    [SerializeField] float idleTime;
+    [SerializeField] float wanderTime = 12;
+    [SerializeField] float runTime = 5;
+    [SerializeField] float idleTime = 7;
 
     //Weight a certain state has to determine what state is the AI more likely to be in in percentatges 0.1 = 10%
     [Header("State weights (0-1)")]
