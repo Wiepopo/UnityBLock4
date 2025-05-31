@@ -1,10 +1,4 @@
-#if UNITY_EDITOR
-using UnityEditor;
-using UnityEditor.Rendering;
-#endif
-
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,16 +6,22 @@ public class DestroyOnCollisiontest : MonoBehaviour
 {
     public GameObject theText;
 
-
     [SerializeField] GameObject emptyBowl1;
     [SerializeField] GameObject fullBowl1;
     [SerializeField] GameObject emptyBowl2;
     [SerializeField] GameObject fullBowl2;
     [SerializeField] GameObject emptyBowl3;
     [SerializeField] GameObject fullBowl3;
+
+    [SerializeField] private ZookeeperRandomTalk zookeeperTalk;
+    [SerializeField] private ZookeeperSubtitle subtitleSystem;
+    [SerializeField] private AudioClip weirdLineVoiceClip;
+
+    private bool hasPlayedWeirdSubtitle = false;
+
     private void OnTriggerEnter(Collider other)
     {
-         if (other.TryGetComponent<Feedable>(out var feedable))
+        if (other.TryGetComponent<Feedable>(out var feedable))
         {
             GameObject hitBowl = other.gameObject;
 
@@ -42,32 +42,54 @@ public class DestroyOnCollisiontest : MonoBehaviour
             }
             else
             {
-                // Not a recognized bowl
                 return;
             }
 
-            Debug.Log("Fed the animal!");
-            Destroy(gameObject); // Destroy the food bag
+          
+            Destroy(gameObject);
 
-            // GameManager logic
             if (GameManager.Instance == null)
             {
-                Debug.LogError("GameManager.Instance is NULL. Add GameManager to the scene.");
+                
                 return;
             }
 
             if (GameManager.Instance.Interactions < GameManager.Instance.MaxInteractions)
             {
                 GameManager.Instance.Interactions++;
-                Debug.Log("Interaction + 1: " + GameManager.Instance.Interactions);
+               
 
                 if (GameManager.Instance.Interactions == GameManager.Instance.MaxInteractions)
                 {
-                    Debug.Log("Objective Completed");
-                    theText.GetComponent<Text>().text = " <color=green>Feed the animals</color>";
+                    
+                    theText.GetComponent<Text>().text = "<color=green>Feed the animals</color>";
                 }
             }
         }
+
+        // ✅ Trigger special subtitle only once
+        if (!hasPlayedWeirdSubtitle &&
+            fullBowl1.activeSelf && fullBowl2.activeSelf && fullBowl3.activeSelf)
+        {
+            hasPlayedWeirdSubtitle = true;
+
+           
+
+            if (zookeeperTalk != null)
+                zookeeperTalk.PauseTalk();
+
+            if (subtitleSystem != null)
+                subtitleSystem.Speak("Hmm that’s weird, I should check that out", weirdLineVoiceClip, 4f, true); // 🆕 forced override
+
+            StartCoroutine(ResumeZookeeperTalkAfterDelay(6f));
+        }
     }
 
+    private IEnumerator ResumeZookeeperTalkAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (zookeeperTalk != null)
+            zookeeperTalk.ResumeTalk();
+    }
 }

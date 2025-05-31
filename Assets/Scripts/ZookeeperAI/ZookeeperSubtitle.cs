@@ -16,37 +16,40 @@ public class ZookeeperSubtitle : MonoBehaviour
         return onCooldown;
     }
 
-    public void Speak(string line, AudioClip voiceClip, float customDuration = -1f)
+    // 🆕 Added `forceOverride` and optional custom duration
+    public void Speak(string line, AudioClip voiceClip, float customDuration = -1f, bool forceOverride = false)
     {
-        if (onCooldown) return;
+        if (onCooldown && !forceOverride)
+        {
+            return;
+        }
 
         if (subtitleRoutine != null)
             StopCoroutine(subtitleRoutine);
 
-        subtitleRoutine = StartCoroutine(ShowLine(line, voiceClip));
+        subtitleRoutine = StartCoroutine(ShowLine(line, voiceClip, customDuration));
     }
 
-    private IEnumerator ShowLine(string line, AudioClip clip)
+    private IEnumerator ShowLine(string line, AudioClip clip, float duration = -1f)
     {
         onCooldown = true;
 
-        // Show subtitle
+
         subtitleText.text = line;
         subtitleText.gameObject.SetActive(true);
 
-        // Play voice
         if (clip != null && voiceSource != null)
         {
             voiceSource.PlayOneShot(clip);
         }
 
-        yield return new WaitForSeconds(displayDuration);
+        float showTime = (duration > 0) ? duration : displayDuration;
+        yield return new WaitForSeconds(showTime);
 
         subtitleText.gameObject.SetActive(false);
         subtitleText.text = "";
 
-        // Cooldown delay
-        yield return new WaitForSeconds(2f); // cooldown duration
+        yield return new WaitForSeconds(2f);
         onCooldown = false;
     }
 }

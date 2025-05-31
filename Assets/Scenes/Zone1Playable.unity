@@ -6907,6 +6907,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9066648826189951199, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9066648826189951199, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -49619,6 +49627,9 @@ MonoBehaviour:
   fullBowl2: {fileID: 1692154738}
   emptyBowl3: {fileID: 2144413635}
   fullBowl3: {fileID: 504379842}
+  zookeeperTalk: {fileID: 1738021620}
+  subtitleSystem: {fileID: 1738021623}
+  weirdLineVoiceClip: {fileID: 0}
 --- !u!4 &1707479104 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55844a6030a40ea48844b49680312ce4, type: 3}
@@ -51267,6 +51278,9 @@ MonoBehaviour:
   fullBowl2: {fileID: 1692154738}
   emptyBowl3: {fileID: 2144413635}
   fullBowl3: {fileID: 504379842}
+  zookeeperTalk: {fileID: 1738021620}
+  subtitleSystem: {fileID: 1738021623}
+  weirdLineVoiceClip: {fileID: 0}
 --- !u!64 &1786979592
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -53201,6 +53215,9 @@ MonoBehaviour:
   fullBowl2: {fileID: 1692154738}
   emptyBowl3: {fileID: 2144413635}
   fullBowl3: {fileID: 504379842}
+  zookeeperTalk: {fileID: 1738021620}
+  subtitleSystem: {fileID: 1738021623}
+  weirdLineVoiceClip: {fileID: 0}
 --- !u!64 &1870763153
 MeshCollider:
   m_ObjectHideFlags: 0

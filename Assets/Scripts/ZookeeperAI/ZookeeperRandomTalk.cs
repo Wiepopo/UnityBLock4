@@ -13,12 +13,14 @@ public class ZookeeperRandomTalk : MonoBehaviour
         public AudioClip[] clips;
     }
 
-    [SerializeField] private FactSet[] factSets; // You can set 3 of these in the Inspector
+    [SerializeField] private FactSet[] factSets;
     [SerializeField] private float minDelay = 10f;
     [SerializeField] private float maxDelay = 25f;
 
     private Queue<(string, AudioClip)> lineQueue;
     private Coroutine talkRoutine;
+
+    private bool isPaused = false;
 
     public void TriggerTalk(int factSetIndex)
     {
@@ -53,6 +55,11 @@ public class ZookeeperRandomTalk : MonoBehaviour
             float waitTime = Random.Range(minDelay, maxDelay);
             yield return new WaitForSeconds(waitTime);
 
+            while (isPaused)
+            {
+                yield return null;
+            }
+
             if (!subtitleSystem) yield break;
 
             var (line, clip) = lineQueue.Dequeue();
@@ -67,5 +74,17 @@ public class ZookeeperRandomTalk : MonoBehaviour
             int rand = Random.Range(i, list.Count);
             (list[i], list[rand]) = (list[rand], list[i]);
         }
+    }
+
+    public void PauseTalk()
+    {
+     
+        isPaused = true;
+    }
+
+    public void ResumeTalk()
+    {
+        
+        isPaused = false;
     }
 }
