@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(AnimalAIRunning))]
 [RequireComponent(typeof(AnimalAIWander))]
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Animator))]
 public class AnimalAImanager : MonoBehaviour
 {
     private AnimalAIWander animalAIWander;
@@ -29,6 +30,7 @@ public class AnimalAImanager : MonoBehaviour
     [Range(0f, 1f)] public float idleWeight = 0.4f;
     [Range(0f, 1f)] public float wanderWeight = 0.4f;
     [Range(0f, 1f)] public float runWeight = 0.2f;
+    [Header("Remember to assign the right animalController to the animator")]
 
     //Handles animations of the animals
     private Animator aAnimater;
@@ -57,7 +59,9 @@ public class AnimalAImanager : MonoBehaviour
         {
             SwitchState();
         }
-
+    }
+    void FixedUpdate()
+    {
         AnimationApllication();
     }
 
