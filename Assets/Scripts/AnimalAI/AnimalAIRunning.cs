@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class AnimalAIRunning : MonoBehaviour
 {
     [Header("Wandering Settings")]
@@ -28,7 +27,7 @@ public class AnimalAIRunning : MonoBehaviour
 
     void Start()
     {
-        
+        Debug.Log(obstacleLayer);
     }
 
     void Update()

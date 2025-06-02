@@ -1,6 +1,11 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(AnimalAIIdle))]
+[RequireComponent(typeof(AnimalAIRunning))]
+[RequireComponent(typeof(AnimalAIWander))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class AnimalAImanager : MonoBehaviour
 {
     private AnimalAIWander animalAIWander;
@@ -17,11 +22,14 @@ public class AnimalAImanager : MonoBehaviour
     [SerializeField] float runTime = 5;
     [SerializeField] float idleTime = 7;
 
-    //Weight a certain state has to determine what state is the AI more likely to be in in percentatges 0.1 = 10%
+    //Weight a certain state has to determine what state is the AI more likely to be in, in percentatges 0.1 = 10%
     [Header("State weights (0-1)")]
-    [Range(0f, 1f)]public float idleWeight = 0.4f;
-    [Range(0f, 1f)]public float wanderWeight = 0.4f;
-    [Range(0f, 1f)]public float runWeight = 0.2f;
+    [Range(0f, 1f)] public float idleWeight = 0.4f;
+    [Range(0f, 1f)] public float wanderWeight = 0.4f;
+    [Range(0f, 1f)] public float runWeight = 0.2f;
+
+    //Handles animations of the animals
+    private Animator aAnimater;
     private float switchToNextStateTimer;
 
     void Awake()
@@ -29,7 +37,7 @@ public class AnimalAImanager : MonoBehaviour
         animalAIWander = GetComponent<AnimalAIWander>();
         animalAIIdle = GetComponent<AnimalAIIdle>();
         animalAIRunning = GetComponent<AnimalAIRunning>();
-
+        aAnimater = GetComponent<Animator>();
     }
 
     void Start()
@@ -65,16 +73,19 @@ public class AnimalAImanager : MonoBehaviour
             case AIState.Idle:
                 animalAIIdle.enabled = true;
                 switchToNextStateTimer = idleTime;
+                aAnimater.SetTrigger("");
                 break;
 
             case AIState.Wander:
                 animalAIWander.enabled = true;
                 switchToNextStateTimer = wanderTime;
+                aAnimater.SetTrigger("TrWalk");
                 break;
 
             case AIState.Run:
                 animalAIRunning.enabled = true;
                 switchToNextStateTimer = runTime;
+                aAnimater.SetTrigger("TrRun");
                 break;
         }
     }
@@ -92,7 +103,7 @@ public class AnimalAImanager : MonoBehaviour
             return AIState.Run;
     }
 
-void AllAISetToFalse()
+    void AllAISetToFalse()
     {
         animalAIIdle.enabled = false;
         animalAIWander.enabled = false;
@@ -100,5 +111,5 @@ void AllAISetToFalse()
     }
 
 
-    
+
 }
