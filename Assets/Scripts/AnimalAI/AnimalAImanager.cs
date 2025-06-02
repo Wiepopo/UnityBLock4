@@ -1,6 +1,8 @@
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(AnimalAIIdle))]
 [RequireComponent(typeof(AnimalAIRunning))]
@@ -55,12 +57,30 @@ public class AnimalAImanager : MonoBehaviour
         {
             SwitchState();
         }
+
+        AnimationApllication();
     }
 
     void SwitchState()
     {
         currentState = GetWeightedRandomState();
         ApplyState(currentState);
+    }
+
+    void AnimationApllication()
+    {
+        if (animalAIWander.enabled == true)
+        {
+            aAnimater.SetTrigger("TrWalk");
+        }
+        else if (animalAIRunning.enabled == true)
+        {
+            aAnimater.SetTrigger("TrRun");
+        }
+        else
+        {
+            aAnimater.SetTrigger("Entry");
+        }
     }
 
     void ApplyState(AIState state)
@@ -73,19 +93,16 @@ public class AnimalAImanager : MonoBehaviour
             case AIState.Idle:
                 animalAIIdle.enabled = true;
                 switchToNextStateTimer = idleTime;
-                aAnimater.SetTrigger("");
                 break;
 
             case AIState.Wander:
                 animalAIWander.enabled = true;
                 switchToNextStateTimer = wanderTime;
-                aAnimater.SetTrigger("TrWalk");
                 break;
 
             case AIState.Run:
                 animalAIRunning.enabled = true;
                 switchToNextStateTimer = runTime;
-                aAnimater.SetTrigger("TrRun");
                 break;
         }
     }
