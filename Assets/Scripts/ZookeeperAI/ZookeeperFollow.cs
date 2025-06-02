@@ -87,6 +87,8 @@ public class ZookeeperFollow : MonoBehaviour
         if (animator != null)
         {
             animator.SetFloat("Speed", agent.velocity.magnitude);
+            Debug.Log("Zookeeper speed: " + agent.velocity.magnitude);
+
         }
     }
 
