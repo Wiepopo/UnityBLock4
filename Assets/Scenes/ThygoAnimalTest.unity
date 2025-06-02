@@ -283,7 +283,7 @@ MonoBehaviour:
   walkspeed: 2
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!195 &229175259
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -336,7 +336,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
+  m_AnimatePhysics: 1
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
