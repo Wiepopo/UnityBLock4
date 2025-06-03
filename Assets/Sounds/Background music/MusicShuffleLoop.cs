@@ -1,69 +1,56 @@
 using System.Collections;
 using UnityEngine;
 
-public class MusicShuffleLoop : MonoBehaviour
+public class MusicManager : MonoBehaviour
 {
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioClip[] songs;
-    [SerializeField] private float songDuration = 300f;         // Full play time per song (e.g., 5 minutes)
-    [SerializeField] private float fadeDuration = 3f;           // Duration of fade in/out in seconds
-    [SerializeField] private float targetVolume = 1f;           // Max volume
+    [SerializeField] private float fadeDuration = 2f;
+    [SerializeField] private float targetVolume = 1f;
 
-    private int lastPlayedIndex = -1;
+    private Coroutine fadeCoroutine;
 
     void Start()
     {
-        if (musicSource == null || songs.Length < 2)
+        if (!musicSource)
         {
-            return;
+            musicSource = gameObject.AddComponent<AudioSource>();
+            musicSource.loop = true;
         }
-
         musicSource.volume = 0f;
-        StartCoroutine(PlayShuffledMusicLoop());
     }
 
-    private IEnumerator PlayShuffledMusicLoop()
+    public void PlaySong(AudioClip newClip)
     {
-        while (true)
-        {
-            int nextIndex = GetNextSongIndex();
-            musicSource.clip = songs[nextIndex];
-            musicSource.Play();
+        if (musicSource.clip == newClip) return;
 
-            // fade in
-            yield return StartCoroutine(FadeVolume(0f, targetVolume, fadeDuration));
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
 
-            // wait for (total duration - fade out time)
-            yield return new WaitForSeconds(songDuration - fadeDuration);
-
-            // fade out
-            yield return StartCoroutine(FadeVolume(targetVolume, 0f, fadeDuration));
-
-            musicSource.Stop();
-        }
+        fadeCoroutine = StartCoroutine(FadeToNewClip(newClip));
     }
 
-    private IEnumerator FadeVolume(float from, float to, float duration)
+    private IEnumerator FadeToNewClip(AudioClip newClip)
     {
-        float timer = 0f;
-        while (timer < duration)
+        float startVolume = musicSource.volume;
+
+        // Fade out
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
-            musicSource.volume = Mathf.Lerp(from, to, timer / duration);
-            timer += Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(startVolume, 0f, t / fadeDuration);
             yield return null;
         }
-        musicSource.volume = to;
-    }
 
-    private int GetNextSongIndex()
-    {
-        int newIndex;
-        do
+        musicSource.Stop();
+        musicSource.clip = newClip;
+        musicSource.Play();
+
+        // Fade in
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
-            newIndex = Random.Range(0, songs.Length);
-        } while (newIndex == lastPlayedIndex);
+            musicSource.volume = Mathf.Lerp(0f, targetVolume, t / fadeDuration);
+            yield return null;
+        }
 
-        lastPlayedIndex = newIndex;
-        return newIndex;
+        musicSource.volume = targetVolume;
     }
 }
