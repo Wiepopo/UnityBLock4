@@ -7,15 +7,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class ZookeeperTrigger : MonoBehaviour
 
+public class ZookeeperTrigger : MonoBehaviour
 {
-    public GameObject theText;
+    [Header("Subtitle Settings")]
     public ZookeeperSubtitle subtitleSystem;
     [TextArea]
     public string line;
     public AudioClip voiceClip;
     public float subtitleDuration = -1f; // -1 = auto-match audio length
+
+    [Header("Objective UI")]
+    [SerializeField] private string missionObjectiveText = "Inspect the zoo";
+    public GameObject theText;
 
     private bool alreadyTriggered = false;
 
@@ -25,9 +29,25 @@ public class ZookeeperTrigger : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            subtitleSystem.Speak(line, voiceClip, subtitleDuration);
             alreadyTriggered = true;
-            theText.GetComponent<Text>().text = "Feed the animals";
+
+            // Trigger subtitle
+            subtitleSystem.Speak(line, voiceClip, subtitleDuration);
+
+            // Play sound and show objective text
+            StartCoroutine(ShowObjective());
         }
+    }
+
+    private IEnumerator ShowObjective()
+    {
+       
+        if (theText != null)
+        {
+            theText.SetActive(true);
+            theText.GetComponent<Text>().text = missionObjectiveText;
+        }
+
+        yield break;
     }
 }
