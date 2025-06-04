@@ -7,35 +7,27 @@ public class PhotoDetector : MonoBehaviour
     [SerializeField] private GameObject cameraManager;
     [SerializeField] private PhotoSaveToGallery photoSaveToGallery;
 
-   
     public bool TryDetectEvidence(Texture2D photoTexture)
     {
         Ray ray = photoCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
         if (Physics.Raycast(ray, out RaycastHit hit, 10f) && cameraManager.activeSelf)
         {
-            if (hit.collider.CompareTag("Evidence"))
+            GameObject target = hit.collider.gameObject;
+
+            if (target.CompareTag("Evidence"))
             {
-                Debug.Log("Evidence found: " + hit.collider.name);
+                Debug.Log("Evidence found: " + target.name);
 
-                // ✅ Save the photo to the gallery
-                if (photoSaveToGallery != null)
-                {
-                    photoSaveToGallery.SavePhoto(photoTexture, hit.collider.gameObject);
-                }
-                else
-                {
-                    Debug.LogWarning("photoSaveToGallery reference is not assigned!");
-                }
-
-                // ✅ Update tag to prevent duplicate saving
-                StartCoroutine(ChangeTagAfterDelay(hit.collider.gameObject, 0.1f));
+                // Save first, change tag after
+                photoSaveToGallery.SavePhoto(photoTexture, target);
+                StartCoroutine(ChangeTagAfterDelay(target, 0.2f)); // Slight delay to ensure save finishes
 
                 return true;
             }
             else
             {
-                Debug.Log("Hit something, but it's not evidence.");
+                Debug.Log($"Hit '{target.name}', but it's not evidence. Tag: {target.tag}");
             }
         }
 
@@ -48,3 +40,4 @@ public class PhotoDetector : MonoBehaviour
         obj.tag = "NoLongerEvidence";
     }
 }
+

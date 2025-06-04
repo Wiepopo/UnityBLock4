@@ -37,7 +37,7 @@ public class PhotoSaveToGallery : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        UpdateEvidenceUI(); // initialize UI
+        UpdateEvidenceUI();
     }
 
     void Update()
@@ -76,8 +76,6 @@ public class PhotoSaveToGallery : MonoBehaviour
             takePhotoScript.SetActive(cameraIsActive);
             takePhotoCanvas.SetActive(cameraIsActive);
         }
-
-        Debug.Log(cameraIsActive ? "Active" : "Inactive");
     }
 
     public void CloseGallery()
@@ -95,9 +93,21 @@ public class PhotoSaveToGallery : MonoBehaviour
 
     public void SavePhoto(Texture2D photo, GameObject photographedObject)
     {
-        if (photo == null || photographedObject == null || !photographedObject.CompareTag("Evidence"))
+        if (photo == null)
         {
-            Debug.LogWarning("Invalid photo or object");
+            Debug.LogWarning("SavePhoto failed: photo is null.");
+            return;
+        }
+
+        if (photographedObject == null)
+        {
+            Debug.LogWarning("SavePhoto failed: photographedObject is null.");
+            return;
+        }
+
+        if (!photographedObject.CompareTag("Evidence"))
+        {
+            Debug.LogWarning($"SavePhoto failed: object '{photographedObject.name}' does not have 'Evidence' tag. Current tag: {photographedObject.tag}");
             return;
         }
 
@@ -137,3 +147,4 @@ public class PhotoSaveToGallery : MonoBehaviour
         return photoGallery;
     }
 }
+

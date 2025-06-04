@@ -62,7 +62,7 @@ public class DestroyOnCollisiontest : MonoBehaviour
                 if (GameManager.Instance.Interactions == GameManager.Instance.MaxInteractions)
                 {
                     
-                    theText.GetComponent<Text>().text = "Inspect the zoo <color=green>Feed the animals</color>";
+                    theText.GetComponent<Text>().text = "Inspect the zoo    <color=green>Feed the animals</color>";
                 }
             }
         }
@@ -79,7 +79,7 @@ public class DestroyOnCollisiontest : MonoBehaviour
                 zookeeperTalk.PauseTalk();
 
             if (subtitleSystem != null)
-                subtitleSystem.Speak("Hmm that’s weird, I should check that out", weirdLineVoiceClip, 4f, true); // 🆕 forced override
+                subtitleSystem.Speak("These monkeys look kind of weird let me take some photo's as evidence", weirdLineVoiceClip, 4f, true); // 🆕 forced override
 
             StartCoroutine(ResumeZookeeperTalkAfterDelay(6f));
         }
