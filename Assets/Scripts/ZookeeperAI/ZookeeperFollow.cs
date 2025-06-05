@@ -1,24 +1,28 @@
+// --- ZookeeperFollow.cs ---
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ZookeeperFollow : MonoBehaviour
 {
     public Transform player;
-
     public float followDistance = 5f;
     public float minWanderDistance = 2.5f;
     public float maxWanderDistance = 4f;
-
     public float wanderInterval = 4f;
     public float playerStillThreshold = 2f;
+
+    public Animator animator;
+    public ZookeeperSubtitle subtitleSystem;
+    public AudioClip waitVoiceClip;
 
     private NavMeshAgent agent;
     private float wanderTimer;
     private Vector3 lastPlayerPosition;
     private float playerStillTime;
     private bool followEnabled = false;
+    private bool isWaiting = false;
 
-    public Animator animator;
+    private Vector3? waitTarget = null;
 
     void Start()
     {
@@ -27,17 +31,16 @@ public class ZookeeperFollow : MonoBehaviour
         lastPlayerPosition = player.position;
         playerStillTime = 0f;
 
-        agent.stoppingDistance = minWanderDistance;
+        agent.stoppingDistance = 0.5f;
         agent.autoBraking = true;
     }
 
     void Update()
     {
-        if (!followEnabled) return;
+        if (!followEnabled && !waitTarget.HasValue) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // Track if the player is moving
         if (Vector3.Distance(player.position, lastPlayerPosition) > 0.05f)
         {
             playerStillTime = 0f;
@@ -48,17 +51,15 @@ public class ZookeeperFollow : MonoBehaviour
             playerStillTime += Time.deltaTime;
         }
 
-        // If too far, follow directly
-        if (distanceToPlayer > followDistance)
+        if (followEnabled && distanceToPlayer > followDistance)
         {
             if (Vector3.Distance(agent.destination, player.position) > 1.0f)
             {
                 agent.SetDestination(player.position);
             }
         }
-        else
+        else if (followEnabled)
         {
-            // Wander nearby when close to player
             wanderTimer -= Time.deltaTime;
 
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.1f)
@@ -71,7 +72,6 @@ public class ZookeeperFollow : MonoBehaviour
             }
         }
 
-        // Optional smooth look
         if (agent.hasPath && agent.desiredVelocity.sqrMagnitude > 0.1f)
         {
             Vector3 dir = agent.steeringTarget - transform.position;
@@ -83,12 +83,26 @@ public class ZookeeperFollow : MonoBehaviour
             }
         }
 
-        // Optional animation
         if (animator != null)
         {
             animator.SetFloat("Speed", agent.velocity.magnitude);
-            Debug.Log("Zookeeper speed: " + agent.velocity.magnitude);
+        }
 
+        if (waitTarget.HasValue && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && agent.velocity.sqrMagnitude < 0.01f)
+        {
+            waitTarget = null;
+            isWaiting = true;
+            agent.ResetPath();
+
+            if (subtitleSystem != null)
+            {
+                subtitleSystem.Speak("Yeah go ahead, I'm gonna wait you here.", waitVoiceClip);
+            }
+
+            if (animator != null)
+            {
+                animator.SetFloat("Speed", 0f);
+            }
         }
     }
 
@@ -112,7 +126,6 @@ public class ZookeeperFollow : MonoBehaviour
             }
         }
 
-        // fallback
         agent.ResetPath();
     }
 
@@ -120,4 +133,38 @@ public class ZookeeperFollow : MonoBehaviour
     {
         followEnabled = true;
     }
+
+    public void WaitHere()
+    {
+        isWaiting = true;
+        followEnabled = false;
+        agent.ResetPath();
+
+        if (subtitleSystem != null)
+        {
+            subtitleSystem.Speak("Yeah go ahead, I'm gonna wait you here.", waitVoiceClip);
+        }
+
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", 0f);
+        }
+    }
+
+    public void GoToAndWait(Vector3 position)
+    {
+        waitTarget = position;
+        followEnabled = false;
+        isWaiting = false;
+        agent.SetDestination(position);
+    }
+
+    public void TeleportTo(Vector3 newPosition)
+    {
+        agent.Warp(newPosition);
+        followEnabled = true;
+        isWaiting = false;
+    }
 }
+
+
