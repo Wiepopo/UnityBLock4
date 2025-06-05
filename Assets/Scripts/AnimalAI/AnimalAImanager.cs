@@ -1,9 +1,11 @@
 using System.Linq.Expressions;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
+//Needs these components on the object and will add them on its own
 [RequireComponent(typeof(AnimalAIIdle))]
 [RequireComponent(typeof(AnimalAIRunning))]
 [RequireComponent(typeof(AnimalAIWander))]
@@ -11,11 +13,11 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(Animator))]
 public class AnimalAImanager : MonoBehaviour
 {
+    //referencing other scripts
     private AnimalAIWander animalAIWander;
     private AnimalAIIdle animalAIIdle;
     private AnimalAIRunning animalAIRunning;
 
-    //Statements
     private enum AIState { Idle, Wander, Run }
     private AIState currentState;
 
@@ -38,6 +40,7 @@ public class AnimalAImanager : MonoBehaviour
 
     void Awake()
     {
+        //setting the script references to their components on the object
         animalAIWander = GetComponent<AnimalAIWander>();
         animalAIIdle = GetComponent<AnimalAIIdle>();
         animalAIRunning = GetComponent<AnimalAIRunning>();
@@ -70,7 +73,7 @@ public class AnimalAImanager : MonoBehaviour
         currentState = GetWeightedRandomState();
         ApplyState(currentState);
     }
-
+    //setting which animation to apply at which moment (state)
     void AnimationApllication()
     {
         if (animalAIWander.enabled == true)
@@ -86,7 +89,7 @@ public class AnimalAImanager : MonoBehaviour
             aAnimater.SetTrigger("Entry");
         }
     }
-
+    //applying which state got chosen and enabling that state and setting the timers
     void ApplyState(AIState state)
     {
         AllAISetToFalse();
@@ -110,12 +113,13 @@ public class AnimalAImanager : MonoBehaviour
                 break;
         }
     }
-
+    //get a random number based on weights of the states and return them for application
     AIState GetWeightedRandomState()
     {
         float totalWeight = idleWeight + wanderWeight + runWeight;
-        float rand = Random.Range(0f, totalWeight);
+        float rand = Random.Range(0f, totalWeight); //gets a random number between 0 and total weight value of all states combined
 
+        //check if random number is under a certain value and returns the state that would corrospond 
         if (rand < idleWeight)
             return AIState.Idle;
         else if (rand < idleWeight + wanderWeight)
@@ -126,6 +130,7 @@ public class AnimalAImanager : MonoBehaviour
 
     void AllAISetToFalse()
     {
+        //turns all ai off
         animalAIIdle.enabled = false;
         animalAIWander.enabled = false;
         animalAIRunning.enabled = false;

@@ -26,11 +26,6 @@ public class AnimalAIWander : MonoBehaviour
         obstacleDetectionDistance = wanderRadius + 1f; // the obstacle detection range is slightly further than the walk distance to try keep it from running into walls
     }
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         agent.speed = walkspeed;
