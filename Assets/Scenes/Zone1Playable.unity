@@ -26153,6 +26153,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9000000, guid: 26f8ce65f9788fb4d8e4c7845fa6e858, type: 3}
     - target: {fileID: 5866666021909216657, guid: 26f8ce65f9788fb4d8e4c7845fa6e858, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 26f8ce65f9788fb4d8e4c7845fa6e858, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 5948cf646a07b7d43b97f21b01c731dc, type: 2}
@@ -59175,7 +59179,7 @@ MonoBehaviour:
   wanderInterval: 10
   playerStillThreshold: 2
   animator: {fileID: 1399792118}
-  subtitleSystem: {fileID: 0}
+  subtitleSystem: {fileID: 1738021623}
   waitVoiceClip: {fileID: 0}
 --- !u!136 &1738021622
 CapsuleCollider:

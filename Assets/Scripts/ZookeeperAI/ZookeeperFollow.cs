@@ -87,6 +87,7 @@ public class ZookeeperFollow : MonoBehaviour
         {
             animator.SetFloat("Speed", agent.velocity.magnitude);
         }
+        
 
         if (waitTarget.HasValue && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && agent.velocity.sqrMagnitude < 0.01f)
         {
@@ -103,6 +104,7 @@ public class ZookeeperFollow : MonoBehaviour
             {
                 animator.SetFloat("Speed", 0f);
             }
+
         }
     }
 
