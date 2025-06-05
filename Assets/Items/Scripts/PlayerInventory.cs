@@ -50,6 +50,9 @@ public class PlayerInventory : MonoBehaviour
     public Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>();
     private Dictionary<itemType, GameObject> itemInstantiate = new Dictionary<itemType, GameObject>();
 
+    [SerializeField] private PhotoCapture photoCapture;
+
+
     void Start()
     {
         itemSetActive.Add(itemType.Keys, keys_item);
@@ -202,6 +205,7 @@ public class PlayerInventory : MonoBehaviour
         // Inventory slot selection
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            if (selectedItem == 1) photoCapture.RemovePhoto(); // switching away from camera
             selectedItem = 0;
             NewItemSelected();
             cameraCanvas.SetActive(false);
@@ -218,6 +222,7 @@ public class PlayerInventory : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            if (selectedItem == 1) photoCapture.RemovePhoto();
             selectedItem = 2;
             NewItemSelected();
             cameraCanvas.SetActive(false);
@@ -226,13 +231,13 @@ public class PlayerInventory : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
+            if (selectedItem == 1) photoCapture.RemovePhoto();
             selectedItem = 3;
             NewItemSelected();
             cameraCanvas.SetActive(false);
             cameraController.SetActive(false);
             clipboard.SetActive(false);
         }
-        
     }
     
 

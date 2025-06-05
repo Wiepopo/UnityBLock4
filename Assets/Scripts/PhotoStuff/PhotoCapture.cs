@@ -118,7 +118,7 @@ public class PhotoCapture : MonoBehaviour
         cameraFlash.SetActive(false);
     }
 
-    void RemovePhoto()
+    public void RemovePhoto()
     {
         viewingPhoto = false;
         photoFrame.SetActive(false);
