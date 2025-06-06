@@ -22014,7 +22014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732d8c59e1eb98e4487fb0a78caab560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionObjectiveText: Find a key
+  missionObjectiveText: Collect evidence
   objFX: {fileID: 1706882662}
   theobjective: {fileID: 829131188}
   Objectivetrigger: {fileID: 661110917}
@@ -31908,19 +31908,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c616a22a66c03c4fb8fcdd2236091ee, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6839488
+      value: 0.6948572
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c616a22a66c03c4fb8fcdd2236091ee, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0018639299
+      value: -0.0020698318
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c616a22a66c03c4fb8fcdd2236091ee, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.72939926
+      value: 0.7190151
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c616a22a66c03c4fb8fcdd2236091ee, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.01368458
+      value: 0.013654953
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c616a22a66c03c4fb8fcdd2236091ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -31928,7 +31928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c616a22a66c03c4fb8fcdd2236091ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 93.673
+      value: 91.947
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c616a22a66c03c4fb8fcdd2236091ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -38105,6 +38105,136 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de1e30dcb631ddf40b02d355846f9166, type: 3}
+--- !u!1001 &1008969582
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_Name
+      value: Objectivetriggerbridge
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096734628090178442, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7905781646455368129, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.21487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -39.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1008969586}
+    - targetCorrespondingSourceObject: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1008969585}
+    - targetCorrespondingSourceObject: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1008969584}
+  m_SourcePrefab: {fileID: 100100000, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+--- !u!1 &1008969583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+  m_PrefabInstance: {fileID: 1008969582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1008969584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008969583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33cb5138baa8d2640b6f91adec978516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneNumber: 2
+  photoSaveScript: {fileID: 1774446877}
+--- !u!114 &1008969585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008969583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732d8c59e1eb98e4487fb0a78caab560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missionObjectiveText: 'Find a key '
+  objFX: {fileID: 1706882662}
+  theobjective: {fileID: 829131188}
+  Objectivetrigger: {fileID: 1008969583}
+  theText: {fileID: 968744795}
+--- !u!114 &1008969586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008969583}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe610b7afd5e994ba895795f7f0f7c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objFX: {fileID: 1706882662}
+  theobjective: {fileID: 829131188}
+  Objectivetrigger: {fileID: 1008969583}
+  theText: {fileID: 968744795}
 --- !u!1001 &1010352421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39487,7 +39617,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       propertyPath: m_Name
-      value: Objectivetrigger (2)
+      value: Objectivetriggerbridge2
       objectReference: {fileID: 0}
     - target: {fileID: 3096734628090178442, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       propertyPath: m_Enabled
@@ -46073,7 +46203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subtitleSystem: {fileID: 1738021623}
-  line: Can you help me with the food for the animals
+  line: 'Zookeeper: Can you help me with the food for the animals'
   voiceClip: {fileID: 8300000, guid: cc1251210370a1b4895e4c0ada9a29a3, type: 3}
   subtitleDuration: -1
   missionObjectiveText: Inspect the zoo                 Feed the animals
@@ -54949,10 +55079,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subtitleSystem: {fileID: 1738021623}
-  line: 'Zookeeper: Monkeys have a nack of trying to steal things '
+  line: 'Zookeeper: Monkeys have a nack of trying to steal things. Maybe look for
+    a solution there'
   voiceClip: {fileID: 8300000, guid: cc1251210370a1b4895e4c0ada9a29a3, type: 3}
   subtitleDuration: -1
-  missionObjectiveText: Inspect the zoo                 Feed the animals
+  missionObjectiveText: 
   theText: {fileID: 968744795}
 --- !u!65 &1578159275
 BoxCollider:
@@ -72324,6 +72455,7 @@ SceneRoots:
   - {fileID: 428671299}
   - {fileID: 1084563270}
   - {fileID: 1199019485}
+  - {fileID: 1008969582}
   - {fileID: 1519882850}
   - {fileID: 168487731}
   - {fileID: 544726266}
