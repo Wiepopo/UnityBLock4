@@ -1,7 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Door1 : MonoBehaviour
 {
+   
+    public GameObject theText;
+    public AudioSource objFX;
     [Header("Prefab to Spawn When Door Opens")]
     public GameObject replacementPrefab;
 
@@ -14,6 +19,10 @@ public class Door1 : MonoBehaviour
 
         if (zone1EvidenceCollected)
         {
+              objFX.Play();
+            theText.SetActive(true);
+            theText.GetComponent<Text>().text = "<color=green>Take evidence</color>";
+            
             // Optionally spawn a replacement object
             if (replacementPrefab != null)
             {

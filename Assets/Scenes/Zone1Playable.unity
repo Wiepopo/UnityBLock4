@@ -8336,6 +8336,14 @@ PrefabInstance:
       propertyPath: evidenceCounterText
       value: 
       objectReference: {fileID: 683871576}
+    - target: {fileID: 2335017866058754589, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: d01c55d33bc6f60438b7d3041d0ae73b, type: 3}
+    - target: {fileID: 2335017866058754589, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d01c55d33bc6f60438b7d3041d0ae73b, type: 3}
     - target: {fileID: 2640884803047992965, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -31990,6 +31998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d30ba0c58e0957469d6ae543251b4e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theText: {fileID: 968744795}
+  objFX: {fileID: 1706882662}
   replacementPrefab: {fileID: 1366853648}
 --- !u!114 &908337827
 MonoBehaviour:
@@ -46204,7 +46214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subtitleSystem: {fileID: 1738021623}
   line: 'Zookeeper: Can you help me with the food for the animals'
-  voiceClip: {fileID: 8300000, guid: cc1251210370a1b4895e4c0ada9a29a3, type: 3}
+  voiceClip: {fileID: 8300000, guid: d01c55d33bc6f60438b7d3041d0ae73b, type: 3}
   subtitleDuration: -1
   missionObjectiveText: Inspect the zoo                 Feed the animals
   theText: {fileID: 968744795}
