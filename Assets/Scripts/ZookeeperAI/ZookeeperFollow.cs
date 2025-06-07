@@ -83,11 +83,10 @@ public class ZookeeperFollow : MonoBehaviour
             }
         }
 
-        if (animator != null)
-        {
-            animator.SetFloat("Speed", agent.velocity.magnitude);
-        }
+        animator.SetFloat("Speed", agent.velocity.magnitude);
+
         
+Debug.Log("Animator Speed: " + agent.velocity.magnitude);
 
         if (waitTarget.HasValue && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && agent.velocity.sqrMagnitude < 0.01f)
         {
