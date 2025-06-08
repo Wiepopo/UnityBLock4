@@ -15,7 +15,7 @@ public class Door1 : MonoBehaviour
         if (GameManager.Instance == null) return;
 
         
-        bool zone1EvidenceCollected = GameManager.Instance.PhotosTakenZone1 >= GameManager.Instance.GetMaxPhotosForZone(1);
+        bool zone1EvidenceCollected = GameManager.Instance.PhotosTakenZone2 >= GameManager.Instance.GetMaxPhotosForZone(1);
 
         if (zone1EvidenceCollected)
         {
