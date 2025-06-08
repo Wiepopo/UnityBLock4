@@ -20,7 +20,7 @@ public class AnimalAIRunning : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         timer = wanderInterval;
-        wanderInterval = .5f * runSpeed;
+        wanderInterval = runSpeed;
         wanderRadius = runSpeed * 2 + 2;
         obstacleDetectionDistance = wanderRadius + 1;
     }

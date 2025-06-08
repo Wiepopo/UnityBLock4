@@ -21,7 +21,7 @@ public class AnimalAIWander : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         timer = wanderInterval;
-        wanderInterval = 0.5f * walkspeed;
+        wanderInterval = walkspeed;
         wanderRadius = walkspeed * 2 + 2; //setting the distance the ai tries to walk in line with the speed to choose a new point before reaching the point to keep walking
         obstacleDetectionDistance = wanderRadius + 1f; // the obstacle detection range is slightly further than the walk distance to try keep it from running into walls
     }
