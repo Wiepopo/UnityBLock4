@@ -3236,7 +3236,11 @@ MonoBehaviour:
       size? '
     - 'Did you know that Peruvian monkeys groom each other to strengthen social bonds? '
     clips:
-    - {fileID: 8300000, guid: 78afe051dd4bc01429ddbf952213b564, type: 3}
+    - {fileID: 8300000, guid: d0fbb45e78e6f41479aaf064456af41f, type: 3}
+    - {fileID: 8300000, guid: 857f24c1047cdd04dbe8bc969c695730, type: 3}
+    - {fileID: 8300000, guid: 178dcf5191a6c0e4f86efa9ac2e93872, type: 3}
+    - {fileID: 8300000, guid: a71a9340ff288d1418caa029ce270b37, type: 3}
+    - {fileID: 8300000, guid: bfd8994eb2ff4eb4198dfc40cd584815, type: 3}
   - lines:
     - 'Did you know lions are the only cats that live in groups called prides? '
     - "Did you know a lion\u2019s roar can be heard from up to 8 kilometers away?"
@@ -3246,7 +3250,11 @@ MonoBehaviour:
     - Did you know lions communicate using a range of sounds including roars, grunts,
       moans, and growls?
     clips:
-    - {fileID: 8300000, guid: bd8aa195c4105b74b9beb410f33a9819, type: 3}
+    - {fileID: 8300000, guid: e863739e18d551942be727316d0b775c, type: 3}
+    - {fileID: 8300000, guid: 0c293739e31a269499dfa4eceb34ccb4, type: 3}
+    - {fileID: 8300000, guid: ac9e0a77ad494c24e8b2ddaf29fcae7b, type: 3}
+    - {fileID: 8300000, guid: bbe376bd9eb20a342bcbf219d2d8fab0, type: 3}
+    - {fileID: 8300000, guid: 2febea1cdeb018c4ba56dcaeacf9873e, type: 3}
   - lines:
     - Did you know that Humboldt penguins are excellent swimmers, reaching speeds
       of up to 30 kilometers per hour underwater?
@@ -3257,7 +3265,10 @@ MonoBehaviour:
     - Did you know polar bears are strong swimmers and can paddle continuously for
       over 100 kilometers?
     clips:
-    - {fileID: 8300000, guid: bd8aa195c4105b74b9beb410f33a9819, type: 3}
+    - {fileID: 8300000, guid: 953379494260bd546bbf53c77f460bf6, type: 3}
+    - {fileID: 8300000, guid: a7d6082bec6b624418bb3d34f6b885b3, type: 3}
+    - {fileID: 8300000, guid: 58f1375d21a1e2343b7122d1fd2bcc93, type: 3}
+    - {fileID: 8300000, guid: fe78a30ba3128e7428265127b9214a64, type: 3}
   minDelay: 10
   maxDelay: 25
 --- !u!114 &120594970
@@ -3836,7 +3847,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -46093,8 +46104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subtitleSystem: {fileID: 120594971}
-  line: 'Zookeeper: Can you help me with the food for the animals'
-  voiceClip: {fileID: 8300000, guid: d01c55d33bc6f60438b7d3041d0ae73b, type: 3}
+  line: Can you help me with the food for the animals
+  voiceClip: {fileID: 8300000, guid: 803e67e74adb8e44592be63ca6434d61, type: 3}
   subtitleDuration: -1
   missionObjectiveText: Inspect the zoo                 Feed the animals
   theText: {fileID: 968744795}
@@ -47214,7 +47225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fd83c9bf923094c92c94a494983bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zookeeperTalk: {fileID: 0}
+  zookeeperTalk: {fileID: 120594969}
   factSetIndex: 1
   triggerOnlyOnce: 1
 --- !u!65 &1357991993
@@ -50795,129 +50806,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6da38c08374e5e545b997b9cd40176d2, type: 3}
---- !u!1 &1450188063
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1450188067}
-  - component: {fileID: 1450188066}
-  - component: {fileID: 1450188065}
-  - component: {fileID: 1450188064}
-  - component: {fileID: 1450188068}
-  m_Layer: 0
-  m_Name: TestEvidence (3)
-  m_TagString: Evidence
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1450188064
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450188063}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1450188065
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450188063}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1450188066
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450188063}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1450188067
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450188063}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.178, y: 0.64, z: -16.456}
-  m_LocalScale: {x: 0.0852, y: 1, z: 0.7177}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1450188068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450188063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9969ac81b90a1584c805a6e3700028d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  exclamationPrefab: {fileID: 9186801920548274047, guid: 5e00389da27f7634aaa8454505d6964a, type: 3}
-  iconLocalOffset: {x: 0, y: 2, z: 0}
 --- !u!1001 &1451268106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51051,7 +50939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1455445757}
   fadeDuration: 3
-  targetVolume: 1
+  targetVolume: 0.4
 --- !u!82 &1455445757
 AudioSource:
   m_ObjectHideFlags: 0
@@ -51065,7 +50953,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.12
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -54955,10 +54843,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2ffeb80da13914693e0d0c7ff03ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subtitleSystem: {fileID: 0}
-  line: 'Zookeeper: Monkeys have a nack of trying to steal things. Maybe look for
-    a solution there'
-  voiceClip: {fileID: 8300000, guid: cc1251210370a1b4895e4c0ada9a29a3, type: 3}
+  subtitleSystem: {fileID: 120594971}
+  line: Monkeys have a nack of trying to steal things. Maybe look for a solution
+    there
+  voiceClip: {fileID: 8300000, guid: 60425ebbba7120a44851c89e2a93efb1, type: 3}
   subtitleDuration: -1
   missionObjectiveText: 
   theText: {fileID: 968744795}
@@ -54992,7 +54880,7 @@ Transform:
   m_GameObject: {fileID: 1578159272}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.21, y: 0.69, z: -36.35}
+  m_LocalPosition: {x: -20.21, y: 0.69, z: -38.95}
   m_LocalScale: {x: 1.5821646, y: 1, z: 0.54083556}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66200,7 +66088,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 689eedc511124ec458b20c824171984d, type: 2}
     - target: {fileID: 4133911939092208121, guid: 6da38c08374e5e545b997b9cd40176d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.846069
+      value: -7.94
       objectReference: {fileID: 0}
     - target: {fileID: 4133911939092208121, guid: 6da38c08374e5e545b997b9cd40176d2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -66208,7 +66096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4133911939092208121, guid: 6da38c08374e5e545b997b9cd40176d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.486281
+      value: -3.21
       objectReference: {fileID: 0}
     - target: {fileID: 4133911939092208121, guid: 6da38c08374e5e545b997b9cd40176d2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -74101,7 +73989,6 @@ SceneRoots:
   - {fileID: 418458506}
   - {fileID: 801549928881524376}
   - {fileID: 872006145}
-  - {fileID: 1450188067}
   - {fileID: 1665480630}
   - {fileID: 2091156120}
   - {fileID: 335597675}
