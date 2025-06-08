@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class PetAndMove : MonoBehaviour
 {
     [Header("Interaction Settings")]
@@ -18,6 +19,13 @@ public class PetAndMove : MonoBehaviour
     private bool hasMoved = false;
     private bool isMoving = false;
 
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         if (!hasMoved && isPlayerNear && Input.GetKeyDown(interactKey))
@@ -32,22 +40,47 @@ public class PetAndMove : MonoBehaviour
 
         float distance = Vector3.Distance(player.position, transform.position);
         isPlayerNear = distance <= interactionDistance;
+
+        // Update animation speed parameter
+        float currentSpeed = isMoving ? moveSpeed : 0f;
+        animator.SetFloat("Speed", currentSpeed);
+
     }
 
     void MoveToTarget()
+{
+    // Move towards the target
+    transform.position = Vector3.MoveTowards(transform.position, targetPosition.position, moveSpeed * Time.deltaTime);
+
+    // Rotate to face the target while moving
+    Vector3 direction = (targetPosition.position - transform.position).normalized;
+    if (direction != Vector3.zero)
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition.position, moveSpeed * Time.deltaTime);
+        Quaternion lookRotation = Quaternion.LookRotation(-direction); // use -direction for correct facing
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
 
-        if (Vector3.Distance(transform.position, targetPosition.position) < 0.01f)
+    // Check if reached destination
+    if (Vector3.Distance(transform.position, targetPosition.position) < 0.01f)
+    {
+        transform.position = targetPosition.position;
+        isMoving = false;
+        hasMoved = true;
+
+        // After reaching the point, rotate to face "forward" (your custom direction)
+        Vector3 forwardDirection = player.position - transform.position; // or some default Vector3.forward
+        if (forwardDirection != Vector3.zero)
         {
-            transform.position = targetPosition.position;
-            isMoving = false;
-            hasMoved = true;
+            Quaternion faceForward = Quaternion.LookRotation(forwardDirection);
+            transform.rotation = faceForward;
+        }
 
-            if (keyToActivate != null)
-            {
-                keyToActivate.SetActive(true);
-            }
+        if (keyToActivate != null)
+        {
+            keyToActivate.SetActive(true);
         }
     }
+}
+
+
 }

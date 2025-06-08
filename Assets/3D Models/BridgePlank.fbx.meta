@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 30568506e621e4e40ac00b1a9c7a689d
+guid: c7786204657fcba45b1770a9ba98153a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BrokenBridge Plank_LOW_Material_BaseMap
+    second: {fileID: 2800000, guid: 8b300dc3546addf4ea102d39aeaff546, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BrokenBridge Plank_LOW_Material_Normal
+    second: {fileID: 2800000, guid: b04a1a9f6aa680d4e94c5d3ed8522166, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
