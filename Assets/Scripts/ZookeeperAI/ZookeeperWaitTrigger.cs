@@ -11,6 +11,7 @@ public class ZookeeperWaitTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             zookeeper.GoToAndWait(waitPoint.position);
+            Object.Destroy(this.gameObject);
         }
     }
 }
