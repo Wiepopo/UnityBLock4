@@ -65,7 +65,9 @@ public class FirstPersonController : MonoBehaviour
     public bool playerCanMove = true;
     public float walkSpeed = 5f;
     public float maxVelocityChange = 10f;
-
+    [SerializeField] private AudioSource footstepAudio; // Sleep hier je audio in de Inspector naartoe
+    [SerializeField] private float footstepVolume = 1.0f;
+    [SerializeField] private float movementThreshold = 0.1f;
     // Internal Variables
     private bool isWalking = false;
 
@@ -463,6 +465,25 @@ public class FirstPersonController : MonoBehaviour
             }
         }
         #endregion
+        #region Footstep Audio
+        if (isWalking && isGrounded)
+        {
+            if (!footstepAudio.isPlaying)
+            {
+                footstepAudio.volume = footstepVolume;
+                footstepAudio.Play();
+            }
+        }
+        else
+        {
+            if (footstepAudio.isPlaying)
+            {
+                footstepAudio.Stop();
+            }
+        }
+    #endregion
+
+    
     }
 
     // Sets isGrounded based on a raycast sent straigth down from the player object
