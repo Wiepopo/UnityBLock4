@@ -15092,7 +15092,7 @@ PrefabInstance:
       addedObject: {fileID: 929027207}
     - targetCorrespondingSourceObject: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 929027206}
+      addedObject: {fileID: 929027214}
   m_SourcePrefab: {fileID: 100100000, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
 --- !u!1 &430166551
 GameObject:
@@ -33156,20 +33156,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
   m_PrefabInstance: {fileID: 428671299}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &929027206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929027205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c48840d44cf8ba247bcce8ef3b9fa264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zoneNumber: 1
-  photoSaveScript: {fileID: 1774446877}
 --- !u!114 &929027207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33203,6 +33189,20 @@ MonoBehaviour:
   theobjective: {fileID: 829131188}
   Objectivetrigger: {fileID: 929027205}
   theText: {fileID: 968744795}
+--- !u!114 &929027214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929027205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5238e192d253e8b42b3d5d41d8f0a438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneNumber: 3
+  photoSaveScript: {fileID: 1774446877}
 --- !u!4 &936249940 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 613ea4e9395a098469a3c9372f15b7c5, type: 3}
