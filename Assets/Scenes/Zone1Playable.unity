@@ -36036,7 +36036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675c3133b7468df4799d04041553b635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zookeeper: {fileID: 0}
+  zookeeper: {fileID: 120594970}
   teleportTarget: {fileID: 1318442668}
 --- !u!65 &1154778094
 BoxCollider:
@@ -43636,7 +43636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa547ed237f7a5e458488b5bf46c2099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zookeeper: {fileID: 0}
+  zookeeper: {fileID: 120594970}
   waitPoint: {fileID: 1579418174}
 --- !u!65 &1413208483
 BoxCollider:
