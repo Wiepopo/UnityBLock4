@@ -34,22 +34,24 @@ public class ZookeeperSubtitle : MonoBehaviour
     {
         onCooldown = true;
 
-
         subtitleText.text = line;
         subtitleText.gameObject.SetActive(true);
+
+        float showTime = duration > 0 ? duration : displayDuration;
 
         if (clip != null && voiceSource != null)
         {
             voiceSource.PlayOneShot(clip);
+            showTime = clip.length; // ⬅️ Automatically set duration to clip length
         }
 
-        float showTime = (duration > 0) ? duration : displayDuration;
         yield return new WaitForSeconds(showTime);
 
         subtitleText.gameObject.SetActive(false);
         subtitleText.text = "";
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f); // Cooldown delay
         onCooldown = false;
     }
+
 }
