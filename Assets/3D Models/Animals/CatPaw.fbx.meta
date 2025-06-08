@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: b83b2b11c89a3b14bab45e89323c4ca1
+guid: f88ee5e00fda3d241b11228253388761
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: CatPaw_DefaultMaterial_BaseMap
+    second: {fileID: 2800000, guid: 47f4d8fdc4aa0134387b9626d6a34044, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: CatPaw_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: f10f15f0a09ab1e4eb545c78b8996386, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
