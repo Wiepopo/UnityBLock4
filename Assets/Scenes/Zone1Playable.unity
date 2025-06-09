@@ -66851,8 +66851,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 4294967295
-  defaultFootstepClip: {fileID: 0}
-  concreteFootstepClip: {fileID: 0}
+  defaultFootstepClip: {fileID: 8300000, guid: 15d2e7060477c3c4590ace74e225c3c5, type: 3}
+  concreteFootstepClip: {fileID: 8300000, guid: c8a3c518c82961f499655ec059dad5e8, type: 3}
   footstepInterval: 0.5
   minMoveSpeed: 0.1
 --- !u!82 &1927168817
