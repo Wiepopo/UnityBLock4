@@ -40972,7 +40972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exclamationPrefab: {fileID: 9186801920548274047, guid: 1c025bf4a3215a44ea4c7469ba616b2e, type: 3}
-  iconLocalOffset: {x: 0, y: 5, z: 0}
+  iconLocalOffset: {x: 0, y: 10, z: 0}
 --- !u!1 &851015860
 GameObject:
   m_ObjectHideFlags: 0
