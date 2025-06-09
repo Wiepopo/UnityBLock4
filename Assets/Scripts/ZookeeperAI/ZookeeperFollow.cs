@@ -96,7 +96,7 @@ public class ZookeeperFollow : MonoBehaviour
 
             if (subtitleSystem != null)
             {
-                subtitleSystem.Speak("Yeah go ahead, I'm gonna wait for you here.", waitVoiceClip);
+                subtitleSystem.Speak("", waitVoiceClip);
             }
 
             if (animator != null)
