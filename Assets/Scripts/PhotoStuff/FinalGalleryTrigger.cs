@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.SceneManagement;  // Add this at the top if not present
 using TMPro;
 
 public class FinalGalleryTrigger : MonoBehaviour
@@ -22,6 +23,7 @@ public class FinalGalleryTrigger : MonoBehaviour
     [SerializeField] private TMP_Text evidenceCountText; // <-- Assign this in the inspector
     [SerializeField] private int maxEvidence = 8;
 
+    public string outroScene = "OutroScene";
     void Update()
     {
         if (Input.GetKeyDown(interactionKey))
@@ -107,11 +109,7 @@ public class FinalGalleryTrigger : MonoBehaviour
         if (takePhotoScript != null) takePhotoScript.SetActive(true);
         if (takePhotoCanvas != null) takePhotoCanvas.SetActive(true);
 
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        SceneManager.LoadScene(outroScene);
     }
 
     private IEnumerator HideWarningAfterSeconds(float seconds)

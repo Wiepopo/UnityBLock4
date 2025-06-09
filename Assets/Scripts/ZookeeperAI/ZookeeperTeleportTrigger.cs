@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class ZookeeperTeleportTrigger : MonoBehaviour
+public class HideZookeeperOnTrigger : MonoBehaviour
 {
-    [SerializeField] private ZookeeperFollow zookeeper;
-    [SerializeField] private Transform teleportTarget;
+    public GameObject zookeeperToHide; // Assign in Inspector
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && zookeeperToHide != null)
         {
-            zookeeper.TeleportTo(teleportTarget.position);
+            zookeeperToHide.SetActive(false); // Hides the zookeeper
         }
     }
 }

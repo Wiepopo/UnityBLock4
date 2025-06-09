@@ -48060,8 +48060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675c3133b7468df4799d04041553b635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zookeeper: {fileID: 120594970}
-  teleportTarget: {fileID: 1318442668}
+  zookeeperToHide: {fileID: 120594964}
 --- !u!65 &1154778094
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48081,8 +48080,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.9446554, y: 3.4603934, z: 3.606861}
-  m_Center: {x: 0.26385832, y: 1.2301965, z: -1.3034306}
+  m_Size: {x: 17.439182, y: 3.4603934, z: 3.606861}
+  m_Center: {x: -1.970161, y: 1.2301965, z: -1.3034306}
 --- !u!4 &1154778095
 Transform:
   m_ObjectHideFlags: 0
@@ -73051,6 +73050,7 @@ MonoBehaviour:
   warningText: {fileID: 430166552}
   evidenceCountText: {fileID: 1423214621}
   maxEvidence: 8
+  outroScene: OutroScene
 --- !u!114 &1774446877 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1785540215447509204, guid: a1ed274cd54c0a04c8d5b595523acf59, type: 3}
