@@ -29506,6 +29506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Objectivetriggerzone2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3096734628090178442, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -29520,7 +29524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.59
+      value: -26.2
       objectReference: {fileID: 0}
     - target: {fileID: 8372413231583734738, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       propertyPath: m_LocalPosition.y
