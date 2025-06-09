@@ -19,7 +19,7 @@ public class AnimalAIIdle : MonoBehaviour
         //it means the code sees the animal as stationary and starts the idle animation
         if (agent.velocity.magnitude < stationaryThreshold)
         {
-            agent.transform.Rotate(0f, rotationSpeed, 0f); //this makes the animal just rotate for testing purposes change for animation!!!!!!!!!!!!
+            //agent.transform.Rotate(0f, rotationSpeed, 0f); //this makes the animal just rotate for testing purposes change for animation!!!!!!!!!!!!
         }
     }
 }

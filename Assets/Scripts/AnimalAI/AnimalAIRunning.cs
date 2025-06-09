@@ -22,7 +22,7 @@ public class AnimalAIRunning : MonoBehaviour
         timer = wanderInterval;
         wanderInterval = runSpeed;
         wanderRadius = runSpeed * 2 + 2;
-        obstacleDetectionDistance = wanderRadius + 1;
+        obstacleDetectionDistance = wanderRadius + 3;
     }
 
     void Start()
