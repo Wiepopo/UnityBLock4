@@ -85,8 +85,8 @@ public class ZookeeperFollow : MonoBehaviour
 
         animator.SetFloat("Speed", agent.velocity.magnitude);
 
-        
-Debug.Log("Animator Speed: " + agent.velocity.magnitude);
+
+   
 
         if (waitTarget.HasValue && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && agent.velocity.sqrMagnitude < 0.01f)
         {
@@ -151,6 +151,12 @@ Debug.Log("Animator Speed: " + agent.velocity.magnitude);
             animator.SetFloat("Speed", 0f);
         }
     }
+    public void CancelWait()
+    {
+        waitTarget = null;
+        isWaiting = false;
+        agent.ResetPath();
+    }
 
     public void GoToAndWait(Vector3 position)
     {
@@ -162,10 +168,12 @@ Debug.Log("Animator Speed: " + agent.velocity.magnitude);
 
     public void TeleportTo(Vector3 newPosition)
     {
+        CancelWait(); // ⬅️ cancel any current GoToAndWait target
         agent.Warp(newPosition);
         followEnabled = true;
         isWaiting = false;
     }
+
 }
 
 

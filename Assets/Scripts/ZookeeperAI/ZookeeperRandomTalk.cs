@@ -22,21 +22,26 @@ public class ZookeeperRandomTalk : MonoBehaviour
 
     private bool isPaused = false;
 
-    public void TriggerTalk(int factSetIndex)
+   public void TriggerTalk(int factSetIndex)
+{
+    
+    if (factSetIndex < 0 || factSetIndex >= factSets.Length) return;
+
+
+    InitializeQueue(factSets[factSetIndex]);
+
+    if (talkRoutine != null)
     {
-        if (factSetIndex < 0 || factSetIndex >= factSets.Length) return;
-
-        if (talkRoutine != null)
-        {
-            StopCoroutine(talkRoutine);
-        }
-
-        InitializeQueue(factSets[factSetIndex]);
-        talkRoutine = StartCoroutine(RandomTalkRoutine());
+        StopCoroutine(talkRoutine);
     }
+
+    talkRoutine = StartCoroutine(RandomTalkRoutine());
+}
 
     void InitializeQueue(FactSet set)
     {
+       
+
         List<(string, AudioClip)> combined = new List<(string, AudioClip)>();
         for (int i = 0; i < set.lines.Length; i++)
         {
@@ -50,6 +55,8 @@ public class ZookeeperRandomTalk : MonoBehaviour
 
     IEnumerator RandomTalkRoutine()
     {
+       
+
         while (lineQueue.Count > 0)
         {
             float waitTime = Random.Range(minDelay, maxDelay);
