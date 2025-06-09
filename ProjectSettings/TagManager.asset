@@ -14,6 +14,7 @@ TagManager:
   - NoLongerEvidence
   - FinalGalleryTrigger
   - Concrete
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Feedable
   - Obstacle
   - Zookeeper
-  - 
+  - Penguin
   - 
   - 
   - 

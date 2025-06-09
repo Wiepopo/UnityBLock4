@@ -23,7 +23,7 @@ public class UnlockDoorTrigger : MonoBehaviour
         }
     }
 
-    void TryUnlockDoor()
+    public void TryUnlockDoor()
     {
         if (playerInventory == null) return;
 
