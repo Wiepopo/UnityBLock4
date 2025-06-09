@@ -46,18 +46,21 @@ public class PlayerFootstepAudio : MonoBehaviour
         }
     }
 
-    private void PlayFootstep()
+   private void PlayFootstep()
+{
+    AudioClip chosenClip = GetFootstepClip();
+
+    if (chosenClip != null)
     {
-        if (!audioSource.isPlaying)
+        if (audioSource.clip != chosenClip || !audioSource.isPlaying)
         {
-            AudioClip chosenClip = GetFootstepClip();
-            if (chosenClip != null)
-            {
-                audioSource.clip = chosenClip;
-                audioSource.Play();
-            }
+            audioSource.Stop(); // Stop current sound even if still playing
+            audioSource.clip = chosenClip;
+            audioSource.Play();
         }
     }
+}
+
 
     private AudioClip GetFootstepClip()
     {

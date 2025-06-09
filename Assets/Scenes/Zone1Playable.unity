@@ -39629,6 +39629,20 @@ MonoBehaviour:
   theobjective: {fileID: 829131188}
   Objectivetrigger: {fileID: 1109161981}
   theText: {fileID: 968744795}
+--- !u!114 &1109161985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109161981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33cb5138baa8d2640b6f91adec978516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneNumber: 2
+  photoSaveScript: {fileID: 1774446877}
 --- !u!1001 &1111232395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41985,6 +41999,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1109161983}
+    - targetCorrespondingSourceObject: {fileID: 2322385826081089292, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1109161985}
   m_SourcePrefab: {fileID: 100100000, guid: 615e5a87dc3c8e34d992887d152c4f2a, type: 3}
 --- !u!1 &1203460459
 GameObject:
