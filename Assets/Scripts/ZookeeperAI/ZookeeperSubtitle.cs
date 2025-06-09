@@ -8,6 +8,9 @@ public class ZookeeperSubtitle : MonoBehaviour
     [SerializeField] private float displayDuration = 3f;
     [SerializeField] private AudioSource voiceSource;
 
+    [SerializeField] private AudioSource specialSpeaker;
+
+
     private Coroutine subtitleRoutine;
     private bool onCooldown = false;
 
@@ -17,41 +20,42 @@ public class ZookeeperSubtitle : MonoBehaviour
     }
 
     // 🆕 Added `forceOverride` and optional custom duration
-    public void Speak(string line, AudioClip voiceClip, float customDuration = -1f, bool forceOverride = false)
+    public void Speak(string line, AudioClip voiceClip, float customDuration = -1f, bool forceOverride = false, bool useSpecialSpeaker = false)
+{
+    if (onCooldown && !forceOverride)
+        return;
+
+    if (subtitleRoutine != null)
+        StopCoroutine(subtitleRoutine);
+
+    subtitleRoutine = StartCoroutine(ShowLine(line, voiceClip, customDuration, useSpecialSpeaker));
+}
+
+
+   private IEnumerator ShowLine(string line, AudioClip clip, float duration = -1f, bool useSpecialSpeaker = false)
+{
+    onCooldown = true;
+
+    subtitleText.text = line;
+    subtitleText.gameObject.SetActive(true);
+
+    float showTime = duration > 0 ? duration : displayDuration;
+
+    if (clip != null)
     {
-        if (onCooldown && !forceOverride)
-        {
-            return;
-        }
-
-        if (subtitleRoutine != null)
-            StopCoroutine(subtitleRoutine);
-
-        subtitleRoutine = StartCoroutine(ShowLine(line, voiceClip, customDuration));
+        AudioSource speaker = useSpecialSpeaker && specialSpeaker != null ? specialSpeaker : voiceSource;
+        speaker.PlayOneShot(clip);
+        showTime = clip.length;
     }
 
-    private IEnumerator ShowLine(string line, AudioClip clip, float duration = -1f)
-    {
-        onCooldown = true;
+    yield return new WaitForSeconds(showTime);
 
-        subtitleText.text = line;
-        subtitleText.gameObject.SetActive(true);
+    subtitleText.gameObject.SetActive(false);
+    subtitleText.text = "";
 
-        float showTime = duration > 0 ? duration : displayDuration;
+    yield return new WaitForSeconds(2f);
+    onCooldown = false;
+}
 
-        if (clip != null && voiceSource != null)
-        {
-            voiceSource.PlayOneShot(clip);
-            showTime = clip.length; // ⬅️ Automatically set duration to clip length
-        }
-
-        yield return new WaitForSeconds(showTime);
-
-        subtitleText.gameObject.SetActive(false);
-        subtitleText.text = "";
-
-        yield return new WaitForSeconds(2f); // Cooldown delay
-        onCooldown = false;
-    }
 
 }
