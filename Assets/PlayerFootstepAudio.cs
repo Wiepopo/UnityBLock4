@@ -9,21 +9,22 @@ public class PlayerFootstepAudio : MonoBehaviour
     public LayerMask groundLayer;
 
     [Header("Footstep Settings")]
-    public AudioClip footstepClip;
+    public AudioClip defaultFootstepClip;
+    public AudioClip concreteFootstepClip;
     public float footstepInterval = 0.5f;
     public float minMoveSpeed = 0.1f;
 
     private AudioSource audioSource;
     private float footstepTimer = 0f;
 
-    void Start()
+    private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.loop = false;
         audioSource.playOnAwake = false;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         bool isMoving = playerRigidbody.linearVelocity.magnitude > minMoveSpeed;
         bool isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
@@ -41,20 +42,38 @@ public class PlayerFootstepAudio : MonoBehaviour
         else
         {
             footstepTimer = 0f;
-            StopFootstep(); // 🔈 Stop sound if movement stops or player is not grounded
+            StopFootstep();
         }
     }
 
-    void PlayFootstep()
+    private void PlayFootstep()
     {
-        if (footstepClip != null && !audioSource.isPlaying)
+        if (!audioSource.isPlaying)
         {
-            audioSource.clip = footstepClip;
-            audioSource.Play();
+            AudioClip chosenClip = GetFootstepClip();
+            if (chosenClip != null)
+            {
+                audioSource.clip = chosenClip;
+                audioSource.Play();
+            }
         }
     }
 
-    void StopFootstep()
+    private AudioClip GetFootstepClip()
+    {
+        // Cast a ray downward from the groundCheck point to detect the surface
+        if (Physics.Raycast(groundCheck.position, Vector3.down, out RaycastHit hit, 1f, groundLayer))
+        {
+            if (hit.collider.CompareTag("Concrete"))
+            {
+                return concreteFootstepClip;
+            }
+        }
+
+        return defaultFootstepClip;
+    }
+
+    private void StopFootstep()
     {
         if (audioSource.isPlaying)
         {
@@ -62,4 +81,5 @@ public class PlayerFootstepAudio : MonoBehaviour
         }
     }
 }
+
 
