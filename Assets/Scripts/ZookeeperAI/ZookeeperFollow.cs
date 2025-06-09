@@ -96,7 +96,7 @@ Debug.Log("Animator Speed: " + agent.velocity.magnitude);
 
             if (subtitleSystem != null)
             {
-                subtitleSystem.Speak("Yeah go ahead, I'm gonna wait you here.", waitVoiceClip);
+                subtitleSystem.Speak("Yeah go ahead, I'm gonna wait for you here.", waitVoiceClip);
             }
 
             if (animator != null)
