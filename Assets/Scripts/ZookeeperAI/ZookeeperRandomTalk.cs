@@ -22,26 +22,39 @@ public class ZookeeperRandomTalk : MonoBehaviour
 
     private bool isPaused = false;
 
-   public void TriggerTalk(int factSetIndex)
-{
-    
-    if (factSetIndex < 0 || factSetIndex >= factSets.Length) return;
+    private int currentFactSetIndex = 0;
 
-
-    InitializeQueue(factSets[factSetIndex]);
-
-    if (talkRoutine != null)
+    public void TriggerTalk(int factSetIndex)
     {
-        StopCoroutine(talkRoutine);
+        if (factSetIndex < 0 || factSetIndex >= factSets.Length) return;
+
+        currentFactSetIndex = factSetIndex;
+
+        InitializeQueue(factSets[factSetIndex]);
+
+        StartTalkRoutine();
     }
 
-    talkRoutine = StartCoroutine(RandomTalkRoutine());
-}
+    public void StartTalkRoutine()
+    {
+        if (talkRoutine != null)
+            StopCoroutine(talkRoutine);
+
+        talkRoutine = StartCoroutine(RandomTalkRoutine());
+        isPaused = false;
+    }
+
+    public void StopTalkRoutine()
+    {
+        if (talkRoutine != null)
+            StopCoroutine(talkRoutine);
+
+        talkRoutine = null;
+        isPaused = false;
+    }
 
     void InitializeQueue(FactSet set)
     {
-       
-
         List<(string, AudioClip)> combined = new List<(string, AudioClip)>();
         for (int i = 0; i < set.lines.Length; i++)
         {
@@ -55,17 +68,21 @@ public class ZookeeperRandomTalk : MonoBehaviour
 
     IEnumerator RandomTalkRoutine()
     {
-       
-
-        while (lineQueue.Count > 0)
+        while (true)
         {
+            if (lineQueue == null || lineQueue.Count == 0)
+            {
+                if (factSets.Length > 0)
+                    InitializeQueue(factSets[currentFactSetIndex]);
+                else
+                    yield break;
+            }
+
             float waitTime = Random.Range(minDelay, maxDelay);
             yield return new WaitForSeconds(waitTime);
 
             while (isPaused)
-            {
                 yield return null;
-            }
 
             if (!subtitleSystem) yield break;
 
@@ -85,13 +102,11 @@ public class ZookeeperRandomTalk : MonoBehaviour
 
     public void PauseTalk()
     {
-     
         isPaused = true;
     }
 
     public void ResumeTalk()
     {
-        
         isPaused = false;
     }
 }

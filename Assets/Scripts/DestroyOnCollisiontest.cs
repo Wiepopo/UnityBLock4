@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DestroyOnCollisiontest : MonoBehaviour
 {
@@ -13,11 +11,9 @@ public class DestroyOnCollisiontest : MonoBehaviour
     [SerializeField] GameObject emptyBowl3;
     [SerializeField] GameObject fullBowl3;
 
-    [SerializeField] private ZookeeperRandomTalk zookeeperTalk;
-    [SerializeField] private ZookeeperSubtitle subtitleSystem;
-    [SerializeField] private AudioClip weirdLineVoiceClip;
+    [SerializeField] private SpecialSubtitleController specialSubtitleController;
 
-    private bool hasPlayedWeirdSubtitle = false;
+    private bool hasTriggeredSpecial = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -45,60 +41,27 @@ public class DestroyOnCollisiontest : MonoBehaviour
                 return;
             }
 
-
             Destroy(gameObject);
 
             if (GameManager.Instance == null)
-            {
-
                 return;
-            }
 
             if (GameManager.Instance.Interactions < GameManager.Instance.MaxInteractions)
             {
                 GameManager.Instance.Interactions++;
 
-
                 if (GameManager.Instance.Interactions == GameManager.Instance.MaxInteractions)
                 {
-
-                    theText.GetComponent<Text>().text = "Take photo's for evidence";
+                    theText.GetComponent<UnityEngine.UI.Text>().text = "Take photo's for evidence";
                 }
             }
         }
 
-        // ✅ Trigger special subtitle only once
-        if (!hasPlayedWeirdSubtitle &&
+        if (!hasTriggeredSpecial &&
             fullBowl1.activeSelf && fullBowl2.activeSelf && fullBowl3.activeSelf)
         {
-            hasPlayedWeirdSubtitle = true;
-
-
-
-            if (zookeeperTalk != null)
-                zookeeperTalk.PauseTalk();
-
-            if (subtitleSystem != null)
-            {
-                subtitleSystem.Speak(
-                    "These monkeys look kind of weird let me take some photo's as evidence",
-                    weirdLineVoiceClip,
-                    4f,
-                    true,               // forceOverride
-                    true                // useSpecialSpeaker
-                );
-            }
-
-
-            StartCoroutine(ResumeZookeeperTalkAfterDelay(6f));
+            hasTriggeredSpecial = true;
+            specialSubtitleController.PlaySpecialSubtitle("These monkeys look kind of weird let me take some photo's as evidence");
         }
-    }
-
-    private IEnumerator ResumeZookeeperTalkAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        if (zookeeperTalk != null)
-            zookeeperTalk.ResumeTalk();
     }
 }
